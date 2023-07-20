@@ -4,15 +4,15 @@ import Navbar from "@/components/Navbar";
 export default function Home() {
   return (
     <main>
-      <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-24 lg:pb-[100px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF]">
+      <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-24 lg:pb-[100px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF] font-general-sans">
         <div className="lg:w-1/2 mt-7 lg:mt-0">
-          <p className="uppercase font-semibold lg:text-sm text-xs">
+          <p className="uppercase font-semibold tracking-wider text-xs">
             Fast. <span className="text-[#0070E0]">Affordable</span>. Stylish.
           </p>
-          <h1 className="text-3xl lg:text-6xl font-medium lg:font-bold mt-5">
+          <h1 className="text-3xl lg:text-5xl font-medium lg:font-bold mt-5">
             Quality VIAS Cabinets
           </h1>
-          <ul className="mt-10 space-y-6">
+          <ul className="mt-10 space-y-6 text-sm font-medium">
             <li className="flex items-center space-x-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@ export default function Home() {
             </li>
           </ul>
 
-          <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-5 text-sm">
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-5 text-sm font-medium">
             <button className="text-white bg-[#023E8A] h-[47px] rounded-lg">
               Explore Cabinets
             </button>
