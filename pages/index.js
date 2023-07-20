@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 export default function Home() {
   return (
     <main>
-      <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-16 lg:pb-[70px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF]">
+      <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-24 lg:pb-[100px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF]">
         <div className="lg:w-1/2 mt-7 lg:mt-0">
           <p className="uppercase font-semibold lg:text-sm text-xs">
             Fast. <span className="text-[#0070E0]">Affordable</span>. Stylish.
