@@ -14,7 +14,7 @@ export default function Home() {
 
       <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-24 lg:pb-[100px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF]">
         <div className="lg:w-1/2 mt-7 lg:mt-0">
-          <p className="uppercase font-semibold tracking-wider text-xs">
+          <p className="uppercase font-semibold tracking-[1.3px] text-xs">
             Fast. <span className="text-[#0070E0]">Affordable</span>. Stylish.
           </p>
           <h1 className="text-3xl lg:text-5xl font-medium lg:font-bold mt-5">
