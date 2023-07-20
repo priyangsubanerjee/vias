@@ -5,22 +5,22 @@ import localFont from "@next/font/local";
 const generalSans = localFont({
   src: [
     {
-      path: "../fonts/GeneralSans-Regular.ttf",
+      path: "../public/fonts/GeneralSans-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../fonts/GeneralSans-Medium.ttf",
+      path: "../public/fonts/GeneralSans-Medium.ttf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "../fonts/GeneralSans-SemiBold.ttf",
+      path: "../public/fonts/GeneralSans-SemiBold.ttf",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../fonts/GeneralSans-Bold.ttf",
+      path: "../public/fonts/GeneralSans-Bold.ttf",
       weight: "700",
       style: "normal",
     },
