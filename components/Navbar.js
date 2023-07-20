@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <nav className="h-[142px] lg:h-[100px] w-full bg-[#023E8A] lg:bg-[#060606] px-6 lg:px-[96px] flex flex-col justify-center lg:flex-row lg:items-center">
       <div className="flex items-center w-full lg:w-fit">
-        <div className="flex items-center space-x-5">
+        <div className="flex items-center space-x-5 lg:space-x-0">
           <button className="text-white lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
