@@ -61,10 +61,10 @@ export default function Home() {
           </ul>
 
           <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-5 text-sm font-medium">
-            <button className="text-white bg-[#023E8A] h-[47px] rounded-lg">
+            <button className="text-white bg-[#023E8A] hover:bg-[#001f47] h-[47px] rounded-lg">
               Explore Cabinets
             </button>
-            <button className="h-[47px] rounded-lg border text-[#0070E0] border-[#0070E0]">
+            <button className="h-[47px] rounded-lg hover:bg-[#002b6333] border text-[#0070E0] border-[#0070E0]">
               Get Free Design & Quote
             </button>
           </div>
