@@ -14,7 +14,7 @@ const generalSans = localFont({
       style: "normal",
     },
     {
-      path: "../public/fonts/GeneralSans-SemiBold.ttf",
+      path: "../public/fonts/GeneralSans-Semibold.ttf",
       weight: "600",
       style: "normal",
     },
