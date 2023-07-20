@@ -3,8 +3,12 @@ import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <main>
-      <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-24 lg:pb-[100px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF] font-general-sans">
+    <main className="font-general-sans">
+      {
+        // hero section
+      }
+
+      <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-24 lg:pb-[100px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF]">
         <div className="lg:w-1/2 mt-7 lg:mt-0">
           <p className="uppercase font-semibold tracking-wider text-xs">
             Fast. <span className="text-[#0070E0]">Affordable</span>. Stylish.
@@ -75,6 +79,18 @@ export default function Home() {
             src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1689826520/Dtory/vias/Right_Side_epqb6g.png"
             alt=""
           />
+        </div>
+      </div>
+
+      {
+        // what people say
+      }
+
+      <div className="h-[485px] w-full bg-[#023E8A] lg:bg-[url('https://res.cloudinary.com/db9kd4qbi/image/upload/v1689863610/Dtory/vias/Rectangle_44_blrrmf.png')] object-cover object-center px-6 py-[50px] lg:px-[96px] lg:py-[90px]">
+        <div className="flex items-center justify-between">
+          <p className="text-2xl lg:text-5xl font-medium text-white w-full lg:w-fit text-center lg:text-left">
+            What people say
+          </p>
         </div>
       </div>
     </main>
