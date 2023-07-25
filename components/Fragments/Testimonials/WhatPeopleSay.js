@@ -1,40 +1,11 @@
 import React, { useEffect } from "react";
-import PeopleSayCard from "../PeopleSayCard";
-import PeopleSayRow from "../PeopleSayRow";
+import PeopleSayRow from "./PeopleSayRow";
 
 // 8116626874 - Rahul pal
 
 function WhatPeopleSay() {
   const [state, setState] = React.useState(0);
   useEffect(() => {
-    // if (state == 0) {
-    //   document.querySelector(".firstTestimonialRow").style.transform =
-    //     "translateX(0%)";
-    //   document.querySelector(".secondTestimonialRow").style.transform =
-    //     "translateX(100%)";
-    //   document.querySelector(".thirdTestimonialRow").style.transform =
-    //     "translateX(100%)";
-    // }
-
-    // if (state == 1) {
-    //   document.querySelector(".firstTestimonialRow").style.transform =
-    //     "translateX(-100%)";
-    //   document.querySelector(".secondTestimonialRow").style.transform =
-    //     "translateX(0%)";
-    //   document.querySelector(".thirdTestimonialRow").style.transform =
-    //     "translateX(100%)";
-    // }
-
-    // if (state == 2) {
-    //   document.querySelector(".firstTestimonialRow").style.transform =
-    //     "translateX(-200%)";
-    //   document.querySelector(".secondTestimonialRow").style.transform =
-    //     "translateX(-200%)";
-    //   document.querySelector(".thirdTestimonialRow").style.transform =
-    //     "translateX(-200%)";
-    // }
-    // tranlate rows on state change smoothly
-
     document.querySelector(
       ".firstTestimonialRow"
     ).style.transform = `translateX(-${state * 100}%)`;

@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Navbar from "@/components/Navbar";
-import PeopleSayCard from "@/components/PeopleSayCard";
+import PeopleSayCard from "@/components/Fragments/Testimonials/PeopleSayCard";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import WhatPeopleSay from "@/components/Fragments/WhatPeopleSay";
+import WhatPeopleSay from "@/components/Fragments/Testimonials/WhatPeopleSay";
+import Real from "@/components/Fragments/Realkitchen";
 
 export default function Home() {
   return (
@@ -81,6 +82,7 @@ export default function Home() {
         </div>
       </div>
       <WhatPeopleSay />
+      <Real />
     </main>
   );
 }
