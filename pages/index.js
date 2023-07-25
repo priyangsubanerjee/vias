@@ -8,10 +8,6 @@ import WhatPeopleSay from "@/components/Fragments/WhatPeopleSay";
 export default function Home() {
   return (
     <main className="font-general-sans">
-      {
-        // hero section
-      }
-
       <div className="flex flex-col-reverse lg:flex-row lg:h-[600px] pb-24 lg:pb-[100px] px-6 py-[30px] lg:px-[96px] lg:py-[90px] bg-[#D7F3FF]">
         <div className="lg:w-1/2 mt-7 lg:mt-0">
           <p className="uppercase font-semibold tracking-[0.08125rem] text-xs">
@@ -67,7 +63,6 @@ export default function Home() {
               <span>FREE Kitchen Design Services</span>
             </li>
           </ul>
-
           <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-5 text-sm font-medium">
             <button className="text-white bg-[#023E8A] hover:bg-[#001f47] h-[47px] rounded-lg">
               Explore Cabinets
@@ -85,11 +80,6 @@ export default function Home() {
           />
         </div>
       </div>
-
-      {
-        // what people say
-      }
-
       <WhatPeopleSay />
     </main>
   );

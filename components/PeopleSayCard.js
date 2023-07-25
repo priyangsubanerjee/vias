@@ -22,7 +22,7 @@ function PeopleSayCard() {
           );
         })}
       </div>
-      <p className="text-sm font-normal leading-6 mt-5 text-[#777] mb-6 line-clamp-4 text-ellipsis">
+      <p className="text-sm font-normal leading-6 mt-5 text-[#777] mb-6 line-clamp-4 text-ellipsis w-full overflow-hidden whitespace-normal">
         I am absolutely thrilled with the incredible results I achieved using
         Product X! This revolutionary product has completely transformed my life
         in ways I never thought possible. From the very first use, I noticed a
