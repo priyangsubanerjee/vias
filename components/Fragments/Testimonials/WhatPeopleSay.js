@@ -17,6 +17,15 @@ function WhatPeopleSay() {
     ).style.transform = `translateX(-${state * 100}%)`;
   }, [state]);
 
+  // auto slide testimonial every 5 seconds
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setState((state) => (state + 1) % 3);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <div className="w-full bg-[#023E8A] lg:bg-[url('https://res.cloudinary.com/db9kd4qbi/image/upload/v1689863610/Dtory/vias/Rectangle_44_blrrmf.png')] object-cover object-center px-6 py-[50px] lg:px-[96px] lg:py-[90px]">
