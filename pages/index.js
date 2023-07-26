@@ -6,6 +6,8 @@ import { Carousel } from "react-responsive-carousel";
 import WhatPeopleSay from "@/components/Fragments/Testimonials/WhatPeopleSay";
 import Real from "@/components/Fragments/Realkitchen";
 import ShopByCategory from "@/components/Fragments/ShopByCategory/index.js.js";
+import Youtube from "@/components/Fragments/Youtube";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -85,6 +87,8 @@ export default function Home() {
       <WhatPeopleSay />
       <Real />
       <ShopByCategory />
+      <Youtube />
+      <Footer />
     </main>
   );
 }
