@@ -2,7 +2,7 @@ import React from "react";
 
 function PeopleSayCard() {
   return (
-    <div className="bg-white p-6 rounded-lg flex flex-col max-w-sm">
+    <div className="bg-white p-6 rounded-lg flex flex-col">
       <div className="flex items-center space-x-1">
         {[...Array(5)].map((_, i) => {
           return (
