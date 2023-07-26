@@ -5,7 +5,7 @@ function RealCardRow({ className }) {
   return (
     <>
       <div
-        className={`${className} hidden lg:grid grid-cols-3 gap-[48px] w-full shrink-0 transition-all duration-1000`}
+        className={`${className} hidden lg:grid grid-cols-3 gap-[40px] w-full shrink-0 transition-all duration-1000`}
       >
         <RealCard />
         <RealCard />
