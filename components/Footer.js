@@ -175,6 +175,12 @@ function Footer() {
           100% Secure Payment
         </p>
       </div>
+      <div className="border-t-[1px] border-[#ccc] mt-16 pt-6">
+        <p className="text-[#ccc] text-sm">
+          Copyright ©2023 VIAS CABINET LLC wholesale ready-to-assemble RTA
+          kitchen cabinets and bathroom vanities.
+        </p>
+      </div>
     </div>
   );
 }
