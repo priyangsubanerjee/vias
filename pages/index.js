@@ -88,7 +88,6 @@ export default function Home() {
       <Real />
       <ShopByCategory />
       <Youtube />
-      <Footer />
       {/*
        */}
     </main>
