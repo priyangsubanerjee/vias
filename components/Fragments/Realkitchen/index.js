@@ -5,20 +5,25 @@ import RealCardRow from "./Row";
 function Real() {
   const [state, setState] = React.useState(0);
   useEffect(() => {
-    document.querySelector(
-      ".firstRealCardRow"
-    ).style.transform = `translateX(-${state * 100}%)`;
-    document.querySelector(
-      ".secondRealCardRow"
-    ).style.transform = `translateX(-${state * 100}%)`;
-    document.querySelector(
-      ".thirdRealCardRow"
-    ).style.transform = `translateX(-${state * 100}%)`;
+    let firstRealCardRow = document.querySelectorAll(".firstRealCardRow");
+    let secondRealCardRow = document.querySelectorAll(".secondRealCardRow");
+    let thirdRealCardRow = document.querySelectorAll(".thirdRealCardRow");
+
+    firstRealCardRow.forEach((item) => {
+      item.style.transform = `translateX(-${state * 100}%)`;
+    });
+    secondRealCardRow.forEach((item) => {
+      item.style.transform = `translateX(-${state * 100}%)`;
+    });
+
+    thirdRealCardRow.forEach((item) => {
+      item.style.transform = `translateX(-${state * 100}%)`;
+    });
   }, [state]);
 
   return (
-    <div className="bg-[#D7F3FF] h-[750px] py-[100px] px-[96px]">
-      <h1 className="text-center text-[40px] font-general-sans font-medium">
+    <div className="bg-[#D7F3FF] h-[750px] lg:py-[100px] lg:px-[96px] px-6 py-[50px]">
+      <h1 className="text-center text-[24px] lg:text-[40px] font-general-sans font-medium">
         Real{" "}
         <span className="text-transparent bg-gradient-to-r from-[#0070E0] to-[#023E8A] font-semibold bg-clip-text">
           Kitchens.

@@ -3,9 +3,9 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="bg-[#023E8A] px-[96px] py-[70px] font-general-sans">
+    <div className="bg-[#023E8A] lg:px-[96px] lg:py-[70px] font-general-sans px-6 py-[50px]">
       <h1 className="font-bold text-3xl text-[#D7F3FF]">VIAS.</h1>
-      <div className="mt-12 grid grid-cols-5">
+      <div className="mt-12 grid gap-16 grid-cols-1 lg:grid-cols-5">
         <div>
           <span className="text-white font-medium">Customer Service</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
@@ -70,31 +70,38 @@ function Footer() {
           </form>
         </div>
       </div>
-      <div className="mt-20 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
-            <img
-              src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370342/Dtory/vias/Visa_Inc._svg_xh3fdd.svg"
-              alt=""
-            />
+      <div className="mt-20 space-y-16 lg:space-y-0 lg:flex items-center justify-between">
+        <div>
+          <div className="flex items-center space-x-3">
+            <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
+              <img
+                src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370342/Dtory/vias/Visa_Inc._svg_xh3fdd.svg"
+                alt=""
+              />
+            </div>
+            <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
+              <img
+                src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370342/Dtory/vias/PayPal_svg_taaqxt.svg"
+                alt=""
+              />
+            </div>
+            <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
+              <img
+                src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370342/Dtory/vias/Mastercard_svg_nxjevw.svg"
+                alt=""
+              />
+            </div>
+            <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
+              <img
+                src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370343/Dtory/vias/discover_cwtk1j.png"
+                alt=""
+              />
+            </div>
           </div>
-          <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
-            <img
-              src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370342/Dtory/vias/PayPal_svg_taaqxt.svg"
-              alt=""
-            />
-          </div>
-          <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
-            <img
-              src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370342/Dtory/vias/Mastercard_svg_nxjevw.svg"
-              alt=""
-            />
-          </div>
-          <div className="bg-white px-4 h-[40px] flex items-center justify-center rounded">
-            <img
-              src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690370343/Dtory/vias/discover_cwtk1j.png"
-              alt=""
-            />
+          <div className="mt-4">
+            <p className="text-[13px] font-semibold text-[#90E0EF] font-general-sans">
+              100% Secure Payment
+            </p>
           </div>
         </div>
         <div className="flex items-center space-x-[24px]">
@@ -170,11 +177,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="mt-4">
-        <p className="text-[13px] font-semibold text-[#90E0EF] font-general-sans">
-          100% Secure Payment
-        </p>
-      </div>
+
       <div className="border-t-[1px] border-[#ccc] mt-16 pt-6">
         <p className="text-[#ccc] text-sm">
           Copyright ©2023 VIAS CABINET LLC wholesale ready-to-assemble RTA

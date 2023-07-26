@@ -2,10 +2,9 @@ import React from "react";
 
 function Youtube() {
   return (
-    <div className="px-[96px] pt-[90px] pb-[120px] bg-[#D7F3FF]">
+    <div className="lg:px-[96px] lg:pt-[90px] pb-[120px] bg-[#D7F3FF] px-6 py-[50px]">
       <iframe
-        className="w-full"
-        height="460"
+        className="w-full lg:h-[460px] h-[250px]"
         src="https://www.youtube.com/embed/QFopfkk0I6U"
         title="IKEA Kitchens Design Tour 2022"
         frameborder="0"

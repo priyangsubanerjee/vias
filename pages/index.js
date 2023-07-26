@@ -89,6 +89,8 @@ export default function Home() {
       <ShopByCategory />
       <Youtube />
       <Footer />
+      {/*
+       */}
     </main>
   );
 }

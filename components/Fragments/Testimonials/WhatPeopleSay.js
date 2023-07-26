@@ -33,7 +33,7 @@ function WhatPeopleSay() {
           <p className="text-2xl lg:text-5xl font-medium text-white w-full lg:w-fit text-center lg:text-left">
             What people say
           </p>
-          <button className="text-[13px] tracking-[1.3px] font-general-sans font-medium text-white">
+          <button className="text-[13px] tracking-[1.3px] font-general-sans font-medium text-white hidden lg:block">
             SEE MORE
           </button>
         </div>
