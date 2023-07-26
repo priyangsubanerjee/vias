@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import WhatPeopleSay from "@/components/Fragments/Testimonials/WhatPeopleSay";
 import Real from "@/components/Fragments/Realkitchen";
+import ShopByCategory from "@/components/Fragments/ShopByCategory/index.js.js";
 
 export default function Home() {
   return (
@@ -83,6 +84,7 @@ export default function Home() {
       </div>
       <WhatPeopleSay />
       <Real />
+      <ShopByCategory />
     </main>
   );
 }

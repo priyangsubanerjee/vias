@@ -20,10 +20,13 @@ function WhatPeopleSay() {
   return (
     <div>
       <div className="w-full bg-[#023E8A] lg:bg-[url('https://res.cloudinary.com/db9kd4qbi/image/upload/v1689863610/Dtory/vias/Rectangle_44_blrrmf.png')] object-cover object-center px-6 py-[50px] lg:px-[96px] lg:py-[90px]">
-        <div className="flex items-center justify-between">
+        <div className="flex items-baseline justify-between">
           <p className="text-2xl lg:text-5xl font-medium text-white w-full lg:w-fit text-center lg:text-left">
             What people say
           </p>
+          <button className="text-[13px] tracking-[1.3px] font-general-sans font-medium text-white">
+            SEE MORE
+          </button>
         </div>
 
         <div className="mt-16 flex overflow-hidden whitespace-nowrap transition-all duration-1000">
