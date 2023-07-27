@@ -5,3 +5,8 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+.outline-text {
+  -webkit-text-stroke: 1.5px #023e8a;
+  color: transparent;
+}
