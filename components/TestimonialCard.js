@@ -4,10 +4,10 @@ import React from "react";
 function TestimonialCard() {
   return (
     <div className="flex space-x-[13px]">
-      <div className="shrink-0 relative w-[64px] h-[64px]">
+      <div className="shrink-0 relative w-[48px] h-[48px] lg:w-[64px] lg:h-[64px]">
         <img
           src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1690469294/Dtory/vias/680e5f031341468307693f303873f6ca_n0zbl3.jpg"
-          className=" w-full h-full rounded-full object-cover shrink-0"
+          className="w-full h-full rounded-full object-cover shrink-0"
           alt=""
         />
         <div className="rounded-full p-[2px] absolute bottom-0 right-0  bg-[#D7F3FF]">
@@ -27,8 +27,12 @@ function TestimonialCard() {
       </div>
       <div>
         <div className="flex text-base">
-          <span className="font-semibold text-[18px]">Judi B.</span>
-          <span className="text-[#808080] ml-[12px]">Verified Buyer</span>
+          <span className="font-semibold text-[16px] lg:text-[18px]">
+            Judi B.
+          </span>
+          <span className="text-[#808080] ml-[12px] text-[14px] lg:text-base">
+            Verified Buyer
+          </span>
           <span className="text-[#808080] ml-auto font-medium">12/07/10</span>
         </div>
         <div className="flex items-center space-x-2 mt-[12px]">
@@ -50,10 +54,10 @@ function TestimonialCard() {
             );
           })}
         </div>
-        <h2 className="mt-[12px] font-bold text-[#1B1B1B]">
+        <h2 className="mt-[12px] text-[14px] lg:text-base font-semibold lg:font-bold text-[#1B1B1B]">
           Extremely impressed with quality and
         </h2>
-        <p className="mt-[8px] text-[#1B1B1B] leading-7">
+        <p className="mt-[8px] text-[14px] lg:text-base text-[#1B1B1B] leading-7">
           Your company is so service oriented. I expected a replacement for the
           irregular piece but received an entire new cabinet and it arrived at
           warped speed. You&apos;re an amazing company with very helpful and
