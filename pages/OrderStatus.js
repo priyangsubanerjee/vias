@@ -18,7 +18,7 @@ function OrderStatus() {
           Track Now
         </button>
       </div>
-      <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
+      <div className="lg:px-[96px] py-[120px] px-6 font-general-sans bg-[#D7F3FF]">
         <h2 className="font-semibold text-black text-[40px]">How it works:</h2>
         <div className="flex items-center justify-center mt-20 space-x-16">
           <div className="flex flex-col items-center justify-center text-center">
