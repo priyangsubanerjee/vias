@@ -38,7 +38,7 @@ function FAQ() {
         <p className="text-[14px] text-[#565656] mt-2">
           From assembly to order status find help for everything.
         </p>
-        <div className="flex mt-16 items-center space-x-8">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-start mt-16 lg:items-center space-y-8 lg:space-y-0 lg:space-x-8">
           <div className="h-[251px] w-[251px] border border-[#B0B0B0] rounded-lg flex flex-col items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,8 +73,8 @@ function FAQ() {
         <h1 className="text-[32px] font-semibold mt-32">
           Frequently Asked Questions
         </h1>
-        <div className="flex space-x-6 mt-8">
-          <div className="w-[250px] h-[300px] bg-white rounded-lg"></div>
+        <div className="flex lg:space-x-6 mt-8">
+          <div className="hidden lg:block w-[250px] h-[300px] bg-white rounded-lg"></div>
           <div className="w-full h-[500px] bg-white rounded-lg"></div>
         </div>
       </div>
