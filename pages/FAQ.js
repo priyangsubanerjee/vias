@@ -31,14 +31,14 @@ function FAQ() {
           />
         </div>
       </div>
-      <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF]">
-        <h1 className="text-[32px] font-semibold">
+      <div className="lg:px-[96px] py-7 lg:py-[90px] px-6 font-general-sans bg-[#D7F3FF]">
+        <h1 className="text-[24px] lg:text-[32px] font-medium lg:font-semibold">
           Need assistance? We&apos;re here to support you.
         </h1>
         <p className="text-[14px] text-[#565656] mt-2">
           From assembly to order status find help for everything.
         </p>
-        <div className="flex flex-col lg:flex-row justify-center lg:justify-start mt-16 lg:items-center space-y-8 lg:space-y-0 lg:space-x-8">
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:justify-start mt-16 lg:items-center space-y-8 lg:space-y-0 lg:space-x-8">
           <div className="h-[251px] w-[251px] border border-[#B0B0B0] rounded-lg flex flex-col items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -70,12 +70,112 @@ function FAQ() {
             <span className="text-[18px] text-[#023E8A] mt-6">Blogs</span>
           </div>
         </div>
-        <h1 className="text-[32px] font-semibold mt-32">
+        <h1 className="text-[24px] lg:text-[32px] font-medium lg:font-semibold mt-32">
           Frequently Asked Questions
         </h1>
         <div className="flex lg:space-x-6 mt-8">
-          <div className="hidden lg:block w-[250px] h-[300px] bg-white rounded-lg"></div>
-          <div className="w-full h-[500px] bg-white rounded-lg"></div>
+          <div className="hidden lg:block w-[250px] h-fit bg-white rounded-lg px-6 py-8 shrink-0">
+            <ul className="border-l border-[#777777] text-[#777777]">
+              <li className="px-4 py-3 rounded-r-md bg-[#D9D9D9]">General</li>
+              <li className="px-4 py-3 rounded-r-md">Design</li>
+              <li className="px-4 py-3 rounded-r-md">Shipping</li>
+              <li className="px-4 py-3 rounded-r-md">Out of stock</li>
+              <li className="px-4 py-3 rounded-r-md">Order Status</li>
+              <li className="px-4 py-3 rounded-r-md">Assembly</li>
+              <li className="px-4 py-3 rounded-r-md">Claims</li>
+            </ul>
+          </div>
+          <div className="w-full">
+            <div className="flex items-center space-x-5 overflow-auto whitespace-nowrap text-base">
+              <button className="py-4 font-medium px-4 rounded-t-md bg-white text-[#023E8A]">
+                General
+              </button>
+              <button className="py-4 font-medium px-4 rounded-t-md bg-white/0 text-[#777777]">
+                General
+              </button>
+              <button className="py-4 font-medium px-4 rounded-t-md bg-white/0 text-[#777777]">
+                General
+              </button>
+            </div>
+            <div className="w-full h-[500px] bg-white -mt-1 rounded-lg px-6 py-8">
+              <div>
+                <div className="flex items-center py-4 border-b px-4">
+                  <p className="font-medium text-base">Do I need Toe Kick ?</p>
+                  <button className="ml-auto">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.3401 18.8439H10.7005V13.1154H5.00006V10.6723H10.7005V5H13.3401V10.6723H19.0405V13.1154H13.3401V18.8439Z"
+                        fill="#1B1B1B"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center py-4 border-b px-4">
+                  <p className="font-medium text-base">Do I need Toe Kick ?</p>
+                  <button className="ml-auto">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.3401 18.8439H10.7005V13.1154H5.00006V10.6723H10.7005V5H13.3401V10.6723H19.0405V13.1154H13.3401V18.8439Z"
+                        fill="#1B1B1B"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center py-4 border-b px-4">
+                  <p className="font-medium text-base">Do I need Toe Kick ?</p>
+                  <button className="ml-auto">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.3401 18.8439H10.7005V13.1154H5.00006V10.6723H10.7005V5H13.3401V10.6723H19.0405V13.1154H13.3401V18.8439Z"
+                        fill="#1B1B1B"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center py-4 border-b px-4">
+                  <p className="font-medium text-base">Do I need Toe Kick ?</p>
+                  <button className="ml-auto">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.3401 18.8439H10.7005V13.1154H5.00006V10.6723H10.7005V5H13.3401V10.6723H19.0405V13.1154H13.3401V18.8439Z"
+                        fill="#1B1B1B"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
