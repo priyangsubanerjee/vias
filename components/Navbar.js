@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import navLinks from "@/static/navlinks";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
