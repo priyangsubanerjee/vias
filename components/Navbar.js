@@ -1,8 +1,10 @@
 import navLinks from "@/static/navlinks";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
 
 function Navbar() {
+  const session = useSession();
   const router = useRouter();
 
   return (
@@ -96,7 +98,32 @@ function Navbar() {
       )}
 
       <ul className="ml-auto hidden lg:flex text-sm items-center space-x-10">
-        {navLinks.map((link) => {
+        {navLinks.slice(0, 3).map((link) => {
+          return (
+            <li key={link.title} className="flex items-center space-x-1">
+              {link.icons}
+              <a href={link.path} className="text-white">
+                {link.title}
+              </a>
+            </li>
+          );
+        })}
+
+        {session.status == "unauthenticated" ? (
+          <li className="flex items-center space-x-1">
+            <a rel="noopener noreferrer" href="/login" className="text-white">
+              Sign in
+            </a>
+          </li>
+        ) : (
+          <li className="flex items-center space-x-1">
+            <a rel="noopener noreferrer" href="/logout" className="text-white">
+              Logout
+            </a>
+          </li>
+        )}
+
+        {navLinks.slice(4, 5).map((link) => {
           return (
             <li key={link.title} className="flex items-center space-x-1">
               {link.icons}

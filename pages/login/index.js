@@ -1,4 +1,5 @@
 import React from "react";
+import { signIn, useSession } from "next-auth/react";
 
 function Login() {
   return (
@@ -46,7 +47,10 @@ function Login() {
           <div className="h-[1px] bg-[#A0A0A0] w-full"></div>
         </div>
         <div className="mt-10 space-y-4">
-          <button className="w-full border border-black h-12 rounded-lg space-x-3 text-[#1B1B1B] font-medium flex items-center justify-center">
+          <button
+            onClick={() => signIn("google")}
+            className="w-full border border-black h-12 rounded-lg space-x-3 text-[#1B1B1B] font-medium flex items-center justify-center"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="25"

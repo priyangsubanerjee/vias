@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Cart() {
-  const [state, setState] = useState("address");
+  const [state, setState] = useState("cart"); // ["cart", "address"]
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
       <div className="flex justify-center">
@@ -378,7 +378,12 @@ function Cart() {
                 <p className="text-[18px] text-black font-semibold">$269.7</p>
               </div>
               <div className="mt-4">
-                <button className="h-[50px] bg-black text-white rounded-md w-full flex items-center justify-center">
+                <button
+                  onClick={() => {
+                    setState("address");
+                  }}
+                  className="h-[50px] bg-black text-white rounded-md w-full flex items-center justify-center"
+                >
                   <span>Proceed to checkout</span>
                   <span className="ml-2">
                     <svg
@@ -477,7 +482,12 @@ function Cart() {
                 Save this information for next time
               </span>
             </div>
-            <button className="mt-10 flex items-center space-x-2">
+            <button
+              onClick={() => {
+                setState("cart");
+              }}
+              className="mt-10 flex items-center space-x-2"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

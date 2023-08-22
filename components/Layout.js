@@ -1,5 +1,6 @@
 import React from "react";
 import localFont from "@next/font/local";
+import { useSession } from "next-auth/react";
 
 const generalSans = localFont({
   src: [
@@ -28,7 +29,15 @@ const generalSans = localFont({
 });
 
 function Layout({ children }) {
-  return <div className={generalSans.variable}>{children}</div>;
+  const session = useSession();
+  return (
+    <div className={generalSans.variable}>
+      <div className="bg-white fixed right-0 top-1/2 p-3 z-20">
+        <p>{session.status}</p>
+      </div>
+      {children}
+    </div>
+  );
 }
 
 export default Layout;
