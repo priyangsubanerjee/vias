@@ -1,19 +1,31 @@
-import React from "react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import Switch from "react-switch";
 
 function Shop() {
+  const router = useRouter();
   const [state, setState] = React.useState("kitchen-cabinets"); // ["kitchen-cabinets", "bathroom-vanities"]
+
+  useEffect(() => {
+    if (router.query.tab === "bathroom") {
+      setState("bathroom-vanities");
+    } else {
+      setState("kitchen-cabinets");
+    }
+  }, [router.query.tab]);
 
   return (
     <div>
-      <div className='h-[340px] font-general-sans flex flex-col items-center justify-center bg-[url("https://res.cloudinary.com/db9kd4qbi/image/upload/v1692430582/Dtory/vias/cabinets_bg_vvhjj2.png")]'>
-        <h1 className="text-5xl text-white font-semibold">
-          VIAS Kitchen Cabinets
+      <div className='h-[240px] lg:h-[340px] font-general-sans flex flex-col items-center justify-center bg-[url("https://res.cloudinary.com/db9kd4qbi/image/upload/v1692430582/Dtory/vias/cabinets_bg_vvhjj2.png")]'>
+        <h1 className="text-3xl lg:text-5xl text-white font-semibold text-center leading-[1.3]">
+          {state == "kitchen-cabinets"
+            ? "VIAS Kitchen Cabinets"
+            : "VIAS Bathroom Vanities"}
         </h1>
       </div>
       <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
-        <div className="flex space-x-16">
-          <div className="w-[235px] shrink-0">
+        <div className="lg:flex lg:space-x-16">
+          <div className="hidden lg:block w-[235px] shrink-0">
             <div className="mt-16 flex items-center space-x-3 text-[13px] font-medium text-[#777]">
               <span
                 className={`${state == "kitchen-cabinets" && "text-[#023E8A]"}`}
@@ -350,7 +362,7 @@ function Shop() {
           </div>
           <div className="w-full">
             <h1 className="text-[24px] font-semibold">Popular Categories</h1>
-            <div className="mt-10 grid grid-cols-4 gap-5">
+            <div className="mt-10 hidden lg:grid grid-cols-4 gap-5">
               <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
                 <p className="text-white">White Cabinets</p>
               </div>
@@ -364,7 +376,7 @@ function Shop() {
                 <p className="text-white">Brown Cabinets</p>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-4 mt-8">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
               <div className="border-[3px] rounded-2xl overflow-hidden">
                 <div className="h-44 w-full border-b-[3px]"></div>
                 <div className="p-5 bg-white">

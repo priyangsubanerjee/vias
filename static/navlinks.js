@@ -1,12 +1,12 @@
 const navLinks = [
   {
     title: "Kitchen Cabinets",
-    path: "/",
+    path: "/shop?tab=kitchen",
     icons: "",
   },
   {
     title: "Bathroom Cabinets",
-    path: "/",
+    path: "/shop?tab=bathroom",
     icons: "",
   },
   {
