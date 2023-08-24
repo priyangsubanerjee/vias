@@ -11,9 +11,7 @@ function Navbar() {
   return (
     <nav
       className={` ${
-        router.pathname == "/"
-          ? "h-[142px] lg:h-[100px]"
-          : " h-[80px] lg:h-[100px]"
+        true ? "h-[142px] lg:h-[100px]" : " h-[80px] lg:h-[100px]"
       } w-full bg-[#023E8A] lg:bg-[#060606] px-6 lg:px-[96px] flex flex-col justify-center lg:flex-row lg:items-center font-general-sans`}
     >
       <div className="flex items-center w-full lg:w-fit">
