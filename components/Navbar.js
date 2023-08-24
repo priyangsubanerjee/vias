@@ -32,7 +32,11 @@ function Navbar() {
               />
             </svg>
           </button>
-          <h1 className="text-white font-bold text-2xl lg:text-2xl">VIAS.</h1>
+          <img
+            src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692895112/Dtory/vias/Logo_fktmyl.png"
+            alt=""
+            className="h-12"
+          />
         </div>
 
         <div className="lg:hidden flex items-center ml-auto lg:ml-0 space-x-6">

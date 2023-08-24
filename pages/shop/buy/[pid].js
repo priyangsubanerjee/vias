@@ -3,10 +3,6 @@ import React, { useEffect, useState } from "react";
 function ProductBuy() {
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
-    // add scroll event listener
-
-    // remove scroll event listener
-
     return () => {
       window.removeEventListener("scroll", () => {});
     };
