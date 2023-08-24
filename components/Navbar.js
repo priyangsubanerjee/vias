@@ -11,7 +11,9 @@ function Navbar() {
   return (
     <nav
       className={` ${
-        true ? "h-[142px] lg:h-[100px]" : " h-[80px] lg:h-[100px]"
+        router.pathname == "/"
+          ? "h-[142px] lg:h-[100px]"
+          : " h-[80px] lg:h-[100px]"
       } w-full bg-[#023E8A] lg:bg-[#060606] px-6 lg:px-[96px] flex flex-col justify-center lg:flex-row lg:items-center font-general-sans`}
     >
       <div className="flex items-center w-full lg:w-fit">
@@ -72,7 +74,7 @@ function Navbar() {
         </div>
       </div>
 
-      {router.pathname === "/" && (
+      {true && (
         <div className="lg:w-[385px] h-[40px] lg:h-[46px] bg-white rounded-sm lg:ml-16 flex items-center px-6 mt-5 lg:mt-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
