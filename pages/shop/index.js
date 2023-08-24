@@ -25,7 +25,7 @@ function Shop() {
       </div>
       <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
         <div className="lg:flex lg:space-x-16">
-          <div className="hidden lg:block w-[235px] shrink-0">
+          <div className="hidden lg:block w-[245px] shrink-0">
             <div className="mt-16 flex items-center space-x-3 text-[13px] font-medium text-[#777]">
               <span
                 className={`${state == "kitchen-cabinets" && "text-[#023E8A]"}`}
@@ -76,7 +76,7 @@ function Shop() {
               </span>
             </div>
             <div className="mt-7 py-6 px-5 bg-white rounded-lg">
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,12 @@ function Shop() {
                     />
                   </svg>
                 </span>
-                <span>Color</span>
+                <span className="ml-2 text-sm font-medium text-[#555555]">
+                  Color
+                </span>
+                <button className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans">
+                  Clear
+                </button>
               </div>
               <ul className="mt-4 text-sm space-y-2">
                 <li className="flex items-center space-x-3">
@@ -137,7 +142,7 @@ function Shop() {
                 </li>
               </ul>
               <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -154,32 +159,25 @@ function Shop() {
                     />
                   </svg>
                 </span>
-                <span>Price</span>
+                <span className="ml-2 text-sm font-medium text-[#555555]">
+                  Price
+                </span>
+                <button className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans">
+                  Clear
+                </button>
               </div>
               <ul className="mt-4 text-sm space-y-2">
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>White</span>
+                  <span>High to Low</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>Blue</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Yellow</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Brown</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Black</span>
+                  <span>Low to High</span>
                 </li>
               </ul>
               <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -203,32 +201,29 @@ function Shop() {
                     />
                   </svg>
                 </span>
-                <span>Cabinet Style</span>
+                <span className="ml-2 text-sm font-medium text-[#555555]">
+                  Cabinet Style
+                </span>
+                <button className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans">
+                  Clear
+                </button>
               </div>
               <ul className="mt-4 text-sm space-y-2">
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>White</span>
+                  <span>Contemporary</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>Blue</span>
+                  <span>Traditional</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>Yellow</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Brown</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Black</span>
+                  <span>Traditional</span>
                 </li>
               </ul>
               <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -252,32 +247,29 @@ function Shop() {
                     />
                   </svg>
                 </span>
-                <span>Door Style</span>
+                <span className="ml-2 text-sm font-medium text-[#555555]">
+                  Door Style
+                </span>
+                <button className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans">
+                  Clear
+                </button>
               </div>
               <ul className="mt-4 text-sm space-y-2">
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>White</span>
+                  <span>Shaker</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>Blue</span>
+                  <span>Raised Panel</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>Yellow</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Brown</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Black</span>
+                  <span>Flat Panel</span>
                 </li>
               </ul>
               <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -292,32 +284,25 @@ function Shop() {
                     />
                   </svg>
                 </span>
-                <span>Construction Type</span>
+                <span className="ml-2 text-sm font-medium text-[#555555]">
+                  Construction Type
+                </span>
+                <button className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans">
+                  Clear
+                </button>
               </div>
               <ul className="mt-4 text-sm space-y-2">
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>White</span>
+                  <span>Framed</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <input type="checkbox" name="" id="" />
-                  <span>Blue</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Yellow</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Brown</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <input type="checkbox" name="" id="" />
-                  <span>Black</span>
+                  <span>Frameless</span>
                 </li>
               </ul>
               <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -346,7 +331,12 @@ function Shop() {
                     </defs>
                   </svg>
                 </span>
-                <span>Features</span>
+                <span className="ml-2 text-sm font-medium text-[#555555]">
+                  Features
+                </span>
+                <button className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans">
+                  Clear
+                </button>
               </div>
               <ul className="mt-4 text-sm space-y-2">
                 <li className="flex items-center space-x-3">
@@ -377,8 +367,8 @@ function Shop() {
               </div>
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-              <div className="border-[3px] rounded-2xl overflow-hidden">
-                <div className="h-44 w-full border-b-[3px]"></div>
+              <div className="border-[3px] border-[#C3C3C3] rounded-2xl overflow-hidden">
+                <div className="h-44 w-full border-b-[3px] border-[#C3C3C3]"></div>
                 <div className="p-5 bg-white">
                   <div className="flex">
                     <span>
