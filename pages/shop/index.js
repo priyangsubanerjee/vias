@@ -351,7 +351,39 @@ function Shop() {
             </div>
           </div>
           <div className="w-full">
-            <h1 className="text-[24px] font-semibold">Popular Categories</h1>
+            <div className="-mt-6 lg:hidden flex items-center justify-center space-x-3 text-[13px] font-medium text-[#777]">
+              <span
+                className={`${state == "kitchen-cabinets" && "text-[#023E8A]"}`}
+              >
+                Kitchen
+              </span>
+              <Switch
+                checkedIcon={null}
+                uncheckedIcon={null}
+                onColor="#CCCCCC"
+                offColor="#CCCCCC"
+                onHandleColor="#023E8A"
+                offHandleColor="#023E8A"
+                checked={state == "bathroom-vanities"}
+                onChange={() =>
+                  setState(
+                    state == "kitchen-cabinets"
+                      ? "bathroom-vanities"
+                      : "kitchen-cabinets"
+                  )
+                }
+              />
+              <span
+                className={`${
+                  state == "bathroom-vanities" && "text-[#023E8A]"
+                }`}
+              >
+                Bathroom
+              </span>
+            </div>
+            <h1 className="hidden lg:block text-[24px] font-semibold mt-10">
+              Popular Categories
+            </h1>
             <div className="mt-10 hidden lg:grid grid-cols-4 gap-5">
               <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
                 <p className="text-white">White Cabinets</p>
@@ -366,7 +398,7 @@ function Shop() {
                 <p className="text-white">Brown Cabinets</p>
               </div>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
+            <div className="grid grid-cols-1 place-content-center lg:grid-cols-3 gap-4 mt-8">
               <div className="border-[3px] border-[#C3C3C3] rounded-2xl overflow-hidden">
                 <div className="h-44 w-full border-b-[3px] border-[#C3C3C3]"></div>
                 <div className="p-5 bg-white">
