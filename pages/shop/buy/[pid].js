@@ -4,33 +4,33 @@ import { Icon } from "@iconify/react";
 
 function ProductBuy() {
   return (
-    <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF]">
+    <div className="lg:px-[96px] lg:py-[90px] py-10 px-6 font-general-sans bg-[#D7F3FF]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:space-x-16">
         <div className="">
           <img
             src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
             alt=""
-            className="h-[300px] lg:h-[400px] w-full rounded-md object-cover"
+            className="h-[250px] lg:h-[400px] w-full rounded-md object-cover"
           />
           <div className="flex items-center justify-center space-x-5 mt-5">
             <button className="rotate-180">
               <Icon height={30} icon="ep:right" />
             </button>
-            <div className="w-[80%] flex space-x-3 items-center overflow-hidden">
+            <div className="w-[80%] flex space-x-3 items-center overflow-auto whitespace-nowrap">
               <img
                 src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
                 alt=""
-                className="h-[80px] w-[120px] rounded-md"
+                className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
               />
               <img
                 src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
                 alt=""
-                className="h-[80px] w-[120px] rounded-md"
+                className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
               />
               <img
                 src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
                 alt=""
-                className="h-[80px] w-[120px] rounded-md"
+                className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
               />
             </div>
             <button>
@@ -38,8 +38,8 @@ function ProductBuy() {
             </button>
           </div>
         </div>
-        <div className="">
-          <h1 className="text-[32px] font-medium">
+        <div className="mt-8 lg:mt-0">
+          <h1 className="text-[24px] lg:text-[32px] font-medium">
             Weston White Shaker Kitchen Cabinets
           </h1>
           <div className="bg-[#D7E8FF] p-6 rounded-md mt-6">
@@ -111,7 +111,7 @@ function ProductBuy() {
           </div>
         </div>
       </div>
-      <div className="mt-44">
+      <div className="mt-28 lg:mt-44">
         <div className="bg-white h-[46px] px-4 flex items-center">
           <Icon className="shrink-0" icon="carbon:search" />
           <input
