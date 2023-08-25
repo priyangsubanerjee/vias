@@ -62,7 +62,14 @@ function ProductBuy({ product }) {
               {product.description}
             </p>
           </div>
-          <button className="mt-7 h-12 bg-[#023E8A] w-full rounded-lg text-white">
+          <button
+            onClick={() => {
+              document
+                .querySelector(".collectionGroup")
+                .scrollIntoView({ behavior: "smooth" });
+            }}
+            className="mt-7 h-12 bg-[#023E8A] w-full rounded-lg text-white"
+          >
             Start Shopping Now
           </button>
           <div className="bg-[#D7E8FF] p-6 rounded-md mt-6">
@@ -128,7 +135,7 @@ function ProductBuy({ product }) {
             id=""
           />
         </div>
-        <div className="mt-8">
+        <div className="mt-8 ">
           <h2 className="font-semibold text-[#1B1B1B]">Filter by Type</h2>
           <div className="mt-7 flex items-center lg:justify-between overflow-auto lg:overflow-hidden space-x-5">
             <div className="border shrink-0 w-fit border-[#777] py-[22px] px-[20px] flex items-center rounded-lg">
@@ -178,7 +185,7 @@ function ProductBuy({ product }) {
             </div>
           </div>
         </div>
-        <div className="mt-8 flex items-center space-x-2">
+        <div className="mt-8 flex items-center space-x-2 collectionGroup">
           <img
             src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941953/Dtory/vias/SHAKER_WHITE_4_oidssv.png"
             alt=""

@@ -125,7 +125,7 @@ function Navbar() {
           </li>
         ) : (
           <li className="flex items-center space-x-1">
-            <a rel="noopener noreferrer" href="/profile" className="text-white">
+            <a rel="noopener noreferrer" href="/" className="text-white">
               <Icon height={30} icon="gridicons:user" />
             </a>
           </li>
