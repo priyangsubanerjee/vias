@@ -38,6 +38,13 @@ function CartProduct({ product, refreshCart }) {
     }
   };
 
+  const handleRemove = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.filter((item) => item._id !== product._id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    refreshCart();
+  };
+
   return (
     <div className="product">
       <div className="lg:flex lg:space-x-4">
@@ -51,7 +58,7 @@ function CartProduct({ product, refreshCart }) {
         <div className="w-full">
           <div className="flex h-fit w-full items-center justify-between">
             <h2 className="font-medium text-[18px]">{product?.name}</h2>
-            <button>
+            <button onClick={() => handleRemove()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
