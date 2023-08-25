@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import navLinks from "@/static/navlinks";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -31,11 +32,13 @@ function Navbar() {
               />
             </svg>
           </button>
-          <img
-            src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692895112/Dtory/vias/Logo_fktmyl.png"
-            alt=""
-            className="h-12"
-          />
+          <Link href="/">
+            <img
+              src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692895112/Dtory/vias/Logo_fktmyl.png"
+              alt=""
+              className="h-10 lg:h-12"
+            />
+          </Link>
         </div>
 
         <div className="lg:hidden flex items-center ml-auto lg:ml-0 space-x-6">
