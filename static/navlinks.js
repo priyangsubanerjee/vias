@@ -34,7 +34,7 @@ const navLinks = [
   },
   {
     title: "",
-    path: "/",
+    path: "/cart",
     icons: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

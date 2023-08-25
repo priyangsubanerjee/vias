@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/no-html-link-for-pages */
 import navLinks from "@/static/navlinks";
+import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -124,20 +125,20 @@ function Navbar() {
           </li>
         ) : (
           <li className="flex items-center space-x-1">
-            <a rel="noopener noreferrer" href="/logout" className="text-white">
-              Logout
+            <a rel="noopener noreferrer" href="/profile" className="text-white">
+              <Icon height={30} icon="gridicons:user" />
             </a>
           </li>
         )}
 
         {navLinks.slice(4, 5).map((link) => {
           return (
-            <li key={link.title} className="flex items-center space-x-1">
-              {link.icons}
-              <a href={link.path} className="text-white">
+            <a href={link.path} key={link.title} className="text-white">
+              <li className="flex items-center space-x-1">
+                {link.icons}
                 {link.title}
-              </a>
-            </li>
+              </li>
+            </a>
           );
         })}
       </ul>
