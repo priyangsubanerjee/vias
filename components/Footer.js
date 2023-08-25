@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { signOut } from "next-auth/react";
 import React from "react";
 
 function Footer() {
@@ -39,7 +40,7 @@ function Footer() {
           <span className="text-white font-medium">Account</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
             <li>Create an account</li>
-            <li>Log out</li>
+            <li onClick={() => signOut()}>Log out</li>
             <li>Shopping Cart</li>
           </ul>
         </div>
