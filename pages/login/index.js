@@ -4,7 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 function Login() {
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
-      <div className="w-[500px] p-7 rounded-[16px] border border-[#B0B0B0] mx-auto">
+      <div className="w-[90%] lg:w-[500px] p-7 rounded-[16px] border border-[#B0B0B0] mx-auto">
         <h1 className="text-[32px] font-semibold text-black">Sign In</h1>
         <form action="" className="mt-6">
           <div>
