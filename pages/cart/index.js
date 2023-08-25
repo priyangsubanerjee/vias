@@ -1,8 +1,20 @@
 import CartProduct from "@/components/Cards/CartProduct";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Cart() {
+  const [cartItems, setCartItems] = useState([]);
   const [state, setState] = useState("cart"); // ["cart", "address"]
+
+  useEffect(() => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(cart);
+  }, []);
+
+  const refreshCart = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(cart);
+  };
+
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
       <div className="flex justify-center space-x-3">
@@ -43,9 +55,32 @@ function Cart() {
           <div className="lg:w-[720px] shrink-0">
             <h1 className="text-[18px] font-medium">Shopping Cart</h1>
             <div className="bg-[#F2F2F2] border border-[#777777] p-5 rounded-[16px] mt-4">
-              <CartProduct />
-              <div className="h-[1px] bg-[#ADADAD] w-full my-10"></div>
-              <CartProduct />
+              {cartItems.map((item, index) => {
+                if (index < cartItems.length - 1) {
+                  return (
+                    <>
+                      <CartProduct refreshCart={refreshCart} product={item} />
+                      <div className="h-[1px] bg-[#ADADAD] w-full my-10"></div>
+                    </>
+                  );
+                } else {
+                  return (
+                    <CartProduct
+                      refreshCart={refreshCart}
+                      key={index}
+                      product={item}
+                    />
+                  );
+                }
+              })}
+
+              {cartItems.length == 0 && (
+                <div>
+                  <h1 className="text-[18px] font-medium mt-10">
+                    Your cart is empty {":)"}
+                  </h1>
+                </div>
+              )}
             </div>
           </div>
           <div className="w-full mt-20 lg:mt-0">
@@ -101,24 +136,21 @@ function Cart() {
             <h1 className="text-[18px] font-medium mt-10">Price Details</h1>
             <div className="bg-[#F2F2F2] border border-[#777777] p-5 rounded-[16px] mt-4">
               <ul className="space-y-3">
-                <li className="flex items-center justify-between">
-                  <span className="text-[#777777] font-medium text-[14px]">
-                    1x Weston White Shaker
-                  </span>
-                  <span className="text-[#1b1b1b] font-medium">$90.80</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="text-[#777777] font-medium text-[14px]">
-                    1x Weston White Shaker
-                  </span>
-                  <span className="text-[#1b1b1b] font-medium">$90.80</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="text-[#777777] font-medium text-[14px]">
-                    1x Weston White Shaker
-                  </span>
-                  <span className="text-[#1b1b1b] font-medium">$90.80</span>
-                </li>
+                {cartItems.map((item, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="text-[#777777] font-medium text-[14px]">
+                        {item.quantity} X {item.name}
+                      </span>
+                      <span className="text-[#1b1b1b] font-medium">
+                        ${item.discountedPrice * item.quantity}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
               <ul className="space-y-3 mt-3">
                 <li className="flex items-center justify-between">

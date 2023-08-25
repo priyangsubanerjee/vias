@@ -1,13 +1,56 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from "react";
 
-function CartProduct() {
+function CartProduct({ product, refreshCart }) {
+  const [quantity, setQuantity] = useState(product.quantity);
+
+  const handleIncrement = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.map((item) => {
+      if (item._id === product._id) {
+        setQuantity(item.quantity + 1);
+        item.quantity++;
+      }
+      return item;
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    refreshCart();
+  };
+
+  const handleDecrement = () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let item = cart.find((item) => item._id === product._id);
+    if (item.quantity === 1) {
+      cart = cart.filter((item) => item._id !== product._id);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      setQuantity(0);
+      refreshCart();
+    } else {
+      cart = cart.map((item) => {
+        if (item._id === product._id) {
+          setQuantity(item.quantity - 1);
+          item.quantity--;
+        }
+        return item;
+      });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      refreshCart();
+    }
+  };
+
   return (
     <div className="product">
       <div className="lg:flex lg:space-x-4">
-        <div className="h-[135px] w-[135px] border border-[#777] bg-neutral-50 rounded-md shrink-0"></div>
+        <div className="h-[135px] w-[135px] border border-[#777] bg-neutral-50 rounded-md shrink-0 flex items-center justify-center overflow-hidden">
+          <img
+            src={product.image.url}
+            className="h-full w-full object-cover"
+            alt=""
+          />
+        </div>
         <div className="w-full">
           <div className="flex h-fit w-full items-center justify-between">
-            <h2 className="font-medium text-[18px]">Weston White Shaker</h2>
+            <h2 className="font-medium text-[18px]">{product?.name}</h2>
             <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +69,7 @@ function CartProduct() {
             </button>
           </div>
           <div className="flex items-center text-[14px]">
-            <p className="text-[#666666]">Model #WESTONWHITESHAKER</p>
+            <p className="text-[#666666]">TAG {product?.tag}</p>
             <div className="mx-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,14 +108,18 @@ function CartProduct() {
               <p className="text-[#023E8A] font-medium text-[14px]">
                 Unit Price
               </p>
-              <p className="text-[20px] font-semibold text-[#1b1b1b]">$9.80</p>
+              <p className="text-[20px] font-semibold text-[#1b1b1b]">
+                ${product.discountedPrice}
+              </p>
             </div>
             <div className="ml-10">
               <p className="text-[#023E8A] font-medium text-[14px]">Subtotal</p>
-              <p className="text-[20px] font-semibold text-[#1b1b1b]">$19.80</p>
+              <p className="text-[20px] font-semibold text-[#1b1b1b]">
+                ${product.discountedPrice * product.quantity}
+              </p>
             </div>
             <div className="flex items-center space-x-2 ml-auto">
-              <button>
+              <button onClick={() => handleDecrement()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -88,8 +135,8 @@ function CartProduct() {
                   />
                 </svg>
               </button>
-              <span className="text-[#1b1b1b]">1</span>
-              <button>
+              <span className="text-[#1b1b1b]">{quantity}</span>
+              <button onClick={() => handleIncrement()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
