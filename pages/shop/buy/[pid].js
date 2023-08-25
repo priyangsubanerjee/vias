@@ -1,14 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import connectDatabase from "@/db/dbConnect";
+import products from "@/db/models/products";
+import CollectionListing from "@/components/Cards/CollectionListing";
 
-function ProductBuy() {
+export async function getServerSideProps(context) {
+  const pid = context.params.pid;
+  await connectDatabase();
+  let product = await products.find({
+    _id: pid,
+  });
+  product = JSON.parse(JSON.stringify(product));
+  return {
+    props: {
+      product: product[0],
+    },
+  };
+}
+
+function ProductBuy({ product }) {
   return (
     <div className="lg:px-[96px] lg:py-[90px] py-10 px-6 font-general-sans bg-[#D7F3FF]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:space-x-16">
         <div className="">
           <img
-            src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
+            src={product.productImages[0].url}
             alt=""
             className="h-[250px] lg:h-[400px] w-full rounded-md object-cover"
           />
@@ -17,21 +34,16 @@ function ProductBuy() {
               <Icon height={30} icon="ep:right" />
             </button>
             <div className="w-[80%] flex space-x-3 items-center overflow-auto whitespace-nowrap">
-              <img
-                src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
-                alt=""
-                className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
-              />
-              <img
-                src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
-                alt=""
-                className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
-              />
-              <img
-                src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
-                alt=""
-                className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
-              />
+              {product.productImages.map((image, index) => {
+                return (
+                  <img
+                    key={index}
+                    src={image.url}
+                    alt=""
+                    className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
+                  />
+                );
+              })}
             </div>
             <button>
               <Icon height={30} icon="ep:right" />
@@ -40,20 +52,14 @@ function ProductBuy() {
         </div>
         <div className="mt-8 lg:mt-0">
           <h1 className="text-[24px] lg:text-[32px] font-medium">
-            Weston White Shaker Kitchen Cabinets
+            {product.name}
           </h1>
           <div className="bg-[#D7E8FF] p-6 rounded-md mt-6">
             <h2 className="text-lg font-semibold text-[#383838]">
               Description
             </h2>
-            <p className="text-sm leading-7">
-              Cross-cut paper shredder with 6-sheet capacity; shreds credit
-              cards (one at a time) Staple gun (18 or 20 gauge 1/2″ staples) and
-              wood glue required for assembly. Cabinets into sets measuring 0.48
-              cm x 4.68 cm 3 minute continuous run time with 30 minute cool down
-              cycle with overheat LED indicator Angled feed entry for safety
-              with auto start mode and manual reverse to clear paper jams 5 year
-              warranty
+            <p className="text-sm leading-8 whitespace-pre mt-2">
+              {product.description}
             </p>
           </div>
           <button className="mt-7 h-12 bg-[#023E8A] w-full rounded-lg text-white">
@@ -187,44 +193,9 @@ function ProductBuy() {
           </div>
         </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-          <div className="border border-[#C3C3C3] bg-white rounded-md">
-            <div className="flex items-center justify-center py-3 border-b border-[#C3C3C3]">
-              <img
-                src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692942228/Dtory/vias/image_13_mszddl.png"
-                className="h-[125px] object-contain"
-                alt=""
-              />
-            </div>
-            <div className="px-5 py-4">
-              <h2 className="text-[#1B1B1B] font-semibold">Base Cabinet</h2>
-              <p className="text-[#555] text-sm mt-2">15” W</p>
-              <p className="bg-[#B1C3DB] mt-1 px-2 py-1 rounded-md w-fit text-sm">
-                #HS-B15
-              </p>
-              <div className="flex items-center mt-8 text-[#1C7926] font-medium space-x-2">
-                <Icon icon="zondicons:checkmark-outline" />
-                <span>In Stock</span>
-              </div>
-              <h2 className="text-[18px] text-[#1B1B1B] font-semibold mt-2">
-                $397.99
-              </h2>
-              <h2 className="text-[14px] text-[#A3A3A3] font-normal mt-1 line-through">
-                $397.99
-              </h2>
-              <div className="mt-5 flex justify-between">
-                <div className="flex items-center bg-[#D9D9D9] border border-black rounded-md">
-                  <button className="h-[36px] px-3">-</button>
-                  <span className="px-3 h-[36px] text-sm flex items-center font-medium border-x border-black">
-                    1
-                  </span>
-                  <button className="h-[36px] px-3">+</button>
-                </div>
-                <button className="bg-[#023E8A] px-5 h-[36px] text-white rounded text-sm">
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
+          {product.collections.map((product, index) => {
+            return <CollectionListing product={product} key={index} />;
+          })}
         </div>
       </div>
     </div>
