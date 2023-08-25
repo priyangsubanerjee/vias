@@ -10,7 +10,7 @@ function ProductBuy() {
           <img
             src="https://imgs.search.brave.com/XM_pOUXZKgpniindOLVoKOTwl1tyV3MjeHLlMkFBKAM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvOTIw/Njk1OTg4L3Bob3Rv/L21hbi1vcGVucy10/aGUtY2FiaW5ldC1k/b29yLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1ySzY2SXU4/Rk1GRE9RMlR0MUdQ/d3JXT2JPOGJJRUFa/ZzktaWlueUZwYkVV/PQ"
             alt=""
-            className="h-[400px] w-full rounded-md"
+            className="h-[300px] lg:h-[400px] w-full rounded-md object-cover"
           />
           <div className="flex items-center justify-center space-x-5 mt-5">
             <button className="rotate-180">
