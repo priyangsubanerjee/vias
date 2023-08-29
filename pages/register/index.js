@@ -1,13 +1,41 @@
 import React from "react";
 
 function Login() {
+  const [name, setName] = React.useState("");
+  const [credential, setCredential] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const handleSubmit = async () => {
+    let res = await fetch("/api/user/create", {
+      method: "POST",
+      body: JSON.stringify({
+        name,
+        credential,
+        password,
+      }),
+    });
+    let { success, message } = await res.json();
+    if (success) {
+      window.location.href = "/login";
+    } else {
+      alert(message);
+    }
+  };
+
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
-      <div className="w-[500px] p-7 rounded-[16px] border border-[#B0B0B0] mx-auto">
+      <div className="w-[96%] lg:w-[500px] p-7 rounded-[16px] border border-[#B0B0B0] mx-auto">
         <h1 className="text-[32px] font-semibold text-black">
           Create your account
         </h1>
-        <form action="" className="mt-6">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+          action=""
+          className="mt-6"
+        >
           <div>
             <label
               htmlFor="text"
@@ -17,6 +45,8 @@ function Login() {
             </label>
             <input
               type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="First and last name"
               className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
               name=""
@@ -28,10 +58,12 @@ function Login() {
               htmlFor=""
               className="block text-sm font-medium text-gray-700"
             >
-              Email / Phone number
+              Phone / Phone number
             </label>
             <input
               type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
               className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
               name=""
               id=""
@@ -46,6 +78,8 @@ function Login() {
             </label>
             <input
               type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="At least 8 characters"
               className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
               name=""
@@ -53,11 +87,8 @@ function Login() {
             />
           </div>
           <div className="mt-6">
-            <button
-              disabled
-              className="h-[50px] disabled:bg-[#858585] disabled:text-[#DBDBDB] bg-[#023E8A] w-full rounded-lg text-[#D7F3FF]"
-            >
-              Sign In
+            <button className="h-[50px] disabled:bg-[#858585] disabled:text-[#DBDBDB] bg-[#023E8A] w-full rounded-lg text-[#D7F3FF]">
+              Sign Up
             </button>
           </div>
         </form>

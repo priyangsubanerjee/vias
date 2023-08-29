@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
 
 function Login() {
+  const session = useSession();
+  console.log(session);
+  const [credential, setCredential] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async () => {
+    let response = await signIn("credentials", {
+      credential,
+      password,
+      redirect: false,
+    });
+
+    if (response.error) {
+      alert(response.error);
+    }
+  };
+
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
       <div className="w-[90%] lg:w-[500px] p-7 rounded-[16px] border border-[#B0B0B0] mx-auto">
         <h1 className="text-[32px] font-semibold text-black">Sign In</h1>
-        <form action="" className="mt-6">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+          className="mt-6"
+        >
           <div>
             <label
               htmlFor="email"
@@ -16,6 +39,8 @@ function Login() {
             </label>
             <input
               type="text"
+              value={credential}
+              onChange={(e) => setCredential(e.target.value)}
               className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
               name=""
               id=""
@@ -30,6 +55,8 @@ function Login() {
             </label>
             <input
               type="text"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
               name=""
               id=""
