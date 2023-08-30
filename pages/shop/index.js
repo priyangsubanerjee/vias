@@ -9,14 +9,52 @@ export async function getServerSideProps() {
   await connectDatabase();
   let products_ = await products.find({});
   products_ = JSON.parse(JSON.stringify(products_));
+
+  let colorsAvailable = [];
+  let cabinetStyleAvailable = [];
+  let doorStyleAvailable = [];
+  let constructionTypeAvailable = [];
+  let featuresAvailable = [];
+  let kitchenCabinets = [];
+  let bathroomVanities = [];
+
+  products_.forEach((product) => {
+    colorsAvailable.push(product.color);
+    cabinetStyleAvailable.push(product.cabinetStyle);
+    doorStyleAvailable.push(product.doorStyle);
+    constructionTypeAvailable.push(product.constructionType);
+    featuresAvailable.push(product.features);
+    if (product.category == "kitchen-cabinets") {
+      kitchenCabinets.push(product);
+    }
+    if (product.category == "bathroom-vanities") {
+      bathroomVanities.push(product);
+    }
+  });
+
   return {
     props: {
       products: products_,
+      kitchenCabinets,
+      bathroomVanities,
+      filterOptionsProp: {
+        color: colorsAvailable,
+        cabinetStyle: cabinetStyleAvailable,
+        doorStyle: doorStyleAvailable,
+        constructionType: constructionTypeAvailable,
+        features: featuresAvailable,
+      },
     },
   };
 }
 
-function Shop({ products }) {
+function Shop({
+  products,
+  filterOptionsProp,
+  kitchenCabinets,
+  bathroomVanities,
+}) {
+  const [visibleProducts, setVisibleProducts] = React.useState(kitchenCabinets); // ["kitchen-cabinets", "bathroom-vanities"
   const router = useRouter();
   const [state, setState] = React.useState("kitchen-cabinets"); // ["kitchen-cabinets", "bathroom-vanities"]
   const [filters, setFilters] = React.useState({
@@ -27,14 +65,13 @@ function Shop({ products }) {
     features: [],
   });
   const [filterOptions, setFilterOptions] = React.useState({
-    color: ["White", "Blue", "Yellow", "Brown", "Black"],
-    cabinetStyle: ["Contemporary", "Traditional", "Rustic"],
-    doorStyle: ["Shaker", "Raised Panel", "Flat Panel"],
-    constructionType: ["Framed", "Frameless"],
-    features: ["Soft Close", "Dovetailed Drawers"],
+    color: filterOptionsProp.color,
+    cabinetStyle: filterOptionsProp.cabinetStyle,
+    doorStyle: filterOptionsProp.doorStyle,
+    constructionType: filterOptionsProp.constructionType,
+    features: filterOptionsProp.features,
   });
   const [sortingTabOpen, setSortingTabOpen] = React.useState(false);
-
   const [sorting, setSorting] = React.useState({
     price: "",
   });
@@ -46,6 +83,14 @@ function Shop({ products }) {
       setState("kitchen-cabinets");
     }
   }, [router.query.tab]);
+
+  useEffect(() => {
+    if (state == "kitchen-cabinets") {
+      setVisibleProducts(kitchenCabinets);
+    } else {
+      setVisibleProducts(bathroomVanities);
+    }
+  }, [state]);
 
   return (
     <div>
@@ -590,7 +635,7 @@ function Shop({ products }) {
               </div>
             </div>
             <div className="grid grid-cols-1 place-content-center lg:grid-cols-3 gap-4 mt-8">
-              {products.map((product, index) => {
+              {visibleProducts.map((product, index) => {
                 return <ProductListing key={index} product={product} />;
               })}
             </div>

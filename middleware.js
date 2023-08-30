@@ -3,11 +3,9 @@ import { getToken } from "next-auth/jwt";
 
 export async function middleware(request) {
   let pathname = request.nextUrl.pathname;
-  let onboardingsuccess =
-    request.cookies.get("onboardingsuccess")?.value || null;
   let session = await getToken({
     req: request,
-    secret: process.env.JWT_SECRET,
+    secret: process.env.SECRET_SALT,
   });
 
   if (pathname === "/login" || pathname == "/register") {
@@ -26,5 +24,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/login", "/register", "/cart"],
+  matcher: ["/login", "/register", "/cart/:path*"],
 };

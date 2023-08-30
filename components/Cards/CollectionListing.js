@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import { decrypt, encrypt } from "@/helper/crypto";
 import { Icon } from "@iconify/react";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 function CollectionListing({ product }) {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [quantity, setQuantity] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     let isAdded = cart.find((item) => item._id === product._id);
     if (isAdded) {
       setQuantity(isAdded.quantity);
@@ -20,6 +24,7 @@ function CollectionListing({ product }) {
 
   const handleAddToCart = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     let isAdded = cart.find((item) => item._id === product._id);
     if (isAdded) {
       cart = cart.map((item) => {
@@ -31,14 +36,15 @@ function CollectionListing({ product }) {
       });
     } else {
       setQuantity(1);
-      cart.push({ ...product, quantity: 1 });
+      cart.push({ ...product, quantity: 1, pid: router.query.pid });
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     setIsAddedToCart(true);
   };
 
   const handleIncrement = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     cart = cart.map((item) => {
       if (item._id === product._id) {
         setQuantity(item.quantity + 1);
@@ -46,12 +52,13 @@ function CollectionListing({ product }) {
       }
       return item;
     });
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     setIsAddedToCart(true);
   };
 
   const handleDecrement = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     let item = cart.find((item) => item._id === product._id);
     if (item.quantity === 1) {
       cart = cart.filter((item) => item._id !== product._id);
@@ -66,7 +73,10 @@ function CollectionListing({ product }) {
         }
         return item;
       });
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(encrypt(JSON.stringify(cart)))
+      );
       setIsAddedToCart(true);
     }
   };

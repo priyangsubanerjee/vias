@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { decrypt, encrypt } from "@/helper/crypto";
 import React, { useState } from "react";
 
 function CartProduct({ product, refreshCart }) {
@@ -6,6 +7,7 @@ function CartProduct({ product, refreshCart }) {
 
   const handleIncrement = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     cart = cart.map((item) => {
       if (item._id === product._id) {
         setQuantity(item.quantity + 1);
@@ -13,16 +15,20 @@ function CartProduct({ product, refreshCart }) {
       }
       return item;
     });
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     refreshCart();
   };
 
   const handleDecrement = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     let item = cart.find((item) => item._id === product._id);
     if (item.quantity === 1) {
       cart = cart.filter((item) => item._id !== product._id);
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(encrypt(JSON.stringify(cart)))
+      );
       setQuantity(0);
       refreshCart();
     } else {
@@ -33,15 +39,19 @@ function CartProduct({ product, refreshCart }) {
         }
         return item;
       });
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(encrypt(JSON.stringify(cart)))
+      );
       refreshCart();
     }
   };
 
   const handleRemove = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     cart = cart.filter((item) => item._id !== product._id);
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     refreshCart();
   };
 
