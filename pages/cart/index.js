@@ -14,6 +14,7 @@ function Cart() {
   const [state, setState] = useState("cart"); // ["cart", "address"]
   const [address, setAddress] = useState({});
   const [totalAmount, setTotalAmount] = useState(0);
+  const [coupons, setCoupons] = useState([]); // [{id, name, discount}
 
   const handleCheckout = async () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -44,7 +45,7 @@ function Cart() {
       }
     } catch (err) {
       console.error("Error in creating checkout session:", err);
-      router.push("/error");
+      //router.push("/error");
     }
   };
 
@@ -57,7 +58,20 @@ function Cart() {
     });
     setTotalAmount(total + 7.5);
     setCartItems(cart);
+    loadCoupons();
   }, []);
+
+  const loadCoupons = async () => {
+    console.log("load coupons");
+    const stripe = require("stripe")(
+      "sk_test_51NMN0HCtWx3MLSIaRc3XH7FYHrc9FaX4mj0ehKmWS9cTCY5WTdQllkgFZVCXTpfwOB9FfbrbPdDNHWNwM9inf8LO007xTRcCTl"
+    );
+
+    const coupons = await stripe.coupons.list({
+      limit: 3,
+    });
+    console.log(coupons);
+  };
 
   const refreshCart = () => {
     let total = 0;
