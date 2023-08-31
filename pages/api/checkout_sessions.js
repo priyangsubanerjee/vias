@@ -40,7 +40,8 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ["card"],
+        // add goole pay and apple pay here later
+        payment_method_types: ["card", "giropay"],
         line_items: [...formattedCart],
         mode: "payment",
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
