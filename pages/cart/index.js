@@ -1,21 +1,72 @@
 import CartProduct from "@/components/Cards/CartProduct";
 import { decrypt } from "@/helper/crypto";
 import React, { useEffect, useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { useRouter } from "next/router";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+);
 
 function Cart() {
+  const router = useRouter();
   const [cartItems, setCartItems] = useState([]);
   const [state, setState] = useState("cart"); // ["cart", "address"]
+  const [address, setAddress] = useState({});
   const [totalAmount, setTotalAmount] = useState(0);
 
-  useEffect(() => {
+  const handleCheckout = async () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
+
+    try {
+      const stripe = await stripePromise;
+      const response = await fetch("/api/checkout_sessions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cart,
+          address,
+          cancelUrl: "/cart",
+        }),
+      });
+
+      const { sessionId } = await response.json();
+      const { error } = await stripe.redirectToCheckout({
+        sessionId,
+      });
+
+      if (error) {
+        console.log(error);
+        router.push("/error");
+      }
+    } catch (err) {
+      console.error("Error in creating checkout session:", err);
+      router.push("/error");
+    }
+  };
+
+  useEffect(() => {
+    let total = 0;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
+    cart.forEach((item) => {
+      total += item.discountedPrice * item.quantity;
+    });
+    setTotalAmount(total + 7.5);
     setCartItems(cart);
   }, []);
 
   const refreshCart = () => {
+    let total = 0;
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
+    cart.forEach((item) => {
+      total += item.discountedPrice * item.quantity;
+    });
+    setTotalAmount(total + 7.5);
     setCartItems(cart);
   };
 
@@ -243,6 +294,10 @@ function Cart() {
             <h1 className="text-[18px] font-medium mt-10">Contact details</h1>
             <input
               type="text"
+              value={address.email || ""}
+              onChange={(e) => {
+                setAddress({ ...address, email: e.target.value });
+              }}
               className="px-5 w-[431px] mt-3 h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
               placeholder="Email address"
               name=""
@@ -252,6 +307,10 @@ function Cart() {
             <div className="grid grid-cols-2 gap-4 mt-5">
               <input
                 type="text"
+                value={address.firstName || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, firstName: e.target.value });
+                }}
                 className="px-5 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="First name"
                 name=""
@@ -259,6 +318,10 @@ function Cart() {
               />
               <input
                 type="text"
+                value={address.lastName || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, lastName: e.target.value });
+                }}
                 className="px-5 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="Last name"
                 name=""
@@ -266,6 +329,10 @@ function Cart() {
               />
               <input
                 type="text"
+                value={address.address || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, address: e.target.value });
+                }}
                 className="px-5 col-span-2 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="Address"
                 name=""
@@ -273,6 +340,10 @@ function Cart() {
               />
               <input
                 type="text"
+                value={address.apartment || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, apartment: e.target.value });
+                }}
                 className="px-5 col-span-2 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="Apartment, suite, etc. (optional)"
                 name=""
@@ -280,6 +351,10 @@ function Cart() {
               />
               <input
                 type="text"
+                value={address.city || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, city: e.target.value });
+                }}
                 className="px-5 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="City"
                 name=""
@@ -287,6 +362,10 @@ function Cart() {
               />
               <input
                 type="text"
+                value={address.state || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, state: e.target.value });
+                }}
                 className="px-5 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="State"
                 name=""
@@ -294,6 +373,10 @@ function Cart() {
               />
               <input
                 type="text"
+                value={address.pincode || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, pincode: e.target.value });
+                }}
                 className="px-5 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="Pincode"
                 name=""
@@ -301,6 +384,10 @@ function Cart() {
               />
               <input
                 type="text"
+                value={address.phone || ""}
+                onChange={(e) => {
+                  setAddress({ ...address, phone: e.target.value });
+                }}
                 className="px-5 w-full h-[55px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0] placeholder:text-[#777]"
                 placeholder="Phone number"
                 name=""
@@ -341,24 +428,21 @@ function Cart() {
             <h1 className="text-[18px] font-medium mt-10">Price Details</h1>
             <div className="bg-[#F2F2F2] border border-[#777777] p-5 rounded-[16px] mt-4">
               <ul className="space-y-3">
-                <li className="flex items-center justify-between">
-                  <span className="text-[#777777] font-medium text-[14px]">
-                    1x Weston White Shaker
-                  </span>
-                  <span className="text-[#1b1b1b] font-medium">$90.80</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="text-[#777777] font-medium text-[14px]">
-                    1x Weston White Shaker
-                  </span>
-                  <span className="text-[#1b1b1b] font-medium">$90.80</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="text-[#777777] font-medium text-[14px]">
-                    1x Weston White Shaker
-                  </span>
-                  <span className="text-[#1b1b1b] font-medium">$90.80</span>
-                </li>
+                {cartItems.map((item, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="flex items-center justify-between"
+                    >
+                      <span className="text-[#777777] font-medium text-[14px]">
+                        {item.quantity} X {item.name}
+                      </span>
+                      <span className="text-[#1b1b1b] font-medium">
+                        ${item.discountedPrice * item.quantity}
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
               <ul className="space-y-3 mt-3">
                 <li className="flex items-center justify-between">
@@ -379,11 +463,18 @@ function Cart() {
                 <p className="text-[18px] text-black font-semibold">
                   Total Amount
                 </p>
-                <p className="text-[18px] text-black font-semibold">$269.7</p>
+                <p className="text-[18px] text-black font-semibold">
+                  ${totalAmount}
+                </p>
               </div>
               <div className="mt-4">
-                <button className="h-[50px] bg-black text-white rounded-md w-full flex items-center justify-center">
-                  <span>Proceed to payment</span>
+                <button
+                  onClick={() => {
+                    handleCheckout();
+                  }}
+                  className="h-[50px] bg-black text-white rounded-md w-full flex items-center justify-center"
+                >
+                  <span>Proceed to checkout</span>
                   <span className="ml-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
