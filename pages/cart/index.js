@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import CartProduct from "@/components/Cards/CartProduct";
 import { decrypt } from "@/helper/crypto";
 import React, { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
+import { Icon } from "@iconify/react";
+import { useSession } from "next-auth/react";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -12,9 +15,90 @@ function Cart() {
   const router = useRouter();
   const [cartItems, setCartItems] = useState([]);
   const [state, setState] = useState("cart"); // ["cart", "address"]
-  const [address, setAddress] = useState({});
+  const [address, setAddress] = useState({
+    email: "abc@gmail.com",
+    firstName: "Hello",
+    lastName: "World",
+    address: "nothing",
+    apartment: "11.2",
+    city: "bbser",
+    state: "odisha",
+    pincode: "751024",
+    phone: "823423423",
+  });
   const [totalAmount, setTotalAmount] = useState(0);
-  const [coupons, setCoupons] = useState([]); // [{id, name, discount}
+  const [coupons, setCoupons] = useState([]);
+  const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const [couponLayer, setCouponLayer] = useState(false);
+  const [coupounAmount, setCoupounAmount] = useState(0);
+
+  const session = useSession();
+
+  const handleValidation = () => {
+    let stopPropagation = false;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
+
+    if (cart.length == 0) {
+      alert("Your cart is empty.");
+      stopPropagation == true;
+      return;
+    }
+
+    if (address.email == "" || address.email == null) {
+      alert("Please provide shipping email");
+      stopPropagation = true;
+      return;
+    }
+    if (address.firstName == "" || address.firstName == null) {
+      alert("Please provide first name");
+      stopPropagation = true;
+      return;
+    }
+    if (address.lastName == "" || address.lastName == null) {
+      alert("Please provide first name");
+      stopPropagation = true;
+      return;
+    }
+    if (address.address == "" || address.address == null) {
+      alert("Please provide address");
+      stopPropagation = true;
+      return;
+    }
+    if (address.apartment == "" || address.apartment == null) {
+      alert("Please provide apartment/house number");
+      stopPropagation = true;
+      return;
+    }
+
+    if (address.city == "" || address.city == null) {
+      alert("Please provide city name.");
+      stopPropagation = true;
+      return;
+    }
+
+    if (address.state == "" || address.state == null) {
+      alert("Please provide state.");
+      stopPropagation = true;
+      return;
+    }
+
+    if (address.pincode == "" || address.pincode == null) {
+      alert("Please provide pincode/zipcode");
+      stopPropagation = true;
+      return;
+    }
+
+    if (address.phone == "" || address.phone == null) {
+      alert("Please provide phone number");
+      stopPropagation = true;
+      return;
+    }
+
+    if (stopPropagation == false) {
+      handleCheckout();
+    }
+  };
 
   const handleCheckout = async () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -30,7 +114,11 @@ function Cart() {
         body: JSON.stringify({
           cart,
           address,
-          cancelUrl: "/cart",
+          coupon_obj: selectedCoupon,
+          shippping_Email: address.email || "",
+          placedBy_email: session.data.user.email,
+          placedBy_name: session.data.user.name,
+          totalAmount,
         }),
       });
 
@@ -45,7 +133,7 @@ function Cart() {
       }
     } catch (err) {
       console.error("Error in creating checkout session:", err);
-      //router.push("/error");
+      router.push("/error");
     }
   };
 
@@ -56,7 +144,17 @@ function Cart() {
     cart.forEach((item) => {
       total += item.discountedPrice * item.quantity;
     });
-    setTotalAmount(total + 7.5);
+    let couponDiscount = 0;
+    if (selectedCoupon != null) {
+      if (selectedCoupon.percent_off) {
+        couponDiscount = total * (selectedCoupon.percent_off / 100);
+        setCoupounAmount(couponDiscount);
+      } else {
+        couponDiscount = selectedCoupon.amount_off / 100;
+        setCoupounAmount(couponDiscount);
+      }
+      setTotalAmount(total - couponDiscount + 7.5);
+    }
     setCartItems(cart);
     loadCoupons();
   }, []);
@@ -66,11 +164,8 @@ function Cart() {
     const stripe = require("stripe")(
       "sk_test_51NMN0HCtWx3MLSIaRc3XH7FYHrc9FaX4mj0ehKmWS9cTCY5WTdQllkgFZVCXTpfwOB9FfbrbPdDNHWNwM9inf8LO007xTRcCTl"
     );
-
-    const coupons = await stripe.coupons.list({
-      limit: 3,
-    });
-    console.log(coupons);
+    const coupons = await stripe.coupons.list();
+    setCoupons(coupons.data);
   };
 
   const refreshCart = () => {
@@ -80,7 +175,17 @@ function Cart() {
     cart.forEach((item) => {
       total += item.discountedPrice * item.quantity;
     });
-    setTotalAmount(total + 7.5);
+    let couponDiscount = 0;
+    if (selectedCoupon != null) {
+      if (selectedCoupon.percent_off) {
+        couponDiscount = total * (selectedCoupon.percent_off / 100);
+        setCoupounAmount(couponDiscount);
+      } else {
+        couponDiscount = selectedCoupon.amount_off / 100;
+        setCoupounAmount(couponDiscount);
+      }
+      setTotalAmount(total - couponDiscount + 7.5);
+    }
     setCartItems(cart);
   };
 
@@ -91,8 +196,40 @@ function Cart() {
     cart.forEach((item) => {
       total += item.discountedPrice * item.quantity;
     });
-    setTotalAmount(total + 7.5);
+    let couponDiscount = 0;
+    if (selectedCoupon != null) {
+      if (selectedCoupon.percent_off) {
+        couponDiscount = total * (selectedCoupon.percent_off / 100);
+        setCoupounAmount(couponDiscount);
+      } else {
+        couponDiscount = selectedCoupon.amount_off / 100;
+        setCoupounAmount(couponDiscount);
+      }
+      setTotalAmount(total - couponDiscount + 7.5);
+    }
   }, [cartItems]);
+
+  useEffect(() => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
+    let total = 0;
+    cart.forEach((item) => {
+      total += item.discountedPrice * item.quantity;
+    });
+    let couponDiscount = 0;
+    if (selectedCoupon != null) {
+      if (selectedCoupon.percent_off) {
+        couponDiscount = total * (selectedCoupon.percent_off / 100);
+        setCoupounAmount(couponDiscount);
+      } else {
+        couponDiscount = selectedCoupon.amount_off / 100;
+        setCoupounAmount(couponDiscount);
+      }
+      setTotalAmount(total - couponDiscount + 7.5);
+    } else {
+      setTotalAmount(total + 7.5);
+    }
+  }, [selectedCoupon]);
 
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
@@ -206,29 +343,52 @@ function Cart() {
                     </svg>
                   </span>
                   <p className="font-semibold ml-3">Coupons</p>
-                  <span className="bg-[#023E8A] text-white rounded-md px-2 py-1 text-[14px] ml-auto">
-                    VIAS200
-                  </span>
-                  <button className="ml-6">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 18 18"
-                      fill="none"
-                    >
-                      <path
-                        d="M15 15L3 3M15 3L3 15"
-                        stroke="#777777"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </button>
+                  {selectedCoupon == null ? (
+                    <div className="flex items-center ml-auto">
+                      <button
+                        onClick={() => setCouponLayer(true)}
+                        className="text-[#023E8A] font-medium"
+                      >
+                        Choose coupon
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center ml-auto">
+                      <span className="bg-[#023E8A] text-white rounded-md px-2 py-1 text-[14px]">
+                        {selectedCoupon.name}
+                      </span>
+                      <button
+                        onClick={() => setSelectedCoupon(null)}
+                        className="ml-6"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 18 18"
+                          fill="none"
+                        >
+                          <path
+                            d="M15 15L3 3M15 3L3 15"
+                            stroke="#777777"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
                 </div>
-                <p className="text-[#023E8A] font-semibold mt-3 text-[13px]">
-                  You applied a coupon and claimed 20% OFF.
-                </p>
+                {selectedCoupon != null && (
+                  <p className="text-[#023E8A] font-semibold mt-3 text-[13px]">
+                    You applied a coupon and claimed{" "}
+                    {selectedCoupon.percent_off ? (
+                      <span> {selectedCoupon.percent_off}%</span>
+                    ) : (
+                      <span> ${selectedCoupon.amount_off / 100}</span>
+                    )}
+                  </p>
+                )}
                 <h1 className="text-[18px] font-medium mt-10">Price Details</h1>
                 <div className="bg-[#F2F2F2] border border-[#777777] p-5 rounded-[16px] mt-4">
                   <ul className="space-y-3">
@@ -249,12 +409,16 @@ function Cart() {
                     })}
                   </ul>
                   <ul className="space-y-3 mt-3">
-                    <li className="flex items-center justify-between">
-                      <span className="text-[#023E8A] font-medium text-[14px]">
-                        Coupon discount
-                      </span>
-                      <span className="text-[#023E8A] font-medium">-$5.80</span>
-                    </li>
+                    {selectedCoupon && (
+                      <li className="flex items-center justify-between">
+                        <span className="text-[#023E8A] font-medium text-[14px]">
+                          Coupon discount
+                        </span>
+                        <span className="text-[#023E8A] font-medium">
+                          -${Math.round(coupounAmount).toFixed(2)}
+                        </span>
+                      </li>
+                    )}
                     <li className="flex items-center justify-between">
                       <span className="text-[#777777] font-medium text-[14px]">
                         Delivery charges
@@ -278,7 +442,7 @@ function Cart() {
                       }}
                       className="h-[50px] bg-black text-white rounded-md w-full flex items-center justify-center"
                     >
-                      <span>Proceed to checkout</span>
+                      <span>Proceed to shipping</span>
                       <span className="ml-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -303,8 +467,8 @@ function Cart() {
       )}
 
       {state == "address" && (
-        <div className="flex space-x-10 mt-16">
-          <div className="w-[720px] shrink-0">
+        <div className="lg:flex lg:space-x-16 mt-16">
+          <div className="lg:w-[720px] shrink-0">
             <h1 className="text-[18px] font-medium mt-10">Contact details</h1>
             <input
               type="text"
@@ -459,12 +623,16 @@ function Cart() {
                 })}
               </ul>
               <ul className="space-y-3 mt-3">
-                <li className="flex items-center justify-between">
-                  <span className="text-[#023E8A] font-medium text-[14px]">
-                    Coupon discount
-                  </span>
-                  <span className="text-[#023E8A] font-medium">-$5.80</span>
-                </li>
+                {selectedCoupon && (
+                  <li className="flex items-center justify-between">
+                    <span className="text-[#023E8A] font-medium text-[14px]">
+                      Coupon discount
+                    </span>
+                    <span className="text-[#023E8A] font-medium">
+                      -${Math.round(coupounAmount).toFixed(2)}
+                    </span>
+                  </li>
+                )}
                 <li className="flex items-center justify-between">
                   <span className="text-[#777777] font-medium text-[14px]">
                     Delivery charges
@@ -484,11 +652,11 @@ function Cart() {
               <div className="mt-4">
                 <button
                   onClick={() => {
-                    handleCheckout();
+                    handleValidation();
                   }}
                   className="h-[50px] bg-black text-white rounded-md w-full flex items-center justify-center"
                 >
-                  <span>Proceed to checkout</span>
+                  <span>Proceed to pay</span>
                   <span className="ml-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -505,6 +673,54 @@ function Cart() {
                   </span>
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {couponLayer == true && (
+        <div className="fixed z-20 inset-0 h-full w-full bg-black/50 flex items-center justify-center">
+          <div className="w-[94%] lg:w-[500px] h-fit p-5 bg-[#fff] border rounded-md">
+            <div className="flex items-center justify-between">
+              <h1 className="text-xl font-semibold">Coupons</h1>
+              <button>
+                <Icon height={30} icon="clarity:close-line" />
+              </button>
+            </div>
+
+            <div className="mt-5">
+              {coupons.map((coupon, index) => {
+                console.log(coupon);
+                return (
+                  <div
+                    key={index}
+                    className="p-4 bg-neutral-50 rounded-md flex justify-between items-start"
+                  >
+                    <div>
+                      <h2 className="font-semibold text-[#023E8A]">
+                        {coupon.name}
+                      </h2>
+                      <p className="mt-2">
+                        Flat discount of{" "}
+                        {coupon.percent_off ? (
+                          <span> {coupon.percent_off}%</span>
+                        ) : (
+                          <span> ${coupon.amount_off / 100}</span>
+                        )}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setSelectedCoupon(coupon);
+                        setCouponLayer(false);
+                      }}
+                      className="bg-[#023E8A] text-white px-5 py-2 rounded text-sm"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

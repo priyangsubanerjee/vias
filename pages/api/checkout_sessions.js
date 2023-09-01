@@ -1,15 +1,32 @@
 import connectDatabase from "@/db/dbConnect";
-import users from "@/db/models/users";
+import orders from "@/db/models/orders";
 import Stripe from "stripe";
+import { v4 as uuidv4 } from "uuid";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET);
 
 export default async function handler(req, res) {
   await connectDatabase();
+  const {
+    cart,
+    address,
+    coupon_obj,
+    placedBy_email,
+    placedBy_name,
+    totalAmount,
+  } = req.body;
 
-  const { cart, address } = req.body;
+  let orderNumber = uuidv4().toString();
+  let shippingNumber = "VIAS-" + uuidv4().toString();
 
   let formattedCart = [];
+  let formattedDiscounts = [];
+
+  if (coupon_obj != null) {
+    formattedDiscounts.push({
+      coupon: coupon_obj.id,
+    });
+  }
 
   cart.forEach((item, index) => {
     formattedCart.push({
@@ -40,30 +57,34 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const session = await stripe.checkout.sessions.create({
-        discounts: [
-          {
-            coupon: "12_121",
-          },
-        ],
-
+        discounts: [...formattedDiscounts],
         payment_method_types: ["card"],
+        customer_email: placedBy_email,
         line_items: [...formattedCart],
         mode: "payment",
         success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/cart`,
       });
 
-      //   const user_ = new users({
-      //     name: "test",
-      //     credential: "test",
-      //     password: "test",
-      //     email: "test",
-      //     phone: session.id,
-      //   });
+      if (session.id) {
+        const order_ = new orders({
+          orderNumber,
+          orderedItems: JSON.parse(JSON.stringify(cart)),
+          coupounsApplied: [coupon_obj],
+          totalAmount,
+          shippingNumber,
+          shippingDetails: JSON.parse(JSON.stringify(address)),
+          placedBy_email,
+          placedBy_name,
+          checkoutSessionId: session.id,
+        });
 
-      //   await user_.save();
+        await order_.save();
+      }
 
-      res.status(200).json({ sessionId: session.id });
+      res
+        .status(200)
+        .json({ sessionId: session.id, orderNumber, shippingNumber });
     } catch (err) {
       res.status(500).json({ error: "Error creating checkout session" });
     }

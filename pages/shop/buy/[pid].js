@@ -20,17 +20,27 @@ export async function getServerSideProps(context) {
 }
 
 function ProductBuy({ product }) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   return (
     <div className="lg:px-[96px] lg:py-[90px] py-10 px-6 font-general-sans bg-[#D7F3FF]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:space-x-16">
         <div className="">
           <img
-            src={product.productImages[0].url}
+            src={product.productImages[currentImageIndex].url}
             alt=""
             className="h-[250px] lg:h-[400px] w-full rounded-md object-cover"
           />
           <div className="flex items-center justify-center space-x-5 mt-5">
-            <button className="rotate-180">
+            <button
+              onClick={() => {
+                if (currentImageIndex == 0) {
+                  setCurrentImageIndex(product.productImages.length - 1);
+                  return;
+                }
+                setCurrentImageIndex(currentImageIndex - 1);
+              }}
+              className="rotate-180"
+            >
               <Icon height={30} icon="ep:right" />
             </button>
             <div className="w-[80%] flex space-x-3 items-center overflow-auto whitespace-nowrap">
@@ -39,13 +49,22 @@ function ProductBuy({ product }) {
                   <img
                     key={index}
                     src={image.url}
+                    onClick={() => setCurrentImageIndex(index)}
                     alt=""
-                    className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-none"
+                    className="lg:h-[80px] h-[60px] w-[100px] lg:w-[120px] rounded-md shrink-0 pointer-events-auto cursor-pointer"
                   />
                 );
               })}
             </div>
-            <button>
+            <button
+              onClick={() => {
+                if (currentImageIndex == product.productImages.length - 1) {
+                  setCurrentImageIndex(0);
+                  return;
+                }
+                setCurrentImageIndex(currentImageIndex + 1);
+              }}
+            >
               <Icon height={30} icon="ep:right" />
             </button>
           </div>
@@ -58,7 +77,7 @@ function ProductBuy({ product }) {
             <h2 className="text-lg font-semibold text-[#383838]">
               Description
             </h2>
-            <p className="text-sm leading-8 whitespace-pre mt-2">
+            <p className="text-sm leading-8 whitespace-pre-line mt-2">
               {product.description}
             </p>
           </div>

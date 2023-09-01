@@ -35,10 +35,10 @@ function ProductListing({ product }) {
         </div>
         <h2 className="mt-3 font-medium text-[#222]">{product.name}</h2>
         <h3 className="mt-2 text-[18px] font-semibold">
-          ${product.collections[0].discountedPrice}
+          ${product.collections[0]?.discountedPrice}
         </h3>
         <h3 className="mt-2 text-sm text-[#A3A3A3] line-through font-normal">
-          ${product.collections[0].price}
+          ${product.collections[0]?.price}
         </h3>
         <Link className="block mt-5" href={`/shop/buy/${product._id}`}>
           <button className="bg-[#023E8A] font-medium w-full rounded-lg text-white text-sm py-3 text-center flex items-center justify-center space-x-2">
