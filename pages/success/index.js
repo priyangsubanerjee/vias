@@ -6,6 +6,7 @@ import React from "react";
 export async function getServerSideProps(context) {
   const sessionId = context.query.sid;
   const orderId = context.query.oid;
+  await connectDatabase();
 
   let order_ = await orders.findOne({
     _id: orderId,
@@ -20,7 +21,6 @@ export async function getServerSideProps(context) {
     };
   }
 
-  await connectDatabase();
   order_ = await orders.findOneAndUpdate(
     {
       _id: orderId,
