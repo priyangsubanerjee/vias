@@ -32,7 +32,12 @@ export async function getServerSideProps(context) {
   );
 
   await order_.save();
-  let message = `New order placed by (${order_.placedBy_email})%0A%0AOrder Number: ${order_.orderNumber}%0AShipping Number: ${order_.shippingNumber}%0ATotal Amount: $${order_.totalAmount}%0APayment successfull: ${order_.paymentSuccessfull}%0A%0APayment session id:%0A-------------%0A${sessionId}%0A%0A-------------
+
+  order_ = await orders.findOne({
+    _id: orderId,
+  });
+
+  let message = `New order placed by (${order_.placedBy_email})%0A%0AOrder Number: ${order_.orderNumber}%0AShipping Number: ${order_.shippingNumber}%0ATotal Amount: $${order_.totalAmount}%0APayment successfull: ${order_.paymentSuccessfull}%0A%0APayment session id:%0A-------------%0A${order_.checkoutSessionId}%0A%0A-------------
     %0A%0AShipping Details:%0A
     Email: ${order_.shippingDetails.email}%0A
     First name: ${order_.shippingDetails.firstName}%0A
