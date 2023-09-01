@@ -7,14 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET);
 
 export default async function handler(req, res) {
   await connectDatabase();
-  const {
-    cart,
-    address,
-    coupon_obj,
-    placedBy_email,
-    placedBy_name,
-    totalAmount,
-  } = req.body;
+  const { cart, coupon_obj, placedBy_email, orderId } = req.body;
 
   let orderNumber = uuidv4().toString();
   let shippingNumber = "VIAS-" + uuidv4().toString();
@@ -62,29 +55,10 @@ export default async function handler(req, res) {
         customer_email: placedBy_email,
         line_items: [...formattedCart],
         mode: "payment",
-        success_url: `${req.headers.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/cart`,
+        success_url: `${req.headers.origin}/success?sid={CHECKOUT_SESSION_ID}&oid=${orderId}`,
+        cancel_url: `${req.headers.origin}/cancel?oid=${orderId}`,
       });
-
-      if (session.id) {
-        const order_ = new orders({
-          orderNumber,
-          orderedItems: JSON.parse(JSON.stringify(cart)),
-          coupounsApplied: [coupon_obj],
-          totalAmount,
-          shippingNumber,
-          shippingDetails: JSON.parse(JSON.stringify(address)),
-          placedBy_email,
-          placedBy_name,
-          checkoutSessionId: session.id,
-        });
-
-        await order_.save();
-      }
-
-      res
-        .status(200)
-        .json({ sessionId: session.id, orderNumber, shippingNumber });
+      res.status(200).json({ sessionId: session.id });
     } catch (err) {
       res.status(500).json({ error: "Error creating checkout session" });
     }

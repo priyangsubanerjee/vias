@@ -57,7 +57,7 @@ function CartProduct({ product, refreshCart }) {
 
   return (
     <div className="product">
-      <div className="lg:flex lg:space-x-4">
+      <div className="lg:flex lg:space-x-7">
         <div className="h-[135px] w-[135px] border border-[#777] bg-neutral-50 rounded-md shrink-0 flex items-center justify-center overflow-hidden">
           <img
             src={product.image.url}
@@ -120,7 +120,7 @@ function CartProduct({ product, refreshCart }) {
               </p>
             </div>
           </div>
-          <div className="flex items-center mt-5">
+          <div className="flex items-center mt-4">
             <div>
               <p className="text-[#023E8A] font-medium text-[14px]">
                 Unit Price

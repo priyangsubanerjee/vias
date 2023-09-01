@@ -103,8 +103,23 @@ function Cart() {
   const handleCheckout = async () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
-
     try {
+      let orderPromise = await fetch("/api/orders/create", {
+        method: "POST",
+        body: JSON.stringify({
+          orderedItems: JSON.parse(JSON.stringify(cart)),
+          coupounsApplied: selectedCoupon
+            ? [JSON.parse(JSON.stringify(selectedCoupon))]
+            : [],
+          totalAmount: totalAmount,
+          shippingDetails: JSON.parse(JSON.stringify(address)),
+          placedBy_email: session.data.user.email,
+          placedBy_name: session.data.user.name,
+        }),
+      });
+
+      let { order } = await orderPromise.json();
+
       const stripe = await stripePromise;
       const response = await fetch("/api/checkout_sessions", {
         method: "POST",
@@ -113,12 +128,10 @@ function Cart() {
         },
         body: JSON.stringify({
           cart,
-          address,
-          coupon_obj: selectedCoupon,
-          shippping_Email: address.email || "",
-          placedBy_email: session.data.user.email,
-          placedBy_name: session.data.user.name,
           totalAmount,
+          coupon_obj: selectedCoupon,
+          placedBy_email: session.data.user.email,
+          orderId: order._id,
         }),
       });
 
@@ -129,11 +142,11 @@ function Cart() {
 
       if (error) {
         console.log(error);
-        router.push("/error");
+        //router.push("/error");
       }
     } catch (err) {
       console.error("Error in creating checkout session:", err);
-      router.push("/error");
+      //router.push("/error");
     }
   };
 
@@ -683,11 +696,10 @@ function Cart() {
           <div className="w-[94%] lg:w-[500px] h-fit p-5 bg-[#fff] border rounded-md">
             <div className="flex items-center justify-between">
               <h1 className="text-xl font-semibold">Coupons</h1>
-              <button>
+              <button onClick={() => setCouponLayer(false)}>
                 <Icon height={30} icon="clarity:close-line" />
               </button>
             </div>
-
             <div className="mt-5">
               {coupons.map((coupon, index) => {
                 console.log(coupon);

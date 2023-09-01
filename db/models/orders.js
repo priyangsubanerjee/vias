@@ -44,8 +44,12 @@ const orderSchema = new Schema({
   checkoutSessionId: {
     type: String,
   },
+  paymentSuccessfull: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 mongoose.models = {};
 module.exports =
-  mongoose.models.admins || mongoose.model("orders", orderSchema);
+  mongoose.models.orders || mongoose.model("orders", orderSchema);
