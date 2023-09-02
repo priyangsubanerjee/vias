@@ -6,27 +6,17 @@ import bcrypt from "bcrypt";
 
 export default async function handler(req, res) {
   await connectDatabase();
-  const { name, credential, password } = JSON.parse(req.body);
-
-  const determineType = (credential) => {
-    if (credential.includes("@")) {
-      return "email";
-    } else {
-      return "phone";
-    }
-  };
-
-  const type = determineType(credential);
+  const { name, phone, email, password } = JSON.parse(req.body);
 
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
 
   const user_ = new users({
     name,
-    credential,
+    phone,
+    email,
     password: hash,
-    phone: type === "phone" ? credential : null,
-    email: type === "email" ? credential : null,
+    phone,
   });
 
   try {

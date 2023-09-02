@@ -2,15 +2,22 @@ import React from "react";
 
 function Login() {
   const [name, setName] = React.useState("");
-  const [credential, setCredential] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleSubmit = async () => {
+    if (phone === "" || email === "" || password === "" || name === "") {
+      alert("Please fill in all the fields");
+      return;
+    }
+
     let res = await fetch("/api/user/create", {
       method: "POST",
       body: JSON.stringify({
         name,
-        credential,
+        phone,
+        email,
         password,
       }),
     });
@@ -58,12 +65,30 @@ function Login() {
               htmlFor=""
               className="block text-sm font-medium text-gray-700"
             >
-              Phone / Phone number
+              Phone number
             </label>
             <input
               type="text"
-              value={credential}
-              onChange={(e) => setCredential(e.target.value)}
+              value={phone}
+              placeholder="Enter your phone number"
+              onChange={(e) => setPhone(e.target.value)}
+              className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
+              name=""
+              id=""
+            />
+          </div>
+          <div className="mt-6">
+            <label
+              htmlFor=""
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              type="text"
+              value={email}
+              placeholder="Enter your email address"
+              onChange={(e) => setEmail(e.target.value)}
               className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
               name=""
               id=""

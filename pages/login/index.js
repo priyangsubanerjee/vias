@@ -13,10 +13,13 @@ function Login() {
       password,
       redirect: false,
     });
+    console.log(response);
 
     if (response.error) {
       alert(response.error);
     }
+
+    window.location.reload();
   };
 
   return (

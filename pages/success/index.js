@@ -37,18 +37,17 @@ export async function getServerSideProps(context) {
     _id: orderId,
   });
 
-  let message = `New order placed by (${order_.placedBy_email})%0A%0AOrder Number: ${order_.orderNumber}%0AShipping Number: ${order_.shippingNumber}%0ATotal Amount: $${order_.totalAmount}%0APayment successfull: ${order_.paymentSuccessfull}%0A%0APayment session id:%0A-------------%0A${order_.checkoutSessionId}%0A%0A-------------
-    %0A%0AShipping Details:%0A
-    Email: ${order_.shippingDetails.email}%0A
-    First name: ${order_.shippingDetails.firstName}%0A
-    Last name: ${order_.shippingDetails.lastName}%0A
-    Address: ${order_.shippingDetails.address}%0A
-    Apartment: ${order_.shippingDetails.apartment}%0A
-    City: ${order_.shippingDetails.city}%0A
-    State: ${order_.shippingDetails.state}%0A
-    Pincode: ${order_.shippingDetails.pincode}%0A
-    Phone: ${order_.shippingDetails.phone}%0A
+  let message = `New order placed by (${order_.placedBy_email})%0A%0AOrder Number: ${order_.orderNumber}%0AShipping Number: ${order_.shippingNumber}%0ATotal Amount: $${order_.totalAmount}%0APayment successfull: ${order_.paymentSuccessfull}%0A%0APayment session id:%0A-------------%0A${order_.checkoutSessionId}%0A%0A-------------%0A%0AShipping Details:%0AEmail: ${order_.shippingDetails.email}%0A
+First name: ${order_.shippingDetails.firstName}%0A
+Last name: ${order_.shippingDetails.lastName}%0A
+Address: ${order_.shippingDetails.address}%0A
+Apartment: ${order_.shippingDetails.apartment}%0A
+City: ${order_.shippingDetails.city}%0A
+State: ${order_.shippingDetails.state}%0A
+Pincode: ${order_.shippingDetails.pincode}%0A
+Phone: ${order_.shippingDetails.phone}%0A
   `;
+
   let url = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${process.env.TELEGRAM_CHAT_ID}&text=${message}`;
 
   await fetch(url, {
