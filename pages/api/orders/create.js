@@ -22,6 +22,11 @@ export default async function handler(req, res) {
     shippingDetails,
     placedBy_email,
     placedBy_name,
+    shippingStatus: {
+      date: Date.now().toString(),
+      status: "Payment Pending",
+      details: "Payment is pending for this order.",
+    },
   });
 
   const order = await orderObj.save();

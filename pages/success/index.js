@@ -28,6 +28,12 @@ export async function getServerSideProps(context) {
     {
       checkoutSessionId: sessionId,
       paymentSuccessfull: sessionId ? true : false,
+      shippingStatus: {
+        date: Date.now().toString(),
+        status: "Payment successfull - Order placed",
+        details:
+          "We have received your payment. Your order is placed. We will notify you once your order is shipped.",
+      },
     }
   );
 

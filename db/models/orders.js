@@ -35,6 +35,9 @@ const orderSchema = new Schema({
   shippingDetails: {
     type: Object,
   },
+  shippingStatus: {
+    type: Object,
+  },
   placedBy_email: {
     type: String,
   },
