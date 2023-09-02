@@ -32,8 +32,10 @@ function Layout({ children }) {
   const session = useSession();
   return (
     <div className={generalSans.variable}>
-      <div className="hidden bg-yellow-100 fixed right-0 top-1/2 p-3 z-20">
+      <div className="bg-yellow-100 fixed right-0 top-1/2 p-3 z-20">
         <p>{session.status}</p>
+        <p>{session.data?.user.email}</p>
+        <p>{session.data?.user.id}</p>
       </div>
       {children}
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import CartProduct from "@/components/Cards/CartProduct";
 import { decrypt } from "@/helper/crypto";
@@ -13,6 +14,7 @@ const stripePromise = loadStripe(
 
 function Cart() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [state, setState] = useState("cart"); // ["cart", "address"]
   const [address, setAddress] = useState({
@@ -170,6 +172,7 @@ function Cart() {
     }
     setCartItems(cart);
     loadCoupons();
+    setLoading(false);
   }, []);
 
   const loadCoupons = async () => {
@@ -734,6 +737,18 @@ function Cart() {
                 );
               })}
             </div>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div className="fixed bg-[#D7F3FF] z-20 inset-0 h-full w-full flex items-center justify-center overflow-hidden">
+          <div className="flex flex-col items-center justify-center">
+            <img
+              src="/logo.png"
+              alt=""
+              className="h-16 object-contain animate-pulse"
+            />
           </div>
         </div>
       )}

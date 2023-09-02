@@ -70,6 +70,7 @@ export const authOptions = {
           ...session.user,
           email: existingUser.email,
           name: existingUser.name,
+          id: existingUser._id,
         },
       };
     },
