@@ -71,9 +71,6 @@ export default function Home() {
             <button className="text-white bg-[#023E8A] hover:bg-[#001f47] h-[47px] rounded-lg">
               Explore Cabinets
             </button>
-            <button className="h-[47px] rounded-lg hover:bg-[#002b6333] border text-[#0070E0] border-[#0070E0]">
-              Get Free Design & Quote
-            </button>
           </div>
         </div>
         <div className="lg:w-1/2 flex justify-center">
