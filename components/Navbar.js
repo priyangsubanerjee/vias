@@ -6,8 +6,10 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import Sidebar from "./Sidebar";
 
 function Navbar() {
+  const [sidebarOpen, setSidebarOpen] = React.useState(false);
   const session = useSession();
   const router = useRouter();
 
@@ -19,7 +21,10 @@ function Navbar() {
     >
       <div className="flex items-center w-full lg:w-fit">
         <div className="flex items-center space-x-5 lg:space-x-0">
-          <button className="text-white lg:hidden">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="text-white lg:hidden"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="28"
@@ -142,6 +147,8 @@ function Navbar() {
           );
         })}
       </ul>
+
+      {sidebarOpen && <Sidebar setOpen={setSidebarOpen} />}
     </nav>
   );
 }

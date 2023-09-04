@@ -1,47 +1,77 @@
 /* eslint-disable @next/next/no-img-element */
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
 
 function Footer() {
   return (
     <div className="bg-[#023E8A] lg:px-[96px] lg:py-[70px] font-general-sans px-6 py-[50px]">
-      <h1 className="font-bold text-3xl text-[#D7F3FF]">VIAS.</h1>
+      <Link href="/">
+        <img
+          src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692895112/Dtory/vias/Logo_fktmyl.png"
+          alt=""
+          className="h-10 lg:h-12"
+        />
+      </Link>
       <div className="mt-12 grid gap-16 grid-cols-1 lg:grid-cols-5">
         <div>
           <span className="text-white font-medium">Customer Service</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <li>Contact us</li>
-            <li>Order status</li>
-            <li>FAQ</li>
-            <li>Submit a Claim</li>
+            <Link href="/contact-us" className="block">
+              <li>Contact us</li>
+            </Link>
+            <Link href="/orderstatus" className="block">
+              <li>Order status</li>
+            </Link>
+            <Link href="/orderstatus" className="block">
+              <li>FAQ</li>
+            </Link>
+            <Link href="/orderstatus" className="block">
+              <li>Submit a Claim</li>
+            </Link>
           </ul>
         </div>
         <div>
           <span className="text-white font-medium">General Info</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <li>Customer Reviews</li>
-            <li>Shipping & Return Policy</li>
-            <li>VIAS Cabinet Warranty</li>
-            <li>Privacy Notice</li>
-            <li>Careers</li>
+            <Link href="/testimonials" className="block">
+              <li>Customer Reviews</li>
+            </Link>
+            <Link href="/testimonials" className="block">
+              <li>Shipping & Return Policy</li>
+            </Link>
+            <Link href="/warranty" className="block">
+              <li>VIAS Cabinet Warranty</li>
+            </Link>
+            <Link href="/privacy" className="block">
+              <li>Privacy Notice</li>
+            </Link>
           </ul>
         </div>
         <div>
           <span className="text-white font-medium">Inspiration</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <li>Kitchen Design Tool </li>
-            <li>Installation & Assembly</li>
-            <li>Resources/inspiration</li>
-            <li>VIAS in the Media</li>
-            <li>Blog</li>
+            <Link href="/installation" className="block">
+              <li>Installation & Assembly</li>
+            </Link>
+            <Link href="/media" className="block">
+              <li>VIAS in the Media</li>
+            </Link>
+            <Link href="/blogs" className="block">
+              <li>Blog</li>
+            </Link>
           </ul>
         </div>
         <div>
           <span className="text-white font-medium">Account</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <li>Create an account</li>
+            <Link href="/register" className="block">
+              <li>Create an account</li>
+            </Link>
             <li onClick={() => signOut()}>Log out</li>
-            <li>Shopping Cart</li>
+            <Link href="/cart" className="block">
+              <li>Shopping Cart</li>
+            </Link>
           </ul>
         </div>
         <div>
