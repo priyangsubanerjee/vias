@@ -51,9 +51,6 @@ function Footer() {
         <div>
           <span className="text-white font-medium">Inspiration</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <Link href="/installation" className="block">
-              <li>Installation & Assembly</li>
-            </Link>
             <Link href="/media" className="block">
               <li>VIAS in the Media</li>
             </Link>
