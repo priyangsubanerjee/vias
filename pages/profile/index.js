@@ -1,6 +1,27 @@
+import { Icon } from "@iconify/react";
 import React, { useState } from "react";
+import { authOptions } from "pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth/next";
+import orders from "@/db/models/orders";
+import connectDatabase from "@/db/dbConnect";
+import users from "@/db/models/users";
 
-function MyOrders() {
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+  const email = session?.user?.email;
+  await connectDatabase();
+  let account_ = await users.findOne({ email });
+  let orders_ = await orders.find({ placedBy_email: email });
+  return {
+    props: {
+      account: JSON.parse(JSON.stringify(account_)) || {},
+      orders: JSON.parse(JSON.stringify(orders_)) || [],
+    },
+  };
+}
+
+function MyOrders({ orders, account }) {
+  console.log(account);
   const [state, setstate] = useState("account");
 
   return (
@@ -45,32 +66,71 @@ function MyOrders() {
             <div className="space-y-3">
               <p className="font-medium text-[#555555]">
                 <span className="mr-3 font-semibold text-black">Name:</span>
-                <span>John Doe</span>
+                <span>{account?.name}</span>
               </p>
               <p className="font-medium text-[#555555]">
                 <span className="mr-3 font-semibold text-black">Email:</span>
-                <span>priyangsu26@gmail.com</span>
+                <span>{account?.email}</span>
               </p>
               <p className="font-medium text-[#555555]">
                 <span className="mr-3 font-semibold text-black">Phone:</span>
-                <span>911</span>
+                <span>{account?.phone}</span>
               </p>
             </div>
-            <div className="mt-10">
-              <p className="font-medium text-[#555555]">
-                <span className="mr-3 font-semibold text-black">Password:</span>
-                <span className="inline-flex space-x-1">
-                  <span>•</span>
-                  <span>•</span>
-                  <span>•</span>
-                  <span>•</span>
-                  <span>•</span>
-                </span>
-              </p>
+            {account?.password.length !== 0 && (
+              <>
+                <div className="mt-10">
+                  <p className="font-medium text-[#555555]">
+                    <span className="mr-3 font-semibold text-black">
+                      Password:
+                    </span>
+                    <span className="inline-flex space-x-1">
+                      <span>•</span>
+                      <span>•</span>
+                      <span>•</span>
+                      <span>•</span>
+                      <span>•</span>
+                    </span>
+                  </p>
+                </div>
+                <button className="h-12 flex items-center px-10 border border-black rounded mt-7">
+                  Change password
+                </button>
+              </>
+            )}
+          </div>
+        )}
+        {state == "orders" && (
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+              {orders.map((order, index) => {
+                console.log(order);
+                return (
+                  <div
+                    key={index}
+                    className="p-7 border border-black rounded-md"
+                  >
+                    <Icon height={23} icon="fluent:box-20-filled" />
+                    <h2 className="mt-4 font-semibold text-xl">
+                      ${order.totalAmount}
+                    </h2>
+                    <p className="text-sm mt-3">
+                      Shipping number: {order.shippingNumber}
+                    </p>
+                    <p className="text-sm mt-2">
+                      Order number: {order.orderNumber}
+                    </p>
+                    <p className="text-sm mt-2">
+                      Order placed on:{" "}
+                      {new Date(order.orderPlaceOn).toLocaleString()}
+                    </p>
+                    <button className="bg-[#023E8A] h-10 w-full mt-5 rounded text-white">
+                      Track Order
+                    </button>
+                  </div>
+                );
+              })}
             </div>
-            <button className="h-12 flex items-center px-10 border border-black rounded mt-7">
-              Change password
-            </button>
           </div>
         )}
       </div>
