@@ -7,6 +7,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useRouter } from "next/router";
 import { Icon } from "@iconify/react";
 import { useSession } from "next-auth/react";
+import { v4 as uuidv4 } from "uuid";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -17,16 +18,17 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [state, setState] = useState("cart"); // ["cart", "address"]
+  const [saveAddress, setSaveAddress] = useState(false);
   const [address, setAddress] = useState({
-    email: "abc@gmail.com",
-    firstName: "Hello",
-    lastName: "World",
-    address: "nothing",
-    apartment: "11.2",
-    city: "bbser",
-    state: "odisha",
-    pincode: "751024",
-    phone: "823423423",
+    email: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    city: "",
+    state: "",
+    pincode: "",
+    phone: "",
   });
   const [totalAmount, setTotalAmount] = useState(0);
   const [coupons, setCoupons] = useState([]);
@@ -103,6 +105,28 @@ function Cart() {
   };
 
   const handleCheckout = async () => {
+    if (saveAddress) {
+      const response = await fetch("/api/address/create", {
+        method: "POST",
+        body: JSON.stringify({
+          id: uuidv4(),
+          userEmail: session.data.user.email,
+          email: address.email,
+          firstName: address.firstName,
+          lastName: address.lastName,
+          address: address.address,
+          apartment: address.apartment,
+          city: address.city,
+          state: address.state,
+          pincode: address.pincode,
+          phone: address.phone,
+        }),
+      });
+
+      await response.json();
+      return;
+    }
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     try {
@@ -246,6 +270,12 @@ function Cart() {
       setTotalAmount(total + 7.5);
     }
   }, [selectedCoupon]);
+
+  useEffect(() => {
+    if (localStorage.getItem("address")) {
+      setAddress(JSON.parse(localStorage.getItem("address")));
+    }
+  }, []);
 
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
@@ -589,7 +619,15 @@ function Cart() {
               />
             </div>
             <div className="mt-5 flex items-center space-x-2">
-              <input type="checkbox" name="" id="" />
+              <input
+                type="checkbox"
+                checked={saveAddress}
+                onChange={(e) => {
+                  setSaveAddress(e.target.checked);
+                }}
+                name=""
+                id=""
+              />
               <span className="text-[13px] font-medium text-[#777]">
                 Save this information for next time
               </span>

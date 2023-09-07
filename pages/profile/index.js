@@ -22,6 +22,7 @@ export async function getServerSideProps(context) {
 
 function MyOrders({ orders, account }) {
   const [state, setstate] = useState("address");
+  console.log(account);
 
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
@@ -103,7 +104,6 @@ function MyOrders({ orders, account }) {
           <div>
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
               {orders.map((order, index) => {
-                console.log(order);
                 return (
                   <div
                     key={index}
@@ -134,26 +134,62 @@ function MyOrders({ orders, account }) {
         )}
         {state == "address" && (
           <div>
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-              <div className="border border-black rounded-md overflow-hidden">
-                <div className="p-5">
-                  <h2 className="font-semibold text-xl">Jane Doe</h2>
-                  <p className="text-sm mt-3">Address</p>
-                  <p className="text-sm mt-2">Apartment</p>
-                  <div className="grid grid-cols-2">
-                    <p className="text-sm mt-2">City</p>
-                    <p className="text-sm mt-2">State</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {account?.address?.map((address, i) => {
+                return (
+                  <div
+                    key={i}
+                    className="border border-black rounded-md overflow-hidden"
+                  >
+                    <div className="p-5">
+                      <h2 className="font-semibold text-xl">
+                        {address.firstName} {address.lastName}
+                      </h2>
+                      <p className="text-sm mt-3">{address.address}</p>
+                      <p className="text-sm mt-2">{address.apartment}</p>
+                      <div className="grid grid-cols-2">
+                        <p className="text-sm mt-2">{address.city}</p>
+                        <p className="text-sm mt-2">{address.state}</p>
+                      </div>
+                      <div className="grid grid-cols-2 mt-1">
+                        <p className="text-sm mt-2">{address.pincode}</p>
+                        <p className="text-sm mt-2">{address.phone}</p>
+                      </div>
+                    </div>
+                    <div className="flex font-medium items-center text-sm justify-between bg-white px-5 py-3 border-t border-black">
+                      <button
+                        onClick={() => {
+                          localStorage.setItem(
+                            "address",
+                            JSON.stringify(address)
+                          );
+                        }}
+                        className="text-[#023E8A]"
+                      >
+                        Set as default
+                      </button>
+                      <button
+                        onClick={async () => {
+                          const res = await fetch("/api/address/delete", {
+                            method: "POST",
+                            body: JSON.stringify({
+                              email: account.email,
+                              id: address.id,
+                            }),
+                          });
+                          const { success, message } = await res.json();
+                          if (success) {
+                            window.location.reload();
+                          }
+                        }}
+                        className="text-[#DA3A3A]"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 mt-1">
-                    <p className="text-sm mt-2">Pincode</p>
-                    <p className="text-sm mt-2">Phone</p>
-                  </div>
-                </div>
-                <div className="flex font-medium items-center text-sm justify-between bg-white px-5 py-3 border-t border-black">
-                  <button className="text-[#023E8A]">Set as default</button>
-                  <button className="text-[#DA3A3A]">Delete</button>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
         )}
