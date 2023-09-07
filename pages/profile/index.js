@@ -21,8 +21,7 @@ export async function getServerSideProps(context) {
 }
 
 function MyOrders({ orders, account }) {
-  console.log(account);
-  const [state, setstate] = useState("account");
+  const [state, setstate] = useState("address");
 
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
@@ -49,10 +48,10 @@ function MyOrders({ orders, account }) {
           Orders
         </button>
         <button
-          onClick={() => setstate("addresses")}
+          onClick={() => setstate("address")}
           style={{
-            background: state == "addresses" && "#023E8A",
-            color: state == "addresses" && "#D7F3FF",
+            background: state == "address" && "#023E8A",
+            color: state == "address" && "#D7F3FF",
           }}
           className="h-[48px] px-10 rounded-full border border-black"
         >
@@ -130,6 +129,31 @@ function MyOrders({ orders, account }) {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        )}
+        {state == "address" && (
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+              <div className="border border-black rounded-md overflow-hidden">
+                <div className="p-5">
+                  <h2 className="font-semibold text-xl">Jane Doe</h2>
+                  <p className="text-sm mt-3">Address</p>
+                  <p className="text-sm mt-2">Apartment</p>
+                  <div className="grid grid-cols-2">
+                    <p className="text-sm mt-2">City</p>
+                    <p className="text-sm mt-2">State</p>
+                  </div>
+                  <div className="grid grid-cols-2 mt-1">
+                    <p className="text-sm mt-2">Pincode</p>
+                    <p className="text-sm mt-2">Phone</p>
+                  </div>
+                </div>
+                <div className="flex font-medium items-center text-sm justify-between bg-white px-5 py-3 border-t border-black">
+                  <button className="text-[#023E8A]">Set as default</button>
+                  <button className="text-[#DA3A3A]">Delete</button>
+                </div>
+              </div>
             </div>
           </div>
         )}
