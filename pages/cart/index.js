@@ -124,7 +124,6 @@ function Cart() {
       });
 
       await response.json();
-      return;
     }
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
