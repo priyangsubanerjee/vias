@@ -72,30 +72,36 @@ function MyOrders({ orders, account }) {
                 <span className="mr-3 font-semibold text-black">Email:</span>
                 <span>{account?.email}</span>
               </p>
-              <p className="font-medium text-[#555555]">
-                <span className="mr-3 font-semibold text-black">Phone:</span>
-                <span>{account?.phone}</span>
-              </p>
+              {account.phone && (
+                <p className="font-medium text-[#555555]">
+                  <span className="mr-3 font-semibold text-black">Phone:</span>
+                  <span>{account?.phone}</span>
+                </p>
+              )}
             </div>
-            {account?.password.length !== 0 && (
+            {account.password && (
               <>
-                <div className="mt-10">
-                  <p className="font-medium text-[#555555]">
-                    <span className="mr-3 font-semibold text-black">
-                      Password:
-                    </span>
-                    <span className="inline-flex space-x-1">
-                      <span>•</span>
-                      <span>•</span>
-                      <span>•</span>
-                      <span>•</span>
-                      <span>•</span>
-                    </span>
-                  </p>
-                </div>
-                <button className="h-12 flex items-center px-10 border border-black rounded mt-7">
-                  Change password
-                </button>
+                {account?.password.length !== 0 && (
+                  <>
+                    <div className="mt-10">
+                      <p className="font-medium text-[#555555]">
+                        <span className="mr-3 font-semibold text-black">
+                          Password:
+                        </span>
+                        <span className="inline-flex space-x-1">
+                          <span>•</span>
+                          <span>•</span>
+                          <span>•</span>
+                          <span>•</span>
+                          <span>•</span>
+                        </span>
+                      </p>
+                    </div>
+                    <button className="h-12 flex items-center px-10 border border-black rounded mt-7">
+                      Change password
+                    </button>
+                  </>
+                )}
               </>
             )}
           </div>
