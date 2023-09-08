@@ -36,7 +36,7 @@ function MyOrders({ orders, account }) {
           }}
           className="h-[48px] px-10 rounded-full border border-black"
         >
-          Account
+          Profile
         </button>
         <button
           onClick={() => setstate("orders")}

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { decrypt, encrypt } from "@/helper/crypto";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -132,6 +133,14 @@ function CollectionListing({ product }) {
             >
               Add to Cart
             </button>
+          )}
+
+          {isAddedToCart && (
+            <Link href={"/cart"}>
+              <button className="bg-[#023E8A] px-6 py-2 text-sm rounded text-white">
+                Go to cart
+              </button>
+            </Link>
           )}
         </div>
       </div>

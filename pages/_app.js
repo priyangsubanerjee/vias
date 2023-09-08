@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { useEffect } from "react";
+import NextProgress from "next-progress";
 
 export default function App({
   Component,
@@ -23,6 +24,7 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
+      <NextProgress delay={300} options={{ showSpinner: false }} />
       <Layout>
         <Navbar />
         <Component {...pageProps} />
