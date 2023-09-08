@@ -21,7 +21,7 @@ export async function getServerSideProps(context) {
 }
 
 function MyOrders({ orders, account }) {
-  const [state, setstate] = useState("address");
+  const [state, setstate] = useState("account");
   console.log(account);
 
   return (
