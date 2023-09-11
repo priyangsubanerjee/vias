@@ -1,5 +1,5 @@
-const accountSid = "ACd6f9809db42bed867cd8a487a9eae641";
-const authToken = "d928552e3891939e111b837da89851a4";
+const accountSid = process.env.TWILIO_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require("twilio")(accountSid, authToken);
 const bcrypt = require("bcrypt");
 
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   client.messages
     .create({
       body: `Your OTP is for logging into viascabinet.com is ${otp}`,
-      from: "+18777936123",
+      from: process.env.OTP_FROM,
       to: phone,
     })
     .then((message) => console.log(message.sid));

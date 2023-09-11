@@ -16,6 +16,11 @@ function Login() {
       return;
     }
 
+    if (!phone.includes("+")) {
+      alert("Please include country code in phone");
+      return;
+    }
+
     let res = await fetch("/api/otp", {
       method: "POST",
       body: JSON.stringify({
