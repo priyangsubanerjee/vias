@@ -16,6 +16,11 @@ function Login() {
       return;
     }
 
+    if (phone.length < 10) {
+      alert("Please enter a valid phone number");
+      return;
+    }
+
     if (!phone.includes("+")) {
       alert("Please include country code in phone");
       return;
@@ -98,6 +103,7 @@ function Login() {
               <input
                 type="text"
                 value={name}
+                required={true}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="First and last name"
                 className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
@@ -113,8 +119,9 @@ function Login() {
                 Phone number
               </label>
               <input
-                type="text"
+                type="tel"
                 value={phone}
+                required={true}
                 placeholder="Enter your phone number"
                 onChange={(e) => setPhone(e.target.value)}
                 className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"
@@ -130,7 +137,8 @@ function Login() {
                 Email
               </label>
               <input
-                type="text"
+                type="email"
+                required={true}
                 value={email}
                 placeholder="Enter your email address"
                 onChange={(e) => setEmail(e.target.value)}
@@ -149,6 +157,7 @@ function Login() {
               <input
                 type="text"
                 value={password}
+                required={true}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="At least 8 characters"
                 className="px-5 w-full mt-3 h-[60px] border border-[#BEBEBE] rounded-lg bg-[#F0F0F0]"

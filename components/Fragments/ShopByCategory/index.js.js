@@ -1,5 +1,6 @@
 import React from "react";
 import CategoryCard from "./Card";
+import Link from "next/link";
 
 function ShopByCategory() {
   return (
@@ -8,9 +9,11 @@ function ShopByCategory() {
         <p className="lg:text-[40px] text-[24px] font-medium text-white w-full lg:w-fit text-center lg:text-left">
           Shop by Category
         </p>
-        <button className="text-[13px] tracking-[1.3px] font-general-sans font-medium text-white hidden lg:block">
-          SEE MORE
-        </button>
+        <Link href={"/shop"} className="hidden lg:block">
+          <button className="text-[13px] tracking-[1.3px] font-general-sans font-medium text-white hidden lg:block">
+            SEE MORE
+          </button>
+        </Link>
       </div>
 
       <div className="mt-20 grid grid-cols-1 lg:grid-cols-4 gap-[40px]">

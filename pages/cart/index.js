@@ -99,6 +99,12 @@ function Cart() {
       return;
     }
 
+    if (address.phone.length < 10) {
+      alert("Please provide a valid phone number");
+      stopPropagation = true;
+      return;
+    }
+
     if (stopPropagation == false) {
       handleCheckout();
     }
@@ -595,7 +601,7 @@ function Cart() {
                 id=""
               />
               <input
-                type="text"
+                type="tel"
                 value={address.pincode || ""}
                 onChange={(e) => {
                   setAddress({ ...address, pincode: e.target.value });
@@ -606,7 +612,7 @@ function Cart() {
                 id=""
               />
               <input
-                type="text"
+                type="tel"
                 value={address.phone || ""}
                 onChange={(e) => {
                   setAddress({ ...address, phone: e.target.value });

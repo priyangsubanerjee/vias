@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 
 function Login() {
   const session = useSession();
-  console.log(session);
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
+    if (!credential || !password) {
+      alert("Please enter a valid email/phone number and password");
+      return;
+    }
+
     let response = await signIn("credentials", {
       credential,
       password,
@@ -18,20 +24,24 @@ function Login() {
     if (response.error) {
       alert(response.error);
     }
-
-    window.location.reload();
   };
 
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
       <div className="w-[90%] lg:w-[500px] p-7 rounded-[16px] border border-[#B0B0B0] mx-auto">
         <h1 className="text-[32px] font-semibold text-black">Sign In</h1>
+        <p className="mt-3 text-sm">
+          Dont have an account?{" "}
+          <Link href={"/register"} className="text-[#023E8A] font-semibold">
+            Sign Up
+          </Link>
+        </p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             handleSubmit();
           }}
-          className="mt-6"
+          className="mt-10"
         >
           <div>
             <label
@@ -78,7 +88,10 @@ function Login() {
         </div>
         <div className="mt-10 space-y-4">
           <button
-            onClick={() => signIn("google")}
+            onClick={async () => {
+              setLoading(true);
+              await signIn("google");
+            }}
             className="w-full border border-black h-12 rounded-lg space-x-3 text-[#1B1B1B] font-medium flex items-center justify-center"
           >
             <svg
@@ -140,6 +153,13 @@ function Login() {
           </button>
         </div>
       </div>
+      {loading && (
+        <div className="fixed inset-0 h-full w-full bg-black/50 z-30 flex items-center justify-center">
+          <div className="bg-white p-5 rounded-lg w-[300px] h-[300px] flex items-center justify-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-2 border-t-transparent border-gray-900"></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

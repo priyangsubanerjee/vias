@@ -27,7 +27,9 @@ export const authOptions = {
           existingUser = await users.findOne({ phone: credential });
 
           if (!existingUser) {
-            return null;
+            throw new Error(
+              "You are not registered with us. Please register first."
+            );
           }
         }
         let match = await bcrypt.compare(password, existingUser.password);
@@ -38,7 +40,9 @@ export const authOptions = {
             name: existingUser.name,
           };
         } else {
-          return null;
+          throw new Error(
+            "The password you entered is incorrect. Please try again."
+          );
         }
       },
     }),
@@ -53,7 +57,6 @@ export const authOptions = {
       });
 
       if (!existingUser) {
-        console.log("No user found");
         let existingUser = new users({
           name: session.user.name,
           email: session.user.email,

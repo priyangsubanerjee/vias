@@ -6,3 +6,7 @@
   -webkit-text-stroke: 1.5px #023e8a;
   color: transparent;
 }
+
+.footer li:hover {
+  text-decoration: underline;
+}

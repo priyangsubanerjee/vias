@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PeopleSayRow from "./PeopleSayRow";
+import Link from "next/link";
 
 // 8116626874 - Rahul pal
 
@@ -33,9 +34,11 @@ function WhatPeopleSay() {
           <p className="text-2xl lg:text-5xl font-medium text-white w-full lg:w-fit text-center lg:text-left">
             What people say
           </p>
-          <button className="text-[13px] tracking-[1.3px] font-general-sans font-medium text-white hidden lg:block">
-            SEE MORE
-          </button>
+          <Link href={"/testimonials"} className="hidden lg:block">
+            <button className="text-[13px] tracking-[1.3px] font-general-sans font-medium text-white hidden lg:block">
+              SEE MORE
+            </button>
+          </Link>
         </div>
 
         <div className="mt-16 flex overflow-hidden whitespace-nowrap transition-all duration-1000">

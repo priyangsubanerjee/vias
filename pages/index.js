@@ -8,6 +8,7 @@ import Real from "@/components/Fragments/Realkitchen";
 import ShopByCategory from "@/components/Fragments/ShopByCategory/index.js.js";
 import Youtube from "@/components/Fragments/Youtube";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -68,9 +69,11 @@ export default function Home() {
             </li>
           </ul>
           <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-5 text-sm font-medium">
-            <button className="text-white bg-[#023E8A] hover:bg-[#001f47] h-[47px] rounded-lg">
-              Explore Cabinets
-            </button>
+            <Link href="/shop" className="w-full block">
+              <button className="text-white bg-[#023E8A] px-20 hover:bg-[#001f47] h-[47px] rounded-lg">
+                Explore Cabinets
+              </button>
+            </Link>
           </div>
         </div>
         <div className="lg:w-1/2 flex justify-center">

@@ -102,7 +102,7 @@ function CollectionListing({ product }) {
           <span>In Stock</span>
         </div>
         <h2 className="text-[18px] text-[#1B1B1B] font-semibold mt-2">
-          ${product.price}
+          ${product.discountedPrice}
         </h2>
         <h2 className="text-[14px] text-[#A3A3A3] font-normal mt-1 line-through">
           ${product.price}
