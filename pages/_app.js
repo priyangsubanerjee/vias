@@ -26,11 +26,11 @@ export default function App({
     <SessionProvider session={session}>
       <NextProgress delay={300} options={{ showSpinner: false }} />
       <div className="h-screen w-screen fixed inset-0 bg-white z-50 flex items-center justify-center"></div>
-      <Layout>
+      {/* <Layout>
         <Navbar />
         <Component {...pageProps} />
         <Footer />
-      </Layout>
+      </Layout> */}
     </SessionProvider>
   );
 }
