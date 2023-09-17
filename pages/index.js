@@ -24,6 +24,7 @@ export default function Home() {
           <ul className="mt-10 space-y-6 text-sm font-medium">
             <li className="flex space-x-2">
               <svg
+                className="shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -43,6 +44,7 @@ export default function Home() {
             </li>
             <li className="flex space-x-2">
               <svg
+                className="shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -61,6 +63,7 @@ export default function Home() {
             </li>
             <li className="flex space-x-2">
               <svg
+                className="shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -78,6 +81,7 @@ export default function Home() {
             </li>
             <li className="flex space-x-2">
               <svg
+                className="shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -95,6 +99,7 @@ export default function Home() {
             </li>
             <li className="flex space-x-2">
               <svg
+                className="shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -113,6 +118,7 @@ export default function Home() {
             </li>
             <li className="flex space-x-2">
               <svg
+                className="shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
