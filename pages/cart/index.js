@@ -69,11 +69,6 @@ function Cart() {
       stopPropagation = true;
       return;
     }
-    if (address.apartment == "" || address.apartment == null) {
-      alert("Please provide apartment/house number");
-      stopPropagation = true;
-      return;
-    }
 
     if (address.city == "" || address.city == null) {
       alert("Please provide city name.");
