@@ -16,7 +16,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="flex items-center justify-center bg-[#606060] h-[60px] font-general-sans font-medium">
+      <div className="flex items-center justify-center bg-[#606060] h-[50px] font-general-sans font-medium">
         <ul className="flex justify-center items-center space-x-20 text-white text-sm">
           <li className="flex space-x-2 items-center">
             <Icon icon="material-symbols:call" />
@@ -153,7 +153,7 @@ function Navbar() {
 
         {sidebarOpen && <Sidebar setOpen={setSidebarOpen} />}
       </nav>
-      <div className="flex items-center justify-center bg-[#023E8A] h-[40px] font-general-sans text-base font-medium">
+      <div className="flex items-center justify-center bg-[#023E8A] h-[30px] font-general-sans text-sm font-medium">
         <Marquee>
           <span className="text-white/90 mr-44">Welcome to VIAS Cabinet</span>
           <span className="text-white/90 mr-44">Welcome to VIAS Cabinet</span>
