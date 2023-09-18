@@ -34,7 +34,7 @@ function Footer() {
         <div>
           <span className="text-white font-medium">General Info</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <Link href="/testimonials" className="block">
+            <Link href="/reviews" className="block">
               <li>Customer Reviews</li>
             </Link>
             <Link href="/testimonials" className="block">
