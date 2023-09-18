@@ -17,7 +17,7 @@ function Footer() {
         <div>
           <span className="text-white font-medium">Customer Service</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <Link href="/contact-us" className="block">
+            <Link href="/contact" className="block">
               <li>Contact us</li>
             </Link>
             <Link href="/orderstatus" className="block">
@@ -45,6 +45,9 @@ function Footer() {
             </Link>
             <Link href="/privacy" className="block">
               <li>Privacy Notice</li>
+            </Link>
+            <Link href="/faq" className="block">
+              <li>Help Center</li>
             </Link>
           </ul>
         </div>
