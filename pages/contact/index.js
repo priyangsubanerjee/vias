@@ -30,8 +30,8 @@ function Contact() {
       <p className="text-sm mt-2">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
       </p>
-      <div className="w-[60%] mt-7">
-        <div className="grid grid-cols-2 gap-4">
+      <div className="lg:w-[60%] mt-7">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
             <input
               type="text"
