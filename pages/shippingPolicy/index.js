@@ -1,10 +1,10 @@
 import React from "react";
 
-function PrivacyPolicy() {
+function ShippingPolicy() {
   return (
     <div className="lg:px-[96px] py-[90px] px-6 font-general-sans bg-[#D7F3FF] min-h-screen">
       <h1 className="text-[32px] font-semibold text-center lg:text-left">
-        Privacy Policy
+        Shipping & Refund Policy
       </h1>
       <br />
       Last modified: December 29, 2020 <br />
@@ -159,4 +159,4 @@ function PrivacyPolicy() {
   );
 }
 
-export default PrivacyPolicy;
+export default ShippingPolicy;
