@@ -23,10 +23,10 @@ function Footer() {
             <Link href="/orderstatus" className="block">
               <li>Order status</li>
             </Link>
-            <Link href="/orderstatus" className="block">
+            <Link href="/faq" className="block">
               <li>FAQ</li>
             </Link>
-            <Link href="/orderstatus" className="block">
+            <Link href="/submitclaim" className="block">
               <li>Submit a Claim</li>
             </Link>
           </ul>
