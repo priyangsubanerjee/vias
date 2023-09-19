@@ -68,7 +68,7 @@ function Navbar() {
             </button>
             <Link href="/">
               <img
-                src="https://res.cloudinary.com/dccmraknj/image/upload/v1695040305/static/vias_cabinets_pomoq9.png"
+                src="https://res.cloudinary.com/dccmraknj/image/upload/v1695127190/static/vias_cabinets_1_td1dsi.png"
                 alt=""
                 className="h-10 lg:h-12"
               />

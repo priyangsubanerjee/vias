@@ -8,7 +8,7 @@ function Footer() {
     <div className="footer bg-[#023E8A] lg:px-[96px] lg:py-[70px] font-general-sans px-6 py-[50px]">
       <Link href="/">
         <img
-          src="https://res.cloudinary.com/dccmraknj/image/upload/v1695040305/static/vias_cabinets_pomoq9.png"
+          src="https://res.cloudinary.com/dccmraknj/image/upload/v1695127190/static/vias_cabinets_1_td1dsi.png"
           alt=""
           className="h-10 lg:h-12"
         />
@@ -54,9 +54,6 @@ function Footer() {
         <div>
           <span className="text-white font-medium">Inspiration</span>
           <ul className="text-[#CCCCCC] space-y-3 mt-4 text-sm">
-            <Link href="/media" className="block">
-              <li>VIAS in the Media</li>
-            </Link>
             <Link href="/blogs" className="block">
               <li>Blog</li>
             </Link>
