@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
   const message = await client.messages.create({
     body: `Your OTP is ${otp}`,
-    from: process.env.TWILIO_PHONE_NUMBER,
+    from: process.env.OTP_FROM,
     to: phone,
   });
 
