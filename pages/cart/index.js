@@ -193,6 +193,8 @@ function Cart() {
         setCoupounAmount(couponDiscount);
       }
       setTotalAmount(total - couponDiscount + 7.5);
+    } else {
+      setTotalAmount(total + 7.5);
     }
     setCartItems(cart);
     loadCoupons();
@@ -225,29 +227,11 @@ function Cart() {
         setCoupounAmount(couponDiscount);
       }
       setTotalAmount(total - couponDiscount + 7.5);
+    } else {
+      setTotalAmount(total + 7.5);
     }
     setCartItems(cart);
   };
-
-  useEffect(() => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
-    let total = 0;
-    cart.forEach((item) => {
-      total += item.discountedPrice * item.quantity;
-    });
-    let couponDiscount = 0;
-    if (selectedCoupon != null) {
-      if (selectedCoupon.percent_off) {
-        couponDiscount = total * (selectedCoupon.percent_off / 100);
-        setCoupounAmount(couponDiscount);
-      } else {
-        couponDiscount = selectedCoupon.amount_off / 100;
-        setCoupounAmount(couponDiscount);
-      }
-      setTotalAmount(total - couponDiscount + 7.5);
-    }
-  }, [cartItems]);
 
   useEffect(() => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -343,7 +327,7 @@ function Cart() {
                       return (
                         <>
                           <CartProduct
-                            refreshCart={refreshCart}
+                            refreshCart={() => refreshCart()}
                             product={item}
                           />
                           <div className="h-[1px] bg-[#ADADAD] w-full my-10"></div>
@@ -352,7 +336,7 @@ function Cart() {
                     } else {
                       return (
                         <CartProduct
-                          refreshCart={refreshCart}
+                          refreshCart={() => refreshCart()}
                           key={index}
                           product={item}
                         />

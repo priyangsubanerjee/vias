@@ -8,11 +8,11 @@ function Sidebar({ setOpen }) {
   const router = useRouter();
   useEffect(() => {
     // router on route change complete
-
     router.events.on("routeChangeComplete", () => {
       setOpen(false);
     });
-  }, [router]);
+  }, [router, setOpen]);
+
   return (
     <div className="fixed inset-0 h-full w-full bg-black/50 z-20 flex">
       <div className="h-full w-[80%] bg-[#ECECEC]">
