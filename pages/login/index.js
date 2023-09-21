@@ -19,7 +19,10 @@ function Login() {
       password,
       redirect: false,
     });
-    console.log(response);
+
+    if (response.ok) {
+      window.location.href = "/";
+    }
 
     if (response.error) {
       alert(response.error);
