@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { decrypt, encrypt } from "@/helper/crypto";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 function CartProduct({ product, refreshCart }) {
+  const router = useRouter();
   const [quantity, setQuantity] = useState(product.quantity);
 
   const handleIncrement = () => {
@@ -17,6 +19,7 @@ function CartProduct({ product, refreshCart }) {
     });
     localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     refreshCart();
+    router.reload();
   };
 
   const handleDecrement = () => {
@@ -45,6 +48,7 @@ function CartProduct({ product, refreshCart }) {
       );
       refreshCart();
     }
+    router.reload();
   };
 
   const handleRemove = () => {
@@ -53,6 +57,7 @@ function CartProduct({ product, refreshCart }) {
     cart = cart.filter((item) => item._id !== product._id);
     localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     refreshCart();
+    router.reload();
   };
 
   return (

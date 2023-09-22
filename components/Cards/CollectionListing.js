@@ -41,6 +41,7 @@ function CollectionListing({ product }) {
     }
     localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     setIsAddedToCart(true);
+    location.reload();
   };
 
   const handleIncrement = () => {
@@ -55,6 +56,7 @@ function CollectionListing({ product }) {
     });
     localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     setIsAddedToCart(true);
+    location.reload();
   };
 
   const handleDecrement = () => {
@@ -79,6 +81,7 @@ function CollectionListing({ product }) {
         JSON.stringify(encrypt(JSON.stringify(cart)))
       );
       setIsAddedToCart(true);
+      location.reload();
     }
   };
 

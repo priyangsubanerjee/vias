@@ -1,6 +1,7 @@
 import React from "react";
 import localFont from "@next/font/local";
 import { useSession } from "next-auth/react";
+import MiniCart from "./MiniCart";
 
 const generalSans = localFont({
   src: [
@@ -30,7 +31,12 @@ const generalSans = localFont({
 
 function Layout({ children }) {
   const session = useSession();
-  return <div className={generalSans.variable}>{children}</div>;
+  return (
+    <div className={generalSans.variable}>
+      {children}
+      <MiniCart />
+    </div>
+  );
 }
 
 export default Layout;
