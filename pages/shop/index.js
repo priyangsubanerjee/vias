@@ -519,8 +519,16 @@ function Shop({
               >
                 <p className="text-white">Shaker Cabinets</p>
               </div>
-              <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
-                <p className="text-white">Traditional Cabinets</p>
+              <div
+                onClick={() => {
+                  setFilters({
+                    ...filters,
+                    doorStyle: [...filters.doorStyle, "Classic"],
+                  });
+                }}
+                className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg"
+              >
+                <p className="text-white">Classic Cabinets</p>
               </div>
               <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
                 <p className="text-white">European Cabinets</p>
