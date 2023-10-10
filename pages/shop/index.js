@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ProductListing from "@/components/Cards/ProductListing";
 import connectDatabase from "@/db/dbConnect";
 import products from "@/db/models/products";
@@ -108,7 +109,7 @@ function Shop({
     const sortedColor = filterByColor(products);
     const sortedDoorStyle = filterByDoorStyle(sortedColor);
     setVisibleProducts(sortedDoorStyle);
-  }, [filters]);
+  }, [filterByColor, filterByDoorStyle, filters, products]);
 
   useEffect(() => {
     if (router.query.tab === "bathroom") {
@@ -507,7 +508,15 @@ function Shop({
               Popular Categories
             </h1>
             <div className="mt-10 hidden lg:grid grid-cols-3 gap-5">
-              <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
+              <div
+                onClick={() => {
+                  setFilters({
+                    ...filters,
+                    doorStyle: [...filters.doorStyle, "Shaker"],
+                  });
+                }}
+                className="h-[80px] flex items-center px-6 bg-gradient-to-r cursor-pointer from-[#3875C2] to-[#023E8A] rounded-lg"
+              >
                 <p className="text-white">Shaker Cabinets</p>
               </div>
               <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
