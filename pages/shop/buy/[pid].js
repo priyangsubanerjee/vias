@@ -218,7 +218,7 @@ function ProductBuy({ product }) {
             </p>
           </div>
         </div>
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {product.collections.map((product, index) => {
             return <CollectionListing product={product} key={index} />;
           })}

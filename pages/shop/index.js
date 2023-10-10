@@ -19,17 +19,20 @@ export async function getServerSideProps() {
   let bathroomVanities = [];
 
   products_.forEach((product) => {
-    colorsAvailable.push(product.color);
-    cabinetStyleAvailable.push(product.cabinetStyle);
-    doorStyleAvailable.push(product.doorStyle);
-    constructionTypeAvailable.push(product.constructionType);
-    featuresAvailable.push(product.features);
+    colorsAvailable.includes(product.color) ||
+      colorsAvailable.push(product.color);
+    doorStyleAvailable.includes(product.doorStyle) ||
+      doorStyleAvailable.push(product.doorStyle);
+    constructionTypeAvailable.includes(product.constructionType) ||
+      constructionTypeAvailable.push(product.constructionType);
     if (product.category == "kitchen-cabinets") {
       kitchenCabinets.push(product);
     }
     if (product.category == "bathroom-vanities") {
       bathroomVanities.push(product);
     }
+    // featuresAvailable.push(product.features);  removed on request of client on 10/10/2023
+    // cabinetStyleAvailable.includes(product.cabinetStyle) || cabinetStyleAvailable.push(product.cabinetStyle); removed on request of client on 10/10/2023
   });
 
   return {
@@ -57,13 +60,6 @@ function Shop({
   const [visibleProducts, setVisibleProducts] = React.useState(kitchenCabinets); // ["kitchen-cabinets", "bathroom-vanities"
   const router = useRouter();
   const [state, setState] = React.useState("kitchen-cabinets"); // ["kitchen-cabinets", "bathroom-vanities"]
-  const [filters, setFilters] = React.useState({
-    color: [],
-    cabinetStyle: [],
-    doorStyle: [],
-    constructionType: [],
-    features: [],
-  });
   const [filterOptions, setFilterOptions] = React.useState({
     color: filterOptionsProp.color,
     cabinetStyle: filterOptionsProp.cabinetStyle,
@@ -75,6 +71,44 @@ function Shop({
   const [sorting, setSorting] = React.useState({
     price: "",
   });
+  const [filters, setFilters] = React.useState({
+    color: [],
+    cabinetStyle: [],
+    doorStyle: [],
+    constructionType: [],
+    features: [],
+  });
+
+  const filterByColor = (products) => {
+    if (filters.color.length == 0) {
+      return products;
+    }
+    return products.filter((product) => filters.color.includes(product.color));
+  };
+
+  const filterByCabinetStyle = (products) => {
+    if (filters.cabinetStyle.length == 0) {
+      return products;
+    }
+    return products.filter((product) =>
+      filters.cabinetStyle.includes(product.cabinetStyle)
+    );
+  };
+
+  const filterByDoorStyle = (products) => {
+    if (filters.doorStyle.length == 0) {
+      return products;
+    }
+    return products.filter((product) =>
+      filters.doorStyle.includes(product.doorStyle)
+    );
+  };
+
+  useEffect(() => {
+    const sortedColor = filterByColor(products);
+    const sortedDoorStyle = filterByDoorStyle(sortedColor);
+    setVisibleProducts(sortedDoorStyle);
+  }, [filters]);
 
   useEffect(() => {
     if (router.query.tab === "bathroom") {
@@ -296,78 +330,7 @@ function Shop({
                 </li>
               </ul>
               <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-              <div className="flex items-center">
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="21"
-                    viewBox="0 0 20 21"
-                    fill="none"
-                  >
-                    <path
-                      opacity="0.3"
-                      d="M10.8333 16.3334H15V4.66675H10.8333V16.3334ZM11.6667 9.66675H13.3333V11.3334H11.6667V9.66675ZM5 16.3334H9.16667V4.66675H5V16.3334ZM6.66667 9.66675H8.33333V11.3334H6.66667V9.66675Z"
-                      fill="#555555"
-                    />
-                    <path
-                      d="M16.6667 16.3333V4.66667C16.6667 3.75 15.9167 3 15 3H5C4.08333 3 3.33333 3.75 3.33333 4.66667V16.3333H2.5V18H17.5V16.3333H16.6667ZM9.16667 16.3333H5V4.66667H9.16667V16.3333ZM15 16.3333H10.8333V4.66667H15V16.3333Z"
-                      fill="#555555"
-                    />
-                    <path
-                      d="M6.66602 9.66675H8.33268V11.3334H6.66602V9.66675ZM11.666 9.66675H13.3327V11.3334H11.666V9.66675Z"
-                      fill="#555555"
-                    />
-                  </svg>
-                </span>
-                <span className="ml-2 text-sm font-medium text-[#555555]">
-                  Cabinet Style
-                </span>
-                {filters.cabinetStyle.length > 0 && (
-                  <button
-                    onClick={() =>
-                      setFilters({
-                        ...filters,
-                        cabinetStyle: [],
-                      })
-                    }
-                    className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-              <ul className="mt-4 text-sm space-y-2">
-                {filterOptions.cabinetStyle.map((style, index) => {
-                  return (
-                    <li key={index} className="flex items-center space-x-3">
-                      <input
-                        type="checkbox"
-                        checked={filters.cabinetStyle.includes(style)}
-                        name=""
-                        id={`cabinet-style-${style}`}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFilters({
-                              ...filters,
-                              cabinetStyle: [...filters.cabinetStyle, style],
-                            });
-                          } else {
-                            setFilters({
-                              ...filters,
-                              cabinetStyle: filters.cabinetStyle.filter(
-                                (c) => c !== style
-                              ),
-                            });
-                          }
-                        }}
-                      />
-                      <label htmlFor={`cabinet-style-${style}`}>{style}</label>
-                    </li>
-                  );
-                })}
-              </ul>
-              <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
+
               <div className="flex items-center">
                 <span>
                   <svg
@@ -507,83 +470,6 @@ function Shop({
                   );
                 })}
               </ul>
-              <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-              <div className="flex items-center">
-                <span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="19"
-                    viewBox="0 0 18 19"
-                    fill="none"
-                  >
-                    <g clip-path="url(#clip0_450_1853)">
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M12.9375 6.125V12.875C12.9375 13.9193 12.5227 14.9208 11.7842 15.6592C11.0458 16.3977 10.0443 16.8125 9 16.8125C7.95571 16.8125 6.95419 16.3977 6.21577 15.6592C5.47734 14.9208 5.0625 13.9193 5.0625 12.875V6.125C5.0625 5.08071 5.47734 4.07919 6.21577 3.34077C6.95419 2.60234 7.95571 2.1875 9 2.1875C10.0443 2.1875 11.0458 2.60234 11.7842 3.34077C12.5227 4.07919 12.9375 5.08071 12.9375 6.125ZM3.375 6.125C3.375 4.63316 3.96763 3.20242 5.02252 2.14752C6.07742 1.09263 7.50816 0.5 9 0.5C10.4918 0.5 11.9226 1.09263 12.9775 2.14752C14.0324 3.20242 14.625 4.63316 14.625 6.125V12.875C14.625 14.3668 14.0324 15.7976 12.9775 16.8525C11.9226 17.9074 10.4918 18.5 9 18.5C7.50816 18.5 6.07742 17.9074 5.02252 16.8525C3.96763 15.7976 3.375 14.3668 3.375 12.875V6.125ZM9 8.375C9.59674 8.375 10.169 8.13795 10.591 7.71599C11.0129 7.29403 11.25 6.72174 11.25 6.125C11.25 5.52826 11.0129 4.95597 10.591 4.53401C10.169 4.11205 9.59674 3.875 9 3.875C8.40326 3.875 7.83097 4.11205 7.40901 4.53401C6.98705 4.95597 6.75 5.52826 6.75 6.125C6.75 6.72174 6.98705 7.29403 7.40901 7.71599C7.83097 8.13795 8.40326 8.375 9 8.375Z"
-                        fill="#555555"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_450_1853">
-                        <rect
-                          width="18"
-                          height="18"
-                          fill="white"
-                          transform="translate(0 0.5)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </span>
-                <span className="ml-2 text-sm font-medium text-[#555555]">
-                  Features
-                </span>
-                {filters.features.length > 0 && (
-                  <button
-                    onClick={() =>
-                      setFilters({
-                        ...filters,
-                        features: [],
-                      })
-                    }
-                    className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-              <ul className="mt-4 text-sm space-y-2">
-                {filterOptions.features.map((style, index) => {
-                  return (
-                    <li key={index} className="flex items-center space-x-3">
-                      <input
-                        type="checkbox"
-                        checked={filters.features.includes(style)}
-                        name=""
-                        id={`features-${style}`}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setFilters({
-                              ...filters,
-                              features: [...filters.features, style],
-                            });
-                          } else {
-                            setFilters({
-                              ...filters,
-                              features: filters.features.filter(
-                                (c) => c !== style
-                              ),
-                            });
-                          }
-                        }}
-                      />
-                      <label htmlFor={`features-${style}`}>{style}</label>
-                    </li>
-                  );
-                })}
-              </ul>
             </div>
           </div>
           <div className="w-full">
@@ -620,18 +506,15 @@ function Shop({
             <h1 className="hidden lg:block text-[24px] font-semibold mt-10">
               Popular Categories
             </h1>
-            <div className="mt-10 hidden lg:grid grid-cols-4 gap-5">
+            <div className="mt-10 hidden lg:grid grid-cols-3 gap-5">
               <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
-                <p className="text-white">White Cabinets</p>
+                <p className="text-white">Shaker Cabinets</p>
               </div>
               <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
                 <p className="text-white">Traditional Cabinets</p>
               </div>
               <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
-                <p className="text-white">Grey Cabinets</p>
-              </div>
-              <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
-                <p className="text-white">Brown Cabinets</p>
+                <p className="text-white">European Cabinets</p>
               </div>
             </div>
             <div className="grid grid-cols-1 place-content-center lg:grid-cols-3 gap-4 mt-8">
@@ -818,78 +701,6 @@ function Shop({
                 >
                   <path
                     opacity="0.3"
-                    d="M10.8333 16.3334H15V4.66675H10.8333V16.3334ZM11.6667 9.66675H13.3333V11.3334H11.6667V9.66675ZM5 16.3334H9.16667V4.66675H5V16.3334ZM6.66667 9.66675H8.33333V11.3334H6.66667V9.66675Z"
-                    fill="#555555"
-                  />
-                  <path
-                    d="M16.6667 16.3333V4.66667C16.6667 3.75 15.9167 3 15 3H5C4.08333 3 3.33333 3.75 3.33333 4.66667V16.3333H2.5V18H17.5V16.3333H16.6667ZM9.16667 16.3333H5V4.66667H9.16667V16.3333ZM15 16.3333H10.8333V4.66667H15V16.3333Z"
-                    fill="#555555"
-                  />
-                  <path
-                    d="M6.66602 9.66675H8.33268V11.3334H6.66602V9.66675ZM11.666 9.66675H13.3327V11.3334H11.666V9.66675Z"
-                    fill="#555555"
-                  />
-                </svg>
-              </span>
-              <span className="ml-2 text-sm font-medium text-[#555555]">
-                Cabinet Style
-              </span>
-              {filters.cabinetStyle.length > 0 && (
-                <button
-                  onClick={() =>
-                    setFilters({
-                      ...filters,
-                      cabinetStyle: [],
-                    })
-                  }
-                  className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-            <ul className="mt-4 text-sm space-y-2">
-              {filterOptions.cabinetStyle.map((style, index) => {
-                return (
-                  <li key={index} className="flex items-center space-x-3">
-                    <input
-                      type="checkbox"
-                      checked={filters.cabinetStyle.includes(style)}
-                      name=""
-                      id={`cabinet-style-${style}`}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setFilters({
-                            ...filters,
-                            cabinetStyle: [...filters.cabinetStyle, style],
-                          });
-                        } else {
-                          setFilters({
-                            ...filters,
-                            cabinetStyle: filters.cabinetStyle.filter(
-                              (c) => c !== style
-                            ),
-                          });
-                        }
-                      }}
-                    />
-                    <label htmlFor={`cabinet-style-${style}`}>{style}</label>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-            <div className="flex items-center">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="21"
-                  viewBox="0 0 20 21"
-                  fill="none"
-                >
-                  <path
-                    opacity="0.3"
                     d="M5.83398 16.3334H14.1673V4.66675H5.83398V16.3334ZM10.834 9.66675H12.5007V11.3334H10.834V9.66675Z"
                     fill="#555555"
                   />
@@ -1014,83 +825,6 @@ function Shop({
                     <label htmlFor={`construction-type-${style}`}>
                       {style}
                     </label>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
-            <div className="flex items-center">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="19"
-                  viewBox="0 0 18 19"
-                  fill="none"
-                >
-                  <g clip-path="url(#clip0_450_1853)">
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M12.9375 6.125V12.875C12.9375 13.9193 12.5227 14.9208 11.7842 15.6592C11.0458 16.3977 10.0443 16.8125 9 16.8125C7.95571 16.8125 6.95419 16.3977 6.21577 15.6592C5.47734 14.9208 5.0625 13.9193 5.0625 12.875V6.125C5.0625 5.08071 5.47734 4.07919 6.21577 3.34077C6.95419 2.60234 7.95571 2.1875 9 2.1875C10.0443 2.1875 11.0458 2.60234 11.7842 3.34077C12.5227 4.07919 12.9375 5.08071 12.9375 6.125ZM3.375 6.125C3.375 4.63316 3.96763 3.20242 5.02252 2.14752C6.07742 1.09263 7.50816 0.5 9 0.5C10.4918 0.5 11.9226 1.09263 12.9775 2.14752C14.0324 3.20242 14.625 4.63316 14.625 6.125V12.875C14.625 14.3668 14.0324 15.7976 12.9775 16.8525C11.9226 17.9074 10.4918 18.5 9 18.5C7.50816 18.5 6.07742 17.9074 5.02252 16.8525C3.96763 15.7976 3.375 14.3668 3.375 12.875V6.125ZM9 8.375C9.59674 8.375 10.169 8.13795 10.591 7.71599C11.0129 7.29403 11.25 6.72174 11.25 6.125C11.25 5.52826 11.0129 4.95597 10.591 4.53401C10.169 4.11205 9.59674 3.875 9 3.875C8.40326 3.875 7.83097 4.11205 7.40901 4.53401C6.98705 4.95597 6.75 5.52826 6.75 6.125C6.75 6.72174 6.98705 7.29403 7.40901 7.71599C7.83097 8.13795 8.40326 8.375 9 8.375Z"
-                      fill="#555555"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_450_1853">
-                      <rect
-                        width="18"
-                        height="18"
-                        fill="white"
-                        transform="translate(0 0.5)"
-                      />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </span>
-              <span className="ml-2 text-sm font-medium text-[#555555]">
-                Features
-              </span>
-              {filters.features.length > 0 && (
-                <button
-                  onClick={() =>
-                    setFilters({
-                      ...filters,
-                      features: [],
-                    })
-                  }
-                  className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-            <ul className="mt-4 text-sm space-y-2">
-              {filterOptions.features.map((style, index) => {
-                return (
-                  <li key={index} className="flex items-center space-x-3">
-                    <input
-                      type="checkbox"
-                      checked={filters.features.includes(style)}
-                      name=""
-                      id={`features-${style}`}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setFilters({
-                            ...filters,
-                            features: [...filters.features, style],
-                          });
-                        } else {
-                          setFilters({
-                            ...filters,
-                            features: filters.features.filter(
-                              (c) => c !== style
-                            ),
-                          });
-                        }
-                      }}
-                    />
-                    <label htmlFor={`features-${style}`}>{style}</label>
                   </li>
                 );
               })}

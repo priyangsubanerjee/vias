@@ -38,16 +38,16 @@ function Footer() {
               <li>Customer Reviews</li>
             </Link>
             <Link href="/shippingPolicy" className="block">
-              <li>Shipping & Return Policy</li>
+              <li>REFUND POLICY</li>
             </Link>
             <Link href="/warranty" className="block">
-              <li>VIAS Cabinet Warranty</li>
+              <li>RETURN POLICY</li>
             </Link>
             <Link href="/privacy" className="block">
-              <li>Privacy Notice</li>
+              <li>PRIVACY POLICY</li>
             </Link>
             <Link href="/faq" className="block">
-              <li>Help Center</li>
+              <li>TERMS OF SERVICE</li>
             </Link>
           </ul>
         </div>
