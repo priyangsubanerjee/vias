@@ -13,33 +13,15 @@ function ProductListing({ product }) {
         />
       </div>
       <div className="p-5 bg-white">
-        <div className="flex">
-          <span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-            >
-              <path
-                d="M2.4987 11.2499L1.8737 9.99992H6.2487L5.7487 8.74992H1.66536L1.04036 7.49992H7.54036L7.04036 6.24992H0.923698L0.207031 4.99992H3.33203C3.33203 4.55789 3.50763 4.13397 3.82019 3.82141C4.13275 3.50885 4.55667 3.33325 4.9987 3.33325H14.9987V6.66659H17.4987L19.9987 9.99992V14.1666H18.332C18.332 14.8296 18.0686 15.4655 17.5998 15.9344C17.131 16.4032 16.4951 16.6666 15.832 16.6666C15.169 16.6666 14.5331 16.4032 14.0643 15.9344C13.5954 15.4655 13.332 14.8296 13.332 14.1666H9.9987C9.9987 14.8296 9.73531 15.4655 9.26647 15.9344C8.79762 16.4032 8.16174 16.6666 7.4987 16.6666C6.83566 16.6666 6.19977 16.4032 5.73093 15.9344C5.26209 15.4655 4.9987 14.8296 4.9987 14.1666H3.33203V11.2499H2.4987ZM15.832 15.4166C16.1636 15.4166 16.4815 15.2849 16.7159 15.0505C16.9503 14.816 17.082 14.4981 17.082 14.1666C17.082 13.8351 16.9503 13.5171 16.7159 13.2827C16.4815 13.0483 16.1636 12.9166 15.832 12.9166C15.5005 12.9166 15.1826 13.0483 14.9481 13.2827C14.7137 13.5171 14.582 13.8351 14.582 14.1666C14.582 14.4981 14.7137 14.816 14.9481 15.0505C15.1826 15.2849 15.5005 15.4166 15.832 15.4166ZM17.082 7.91658H14.9987V9.99992H18.7154L17.082 7.91658ZM7.4987 15.4166C7.83022 15.4166 8.14816 15.2849 8.38258 15.0505C8.617 14.816 8.7487 14.4981 8.7487 14.1666C8.7487 13.8351 8.617 13.5171 8.38258 13.2827C8.14816 13.0483 7.83022 12.9166 7.4987 12.9166C7.16718 12.9166 6.84923 13.0483 6.61481 13.2827C6.38039 13.5171 6.2487 13.8351 6.2487 14.1666C6.2487 14.4981 6.38039 14.816 6.61481 15.0505C6.84923 15.2849 7.16718 15.4166 7.4987 15.4166Z"
-                fill="#023E8A"
-              />
-            </svg>
-          </span>
-          <span className="text-[#666] text-sm ml-2">
-            Express delivery in{" "}
-            <span className="text-black font-semibold">3 days</span>
-          </span>
+        <h2 className="font-medium text-[#222]">{product.name}</h2>
+        <div className="flex items-center space-x-5">
+          <h3 className="mt-2 text-[18px] font-semibold">
+            ${product.collections[0]?.discountedPrice}
+          </h3>
+          <h3 className="mt-2 text-sm text-[#A3A3A3] line-through font-normal">
+            ${product.collections[0]?.price}
+          </h3>
         </div>
-        <h2 className="mt-3 font-medium text-[#222]">{product.name}</h2>
-        <h3 className="mt-2 text-[18px] font-semibold">
-          ${product.collections[0]?.discountedPrice}
-        </h3>
-        <h3 className="mt-2 text-sm text-[#A3A3A3] line-through font-normal">
-          ${product.collections[0]?.price}
-        </h3>
         <Link className="block mt-5" href={`/shop/buy/${product._id}`}>
           <button className="bg-[#023E8A] font-medium w-full rounded-lg text-white text-sm py-3 text-center flex items-center justify-center space-x-2">
             <span>
