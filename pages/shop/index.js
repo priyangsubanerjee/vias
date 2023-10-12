@@ -512,7 +512,7 @@ function Shop({
                 onClick={() => {
                   setFilters({
                     ...filters,
-                    doorStyle: [...filters.doorStyle, "Shaker"],
+                    doorStyle: ["Shaker"],
                   });
                 }}
                 className="h-[80px] flex items-center px-6 bg-gradient-to-r cursor-pointer from-[#3875C2] to-[#023E8A] rounded-lg"
@@ -523,14 +523,22 @@ function Shop({
                 onClick={() => {
                   setFilters({
                     ...filters,
-                    doorStyle: [...filters.doorStyle, "Classic"],
+                    doorStyle: ["Classic"],
                   });
                 }}
-                className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg"
+                className="h-[80px] flex items-center px-6 bg-gradient-to-r cursor-pointer from-[#3875C2] to-[#023E8A] rounded-lg"
               >
                 <p className="text-white">Classic Cabinets</p>
               </div>
-              <div className="h-[80px] flex items-center px-6 bg-gradient-to-r from-[#3875C2] to-[#023E8A] rounded-lg">
+              <div
+                onClick={() => {
+                  setFilters({
+                    ...filters,
+                    doorStyle: ["European"],
+                  });
+                }}
+                className="h-[80px] flex items-center px-6 bg-gradient-to-r cursor-pointer from-[#3875C2] to-[#023E8A] rounded-lg"
+              >
                 <p className="text-white">European Cabinets</p>
               </div>
             </div>
