@@ -5,7 +5,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="footer bg-[#023E8A] lg:px-[96px] lg:py-[70px] font-general-sans px-6 py-[50px]">
+    <div className="footer bg-[#023E8A] lg:px-[96px] lg:pt-[70px] lg:pb-[100px] font-general-sans px-6 pt-[50px] pb-[80px]">
       <Link href="/">
         <img
           src="https://res.cloudinary.com/dccmraknj/image/upload/v1695127190/static/vias_cabinets_1_td1dsi.png"

@@ -214,7 +214,7 @@ function ProductBuy({ product }) {
               Weston White Shaker Kitchen Cabinets
             </p>
             <p className="mt-2 font-medium text-sm text-[#333]">
-              197 Cabinet Results
+              {product.collections.length} Cabinet Results
             </p>
           </div>
         </div>
