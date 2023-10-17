@@ -20,7 +20,29 @@ export async function getServerSideProps(context) {
 }
 
 function ProductBuy({ product }) {
+  const [filter, setFilter] = useState("");
+  const [visibleProducts, setVisibleProducts] = useState(
+    product.collections || []
+  );
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (filter == "") {
+      setVisibleProducts(product.collections || []);
+      return;
+    } else {
+      let temp = product.collections.filter(
+        (product) => product.tag.split("-")[1] == filter
+      );
+      console.log(temp);
+      setVisibleProducts(
+        product.collections.filter(
+          (product) => product.tag.split("-")[1] == filter
+        )
+      );
+    }
+  }, [filter, product.collections]);
+
   return (
     <div className="lg:px-[96px] lg:py-[90px] py-10 px-6 font-general-sans bg-[#D7F3FF]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:space-x-16">
@@ -157,7 +179,12 @@ function ProductBuy({ product }) {
         <div className="mt-8 ">
           <h2 className="font-semibold text-[#1B1B1B]">Filter by Type</h2>
           <div className="mt-7 flex items-center lg:justify-between overflow-auto lg:overflow-hidden space-x-5">
-            <div className="border shrink-0 w-fit border-[#777] py-[22px] px-[20px] flex items-center rounded-lg">
+            <div
+              onClick={() => {
+                setFilter("B");
+              }}
+              className="border shrink-0 w-fit border-[#777] py-[22px] px-[20px] flex items-center rounded-lg cursor-pointer"
+            >
               <img
                 src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941379/Dtory/vias/image_8_m13tg2.png"
                 alt=""
@@ -166,7 +193,12 @@ function ProductBuy({ product }) {
                 Base <br /> Cabinets
               </span>
             </div>
-            <div className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg">
+            <div
+              onClick={() => {
+                setFilter("W");
+              }}
+              className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg cursor-pointer"
+            >
               <img
                 src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941379/Dtory/vias/image_9_qmkynw.png"
                 alt=""
@@ -175,7 +207,12 @@ function ProductBuy({ product }) {
                 Wall <br /> Cabinets
               </span>
             </div>
-            <div className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg">
+            <div
+              onClick={() => {
+                setFilter("T");
+              }}
+              className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg cursor-pointer"
+            >
               <img
                 src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941379/Dtory/vias/image_10_yd3dlc.png"
                 alt=""
@@ -184,7 +221,12 @@ function ProductBuy({ product }) {
                 Tall <br /> Cabinets
               </span>
             </div>
-            <div className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg">
+            <div
+              onClick={() => {
+                setFilter("TD");
+              }}
+              className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg cursor-pointer"
+            >
               <img
                 src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941379/Dtory/vias/image_11_scf99u.png"
                 alt=""
@@ -193,7 +235,12 @@ function ProductBuy({ product }) {
                 Trim, Details <br /> & Others
               </span>
             </div>
-            <div className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg">
+            <div
+              onClick={() => {
+                setFilter("V");
+              }}
+              className="border shrink-0 border-[#777] py-[22px] px-[20px] flex items-center rounded-lg cursor-pointer"
+            >
               <img
                 src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941379/Dtory/vias/image_12_z2cjqz.png"
                 alt=""
@@ -219,7 +266,7 @@ function ProductBuy({ product }) {
           </div>
         </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {product.collections.map((product, index) => {
+          {visibleProducts.map((product, index) => {
             return <CollectionListing product={product} key={index} />;
           })}
         </div>
