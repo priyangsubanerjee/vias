@@ -534,7 +534,7 @@ function Shop({
                 onClick={() => {
                   setFilters({
                     ...filters,
-                    doorStyle: ["European"],
+                    doorStyle: ["Euro"],
                   });
                 }}
                 className="h-[80px] flex items-center px-6 bg-gradient-to-r cursor-pointer from-[#3875C2] to-[#023E8A] rounded-lg"
