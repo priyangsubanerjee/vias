@@ -31,13 +31,10 @@ function ProductBuy({ product }) {
       setVisibleProducts(product.collections || []);
       return;
     } else {
-      let temp = product.collections.filter(
-        (product) => product.tag.split("-")[1] == filter
-      );
-      console.log(temp);
       setVisibleProducts(
         product.collections.filter(
-          (product) => product.tag.split("-")[1] == filter
+          (product) =>
+            product.tag.split("-")[1].toLowerCase() == filter.toLowerCase()
         )
       );
     }
