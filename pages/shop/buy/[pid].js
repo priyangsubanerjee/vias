@@ -177,6 +177,10 @@ function ProductBuy({ product }) {
           <h2 className="font-semibold text-[#1B1B1B]">Filter by Type</h2>
           <div className="mt-7 flex items-center lg:justify-between overflow-auto lg:overflow-hidden space-x-5">
             <div
+              style={{
+                border:
+                  filter == "B" ? "1.5px solid #023E8A" : "1px solid #777",
+              }}
               onClick={() => {
                 setFilter("B");
               }}
@@ -191,6 +195,10 @@ function ProductBuy({ product }) {
               </span>
             </div>
             <div
+              style={{
+                border:
+                  filter == "W" ? "1.5px solid #023E8A" : "1px solid #777",
+              }}
               onClick={() => {
                 setFilter("W");
               }}
@@ -205,6 +213,10 @@ function ProductBuy({ product }) {
               </span>
             </div>
             <div
+              style={{
+                border:
+                  filter == "T" ? "1.5px solid #023E8A" : "1px solid #777",
+              }}
               onClick={() => {
                 setFilter("T");
               }}
@@ -219,6 +231,10 @@ function ProductBuy({ product }) {
               </span>
             </div>
             <div
+              style={{
+                border:
+                  filter == "TD" ? "1.5px solid #023E8A" : "1px solid #777",
+              }}
               onClick={() => {
                 setFilter("TD");
               }}
@@ -233,6 +249,10 @@ function ProductBuy({ product }) {
               </span>
             </div>
             <div
+              style={{
+                border:
+                  filter == "V" ? "1.5px solid #023E8A" : "1px solid #777",
+              }}
               onClick={() => {
                 setFilter("V");
               }}
