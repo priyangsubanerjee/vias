@@ -97,19 +97,21 @@ function CollectionListing({ product }) {
       <div className="px-5 py-4">
         <h2 className="text-[#1B1B1B] font-semibold">{product.name}</h2>
         <p className="text-[#555] text-sm mt-2">{product.width}W</p>
-        <p className="bg-[#B1C3DB] mt-1 px-2 py-1 rounded-md w-fit text-sm">
+        {/* <p className="bg-[#B1C3DB] mt-1 px-2 py-1 rounded-md w-fit text-sm">
           #{product.tag}
-        </p>
-        <div className="flex items-center mt-8 text-[#1C7926] font-medium space-x-2">
+        </p> */}
+        <div className="flex items-center mt-3 text-[#1C7926] font-medium space-x-2">
           <Icon icon="zondicons:checkmark-outline" />
           <span>In Stock</span>
         </div>
-        <h2 className="text-[18px] text-[#1B1B1B] font-semibold mt-2">
-          ${product.discountedPrice}
-        </h2>
-        <h2 className="text-[14px] text-[#A3A3A3] font-normal mt-1 line-through">
-          ${product.price}
-        </h2>
+        <div className="flex items-center space-x-4 mt-2">
+          <h2 className="text-[18px] text-[#1B1B1B] font-semibold">
+            ${product.discountedPrice}
+          </h2>
+          <h2 className="text-[14px] text-[#A3A3A3] font-normal line-through">
+            ${product.price}
+          </h2>
+        </div>
         <div className="mt-5 flex justify-between">
           {isAddedToCart ? (
             <div className="flex items-center bg-[#D9D9D9] border border-black rounded-md">
