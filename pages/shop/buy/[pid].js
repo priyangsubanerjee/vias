@@ -273,14 +273,14 @@ function ProductBuy({ product }) {
             src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941953/Dtory/vias/SHAKER_WHITE_4_oidssv.png"
             alt=""
           />
-          <div className="ml-5">
+          {/* <div className="ml-5">
             <p className="text-[#1B1B1B] font-medium text-[20px]">
               Weston White Shaker Kitchen Cabinets
             </p>
             <p className="mt-2 font-medium text-sm text-[#333]">
               {product.collections.length} Cabinet Results
             </p>
-          </div>
+          </div> */}
         </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {visibleProducts.map((product, index) => {

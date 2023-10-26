@@ -727,7 +727,6 @@ function Cart() {
             </div>
             <div className="mt-5">
               {coupons.map((coupon, index) => {
-                console.log(coupon);
                 return (
                   <div
                     key={index}
