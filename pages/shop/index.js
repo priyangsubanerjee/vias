@@ -189,7 +189,7 @@ function Shop({
               </span>
             </div>
             <div className="mt-7 py-6 px-5 bg-white rounded-lg">
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -270,7 +270,7 @@ function Shop({
                   );
                 })}
               </ul>
-              <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div>
+              <div className="h-[1px] w-full bg-[#A3A3A3] my-6"></div> */}
               <div className="flex items-center">
                 <span>
                   <svg
