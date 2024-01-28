@@ -71,6 +71,7 @@ function CollectionListing({ product }) {
       );
       setIsAddedToCart(false);
       setQuantity(0);
+      location.reload();
     } else {
       cart = cart.map((item) => {
         if (item._id === product._id) {
