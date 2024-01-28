@@ -10,3 +10,8 @@
 .footer li:hover {
   text-decoration: underline;
 }
+
+.collectionGroup {
+  scrollbar-color: transparent transparent;
+  scrollbar-width: 0;
+}

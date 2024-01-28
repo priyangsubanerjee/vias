@@ -65,7 +65,10 @@ function CollectionListing({ product }) {
     let item = cart.find((item) => item._id === product._id);
     if (item.quantity === 1) {
       cart = cart.filter((item) => item._id !== product._id);
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(encrypt(JSON.stringify(cart)))
+      );
       setIsAddedToCart(false);
       setQuantity(0);
     } else {

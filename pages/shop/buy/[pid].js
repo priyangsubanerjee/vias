@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
@@ -40,6 +41,63 @@ function ProductBuy({ product }) {
     }
   }, [filter, product.collections]);
 
+  const [doorImages, setDoorImages] = useState([
+    {
+      url: "/door/door1.webp",
+      selected: false,
+      name: "Shaker Natural Wood",
+    },
+    {
+      url: "/door/door2.webp",
+      selected: false,
+      name: "Navy Blue Shaker",
+    },
+    {
+      url: "/door/door3.webp",
+      selected: false,
+      name: "Escada Midnight Blue",
+    },
+    {
+      url: "/door/door4.webp",
+      selected: false,
+      name: "Charcoal Black Shaker",
+    },
+    {
+      url: "/door/door5.webp",
+      selected: false,
+      name: "Shaker Gray",
+    },
+    {
+      url: "/door/door6.webp",
+      selected: false,
+      name: "Escade Vintage Wood",
+    },
+    {
+      url: "/door/door7.webp",
+      selected: false,
+      name: "Thielsen Espresso",
+    },
+    {
+      url: "/door/door8.webp",
+      selected: false,
+      name: "Thielson Pigeon White",
+    },
+    {
+      url: "/door/door9.webp",
+      selected: false,
+      name: "Shaker White",
+    },
+    {
+      url: "/door/door10.webp",
+      selected: false,
+      name: "Pebble Gray",
+    },
+    {
+      url: "/door/door11.webp",
+      selected: false,
+      name: "Thielsen Sapphire Blue",
+    },
+  ]);
   return (
     <div className="lg:px-[96px] lg:py-[90px] py-10 px-6 font-general-sans bg-[#D7F3FF]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:space-x-16">
@@ -268,11 +326,36 @@ function ProductBuy({ product }) {
             </div>
           </div>
         </div>
-        <div className="mt-8 flex items-center space-x-2 collectionGroup">
-          <img
-            src="https://res.cloudinary.com/db9kd4qbi/image/upload/v1692941953/Dtory/vias/SHAKER_WHITE_4_oidssv.png"
-            alt=""
-          />
+        <div className="mt-8 flex items-center space-x-12 collectionGroup overflow-x-auto">
+          {doorImages.map((image, index) => {
+            return (
+              <div
+                onClick={() => {
+                  let temp = [...doorImages];
+                  for (let i = 0; i < temp.length; i++) {
+                    temp[i].selected = false;
+                  }
+                  temp[index].selected = !temp[index].selected;
+                  setDoorImages(temp);
+                }}
+                key={index}
+                style={{
+                  border: image.selected
+                    ? "1.5px solid #023E8A"
+                    : "1px solid #00000000",
+                }}
+                className="flex flex-col items-center py-2 px-4 rounded-lg"
+              >
+                <img
+                  className="w-24 h-[160px] shrink-0 object-cover"
+                  src={image.url}
+                  alt=""
+                />
+                <span className="whitespace-nowrap mt-2">{image.name}</span>
+              </div>
+            );
+          })}
+
           {/* <div className="ml-5">
             <p className="text-[#1B1B1B] font-medium text-[20px]">
               Weston White Shaker Kitchen Cabinets
