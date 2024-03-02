@@ -153,7 +153,7 @@ export default function Home() {
       </div>
       <WhatPeopleSay />
       <Real />
-      <ShopByCategory />
+      {/* <ShopByCategory /> */}
       <Youtube />
       {/*
        */}
