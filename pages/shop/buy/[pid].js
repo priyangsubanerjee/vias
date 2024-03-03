@@ -331,7 +331,7 @@ function ProductBuy({ product }) {
             onClick={() => {
               document.querySelector("#colorScroll").scrollBy(-200, 0);
             }}
-            className="shrink-0 top-1/2 -translate-x-1/2 left-0 h-14 w-14 text-black rounded-full"
+            className="shrink-0 top-1/2 -translate-x-1/2 left-0 text-black rounded-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -391,7 +391,7 @@ function ProductBuy({ product }) {
             onClick={() => {
               document.querySelector("#colorScroll").scrollBy(200, 0);
             }}
-            className="shrink-0 translate-x-1/2 right-0 h-14 w-14 text-black rounded-full"
+            className="shrink-0 translate-x-1/2 right-0 text-black rounded-full"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
