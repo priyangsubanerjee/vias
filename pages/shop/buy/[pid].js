@@ -326,37 +326,59 @@ function ProductBuy({ product }) {
             </div>
           </div>
         </div>
-        <div className="mt-8 flex items-center space-x-12 collectionGroup overflow-x-auto">
-          {doorImages.map((image, index) => {
-            return (
-              <div
-                onClick={() => {
-                  let temp = [...doorImages];
-                  for (let i = 0; i < temp.length; i++) {
-                    temp[i].selected = false;
-                  }
-                  temp[index].selected = !temp[index].selected;
-                  setDoorImages(temp);
-                }}
-                key={index}
-                style={{
-                  border: image.selected
-                    ? "1.5px solid #023E8A"
-                    : "1px solid #00000000",
-                }}
-                className="flex flex-col items-center py-2 px-4 rounded-lg"
-              >
-                <img
-                  className="w-24 h-[160px] shrink-0 object-cover"
-                  src={image.url}
-                  alt=""
-                />
-                <span className="whitespace-nowrap mt-2">{image.name}</span>
-              </div>
-            );
-          })}
+        <div className="flex items-center">
+          <button
+            onClick={() => {
+              document.querySelector("#colorScroll").scrollBy(-200, 0);
+            }}
+            className="shrink-0 top-1/2 -translate-x-1/2 left-0 h-14 w-14 text-black rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="48"
+              viewBox="0 0 7 16"
+            >
+              <path
+                fill="currentColor"
+                d="M5.5 13a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71l4.5-4.49c.2-.2.51-.2.71 0c.2.2.2.51 0 .71L1.71 8l4.15 4.15c.2.2.2.51 0 .71c-.1.1-.23.15-.35.15Z"
+              />
+            </svg>
+          </button>
+          <div
+            id="colorScroll"
+            className="mt-8 flex items-center space-x-12 collectionGroup overflow-x-auto scroll-smooth"
+          >
+            {doorImages.map((image, index) => {
+              return (
+                <div
+                  onClick={() => {
+                    let temp = [...doorImages];
+                    for (let i = 0; i < temp.length; i++) {
+                      temp[i].selected = false;
+                    }
+                    temp[index].selected = !temp[index].selected;
+                    setDoorImages(temp);
+                  }}
+                  key={index}
+                  style={{
+                    border: image.selected
+                      ? "1.5px solid #023E8A"
+                      : "1px solid #00000000",
+                  }}
+                  className="flex flex-col items-center py-2 px-4 rounded-lg cursor-pointer"
+                >
+                  <img
+                    className="w-24 h-[160px] shrink-0 object-cover"
+                    src={image.url}
+                    alt=""
+                  />
+                  <span className="whitespace-nowrap mt-2">{image.name}</span>
+                </div>
+              );
+            })}
 
-          {/* <div className="ml-5">
+            {/* <div className="ml-5">
             <p className="text-[#1B1B1B] font-medium text-[20px]">
               Weston White Shaker Kitchen Cabinets
             </p>
@@ -364,6 +386,25 @@ function ProductBuy({ product }) {
               {product.collections.length} Cabinet Results
             </p>
           </div> */}
+          </div>
+          <button
+            onClick={() => {
+              document.querySelector("#colorScroll").scrollBy(200, 0);
+            }}
+            className="shrink-0 translate-x-1/2 right-0 h-14 w-14 text-black rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="48"
+              viewBox="0 0 7 16"
+            >
+              <path
+                fill="currentColor"
+                d="M1.5 13a.47.47 0 0 1-.35-.15c-.2-.2-.2-.51 0-.71L5.3 7.99L1.15 3.85c-.2-.2-.2-.51 0-.71c.2-.2.51-.2.71 0l4.49 4.51c.2.2.2.51 0 .71l-4.5 4.49c-.1.1-.23.15-.35.15"
+              />
+            </svg>
+          </button>
         </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {visibleProducts.map((product, index) => {
