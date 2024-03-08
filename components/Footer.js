@@ -206,10 +206,13 @@ function Footer() {
         </div>
       </div>
 
-      <div className="border-t-[1px] border-[#ccc] mt-16 pt-6">
+      <div className="border-t-[1px] border-[#ccc] mt-16 pt-6 lg:flex items-center justify-between">
         <p className="text-[#ccc] text-sm">
           Copyright ©2023 VIAS CABINET LLC wholesale ready-to-assemble RTA
           kitchen cabinets and bathroom vanities.
+        </p>
+        <p className="text-[#ccc] text-sm mt-6 lg:mt-6">
+          Made by Consultwise LLC
         </p>
       </div>
     </div>

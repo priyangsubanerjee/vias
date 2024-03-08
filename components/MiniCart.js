@@ -39,10 +39,10 @@ function MiniCart() {
     <div className="fixed inset-x-0 bottom-0 py-6 px-14">
       {router.pathname !== "/cart" && (
         <div className="bg-[#fff] rounded-md shadow-xl shadow-black/10 overflow-hidden">
-          <div className="h-14 flex justify-between items-center px-10">
+          <div className="h-14 md:flex justify-between items-center px-10">
             <div></div>
             <div
-              className="flex items-center w-fit translate-x-14"
+              className="flex items-center w-fit md:translate-x-14"
               onClick={() => setExpanded(!expanded)}
             >
               <span>Shopping cart</span>
