@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import connectDatabase from "@/db/dbConnect";
 import products from "@/db/models/products";
 import CollectionListing from "@/components/Cards/CollectionListing";
+import GlobalState from "@/context/GLobalStates";
 
 export async function getServerSideProps(context) {
   const pid = context.params.pid;
@@ -21,6 +22,7 @@ export async function getServerSideProps(context) {
 }
 
 function ProductBuy({ product }) {
+  const { doorColors, refreshDoorColors } = useContext(GlobalState);
   const [filter, setFilter] = useState("");
   const [visibleProducts, setVisibleProducts] = useState(
     product.collections || []
@@ -326,7 +328,7 @@ function ProductBuy({ product }) {
             </div>
           </div>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center w-full">
           <button
             onClick={() => {
               document.querySelector("#colorScroll").scrollBy(-200, 0);
@@ -347,13 +349,13 @@ function ProductBuy({ product }) {
           </button>
           <div
             id="colorScroll"
-            className="mt-8 flex items-center space-x-12 collectionGroup overflow-x-auto scroll-smooth"
+            className="mt-8 w-full flex items-center space-x-12 collectionGroup overflow-x-auto scroll-smooth"
           >
-            {doorImages.map((image, index) => {
+            {doorColors.map((door, index) => {
               return (
                 <div
                   onClick={() => {
-                    let temp = [...doorImages];
+                    let temp = [...doorColors];
                     for (let i = 0; i < temp.length; i++) {
                       temp[i].selected = false;
                     }
@@ -362,7 +364,7 @@ function ProductBuy({ product }) {
                   }}
                   key={index}
                   style={{
-                    border: image.selected
+                    border: door.selected
                       ? "1.5px solid #023E8A"
                       : "1px solid #00000000",
                   }}
@@ -370,10 +372,10 @@ function ProductBuy({ product }) {
                 >
                   <img
                     className="w-24 h-[160px] shrink-0 object-cover"
-                    src={image.url}
+                    src={door.image}
                     alt=""
                   />
-                  <span className="whitespace-nowrap mt-2">{image.name}</span>
+                  <span className="whitespace-nowrap mt-2">{door.color}</span>
                 </div>
               );
             })}
