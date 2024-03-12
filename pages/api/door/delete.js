@@ -1,4 +1,4 @@
-import connectDatabase from "@/db/connect";
+import connectDatabase from "@/db/dbConnect";
 import door from "@/db/models/door";
 
 export default async function handler(req, res) {
