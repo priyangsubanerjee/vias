@@ -24,24 +24,45 @@ export async function getServerSideProps(context) {
 function ProductBuy({ product }) {
   const { doorColors, refreshDoorColors } = useContext(GlobalState);
   const [filter, setFilter] = useState("");
+  const [colorFilter, setColorFilter] = useState("");
   const [visibleProducts, setVisibleProducts] = useState(
     product.collections || []
   );
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    console.log(product.collections);
     if (filter == "") {
-      setVisibleProducts(product.collections || []);
+      if (colorFilter == "") {
+        setVisibleProducts(product.collections || []);
+        return;
+      } else {
+        setVisibleProducts(
+          product.collections.filter(
+            (product) => product.doorColor == colorFilter
+          )
+        );
+      }
       return;
     } else {
-      setVisibleProducts(
-        product.collections.filter(
-          (product) =>
-            product.tag.split("-")[1].toLowerCase() == filter.toLowerCase()
-        )
-      );
+      if (colorFilter == "") {
+        setVisibleProducts(
+          product.collections.filter(
+            (product) =>
+              product.tag.split("-")[1].toLowerCase() == filter.toLowerCase()
+          )
+        );
+      } else {
+        setVisibleProducts(
+          product.collections.filter(
+            (product) =>
+              product.tag.split("-")[1].toLowerCase() == filter.toLowerCase() &&
+              product.doorColor == colorFilter
+          )
+        );
+      }
     }
-  }, [filter, product.collections]);
+  }, [filter, product.collections, colorFilter]);
 
   const [doorImages, setDoorImages] = useState([
     {
@@ -355,18 +376,14 @@ function ProductBuy({ product }) {
               return (
                 <div
                   onClick={() => {
-                    let temp = [...doorColors];
-                    for (let i = 0; i < temp.length; i++) {
-                      temp[i].selected = false;
-                    }
-                    temp[index].selected = !temp[index].selected;
-                    setDoorImages(temp);
+                    setColorFilter(door.color == colorFilter ? "" : door.color);
                   }}
                   key={index}
                   style={{
-                    border: door.selected
-                      ? "1.5px solid #023E8A"
-                      : "1px solid #00000000",
+                    border:
+                      colorFilter == door.color
+                        ? "1.5px solid #023E8A"
+                        : "1px solid #00000000",
                   }}
                   className="flex flex-col items-center py-2 px-4 rounded-lg cursor-pointer"
                 >
