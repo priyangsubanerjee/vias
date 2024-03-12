@@ -47,6 +47,7 @@ function CollectionListing({ product }) {
   const handleIncrement = () => {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
+    console.log("cart", cart);
     cart = cart.map((item) => {
       if (item._id === product._id) {
         setQuantity(item.quantity + 1);
@@ -56,7 +57,7 @@ function CollectionListing({ product }) {
     });
     localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     setIsAddedToCart(true);
-    location.reload();
+    //location.reload();
   };
 
   const handleDecrement = () => {

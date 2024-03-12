@@ -75,6 +75,7 @@ function CartProduct({ product, refreshCart }) {
             <div>
               <h2 className="font-medium text-[18px]">{product?.name}</h2>
               <p className="text-[#666666] mt-2">TAG {product?.tag}</p>
+              <p className="text-[#666666] mt-2">{product?.doorColor}</p>
             </div>
             <div className="ml-auto">
               <p className="text-[#023E8A] font-medium text-[14px]">
