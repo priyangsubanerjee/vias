@@ -12,13 +12,18 @@ function MiniCart() {
 
   useEffect(() => {
     let total = 0;
+    let totalItems = 0;
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart = cart.length == 0 ? [] : JSON.parse(decrypt(cart));
     cart.forEach((item) => {
       total += item.discountedPrice * item.quantity;
-      setNumItems(numItems + item.quantity);
     });
 
+    cart.forEach((item) => {
+      totalItems += item.quantity;
+    });
+
+    setNumItems(totalItems);
     setTotalAmount(total);
     setCartItems(cart);
   }, []);
@@ -42,7 +47,7 @@ function MiniCart() {
           <div className="h-14 md:flex justify-between items-center px-10">
             <div></div>
             <div
-              className="flex items-center w-fit md:translate-x-14"
+              className="flex items-center w-fit md:`translate-x-14"
               onClick={() => setExpanded(!expanded)}
             >
               <span>Shopping cart</span>

@@ -57,7 +57,7 @@ function CollectionListing({ product }) {
     });
     localStorage.setItem("cart", JSON.stringify(encrypt(JSON.stringify(cart))));
     setIsAddedToCart(true);
-    //location.reload();
+    location.reload();
   };
 
   const handleDecrement = () => {
