@@ -254,6 +254,82 @@ function ProductBuy({ product }) {
             id=""
           />
         </div>
+        <div className="flex items-center w-full">
+          <button
+            onClick={() => {
+              document.querySelector("#colorScroll").scrollBy(-200, 0);
+            }}
+            className="shrink-0 top-1/2 -translate-x-1/2 left-0 text-black rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="48"
+              viewBox="0 0 7 16"
+            >
+              <path
+                fill="currentColor"
+                d="M5.5 13a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71l4.5-4.49c.2-.2.51-.2.71 0c.2.2.2.51 0 .71L1.71 8l4.15 4.15c.2.2.2.51 0 .71c-.1.1-.23.15-.35.15Z"
+              />
+            </svg>
+          </button>
+          <div
+            id="colorScroll"
+            className="mt-8 w-full flex items-center space-x-12 collectionGroup overflow-x-auto scroll-smooth"
+          >
+            {doorColors.map((door, index) => {
+              return (
+                <div
+                  onClick={() => {
+                    setColorFilter(door.color == colorFilter ? "" : door.color);
+                  }}
+                  key={index}
+                  style={{
+                    border:
+                      colorFilter == door.color
+                        ? "1.5px solid #023E8A"
+                        : "1px solid #00000000",
+                  }}
+                  className="flex flex-col items-center py-2 px-4 rounded-lg cursor-pointer"
+                >
+                  <img
+                    className="w-24 h-[160px] shrink-0 object-cover"
+                    src={door.image}
+                    alt=""
+                  />
+                  <span className="whitespace-nowrap mt-2">{door.color}</span>
+                </div>
+              );
+            })}
+
+            {/* <div className="ml-5">
+            <p className="text-[#1B1B1B] font-medium text-[20px]">
+              Weston White Shaker Kitchen Cabinets
+            </p>
+            <p className="mt-2 font-medium text-sm text-[#333]">
+              {product.collections.length} Cabinet Results
+            </p>
+          </div> */}
+          </div>
+          <button
+            onClick={() => {
+              document.querySelector("#colorScroll").scrollBy(200, 0);
+            }}
+            className="shrink-0 translate-x-1/2 right-0 text-black rounded-full"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="48"
+              viewBox="0 0 7 16"
+            >
+              <path
+                fill="currentColor"
+                d="M1.5 13a.47.47 0 0 1-.35-.15c-.2-.2-.2-.51 0-.71L5.3 7.99L1.15 3.85c-.2-.2-.2-.51 0-.71c.2-.2.51-.2.71 0l4.49 4.51c.2.2.2.51 0 .71l-4.5 4.49c-.1.1-.23.15-.35.15"
+              />
+            </svg>
+          </button>
+        </div>
         <div className="mt-8 ">
           <h2 className="font-semibold text-[#1B1B1B]">Filter by Type</h2>
           <div className="mt-7 flex items-center lg:justify-between overflow-auto lg:overflow-hidden space-x-5">
@@ -349,82 +425,7 @@ function ProductBuy({ product }) {
             </div>
           </div>
         </div>
-        <div className="flex items-center w-full">
-          <button
-            onClick={() => {
-              document.querySelector("#colorScroll").scrollBy(-200, 0);
-            }}
-            className="shrink-0 top-1/2 -translate-x-1/2 left-0 text-black rounded-full"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="21"
-              height="48"
-              viewBox="0 0 7 16"
-            >
-              <path
-                fill="currentColor"
-                d="M5.5 13a.47.47 0 0 1-.35-.15l-4.5-4.5c-.2-.2-.2-.51 0-.71l4.5-4.49c.2-.2.51-.2.71 0c.2.2.2.51 0 .71L1.71 8l4.15 4.15c.2.2.2.51 0 .71c-.1.1-.23.15-.35.15Z"
-              />
-            </svg>
-          </button>
-          <div
-            id="colorScroll"
-            className="mt-8 w-full flex items-center space-x-12 collectionGroup overflow-x-auto scroll-smooth"
-          >
-            {doorColors.map((door, index) => {
-              return (
-                <div
-                  onClick={() => {
-                    setColorFilter(door.color == colorFilter ? "" : door.color);
-                  }}
-                  key={index}
-                  style={{
-                    border:
-                      colorFilter == door.color
-                        ? "1.5px solid #023E8A"
-                        : "1px solid #00000000",
-                  }}
-                  className="flex flex-col items-center py-2 px-4 rounded-lg cursor-pointer"
-                >
-                  <img
-                    className="w-24 h-[160px] shrink-0 object-cover"
-                    src={door.image}
-                    alt=""
-                  />
-                  <span className="whitespace-nowrap mt-2">{door.color}</span>
-                </div>
-              );
-            })}
 
-            {/* <div className="ml-5">
-            <p className="text-[#1B1B1B] font-medium text-[20px]">
-              Weston White Shaker Kitchen Cabinets
-            </p>
-            <p className="mt-2 font-medium text-sm text-[#333]">
-              {product.collections.length} Cabinet Results
-            </p>
-          </div> */}
-          </div>
-          <button
-            onClick={() => {
-              document.querySelector("#colorScroll").scrollBy(200, 0);
-            }}
-            className="shrink-0 translate-x-1/2 right-0 text-black rounded-full"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="21"
-              height="48"
-              viewBox="0 0 7 16"
-            >
-              <path
-                fill="currentColor"
-                d="M1.5 13a.47.47 0 0 1-.35-.15c-.2-.2-.2-.51 0-.71L5.3 7.99L1.15 3.85c-.2-.2-.2-.51 0-.71c.2-.2.51-.2.71 0l4.49 4.51c.2.2.2.51 0 .71l-4.5 4.49c-.1.1-.23.15-.35.15"
-              />
-            </svg>
-          </button>
-        </div>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {visibleProducts.map((product, index) => {
             return <CollectionListing product={product} key={index} />;
