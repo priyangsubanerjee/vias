@@ -33,7 +33,7 @@ function Layout({ children }) {
   const session = useSession();
   return (
     <div className={generalSans.variable}>
-      {children}
+      {/* {children} */} Error 404
       <MiniCart />
     </div>
   );
