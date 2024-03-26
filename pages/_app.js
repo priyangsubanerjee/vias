@@ -39,15 +39,14 @@ export default function App({
         refreshDoorColors,
       }}
     >
-      {/* <SessionProvider session={session}>
+      <SessionProvider session={session}>
         <NextProgress delay={300} options={{ showSpinner: false }} />
         <Layout>
           <Navbar />
           <Component {...pageProps} />
           <Footer />
         </Layout>
-      </SessionProvider> */}
-      Error. Please try again later.
+      </SessionProvider>
     </GlobalState.Provider>
   );
 }
