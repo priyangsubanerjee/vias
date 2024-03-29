@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 function CollectionListing({ product }) {
+  console.log("product", product);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const router = useRouter();
@@ -105,9 +106,20 @@ function CollectionListing({ product }) {
         {/* <p className="bg-[#B1C3DB] mt-1 px-2 py-1 rounded-md w-fit text-sm">
           #{product.tag}
         </p> */}
-        <div className="flex items-center mt-3 text-[#1C7926] font-medium space-x-2">
-          <Icon icon="zondicons:checkmark-outline" />
-          <span>In Stock</span>
+        <div
+          style={{
+            color: product.inStock ? "#1C7926" : "#FF0000",
+          }}
+          className="flex items-center mt-3 font-medium space-x-2"
+        >
+          <Icon
+            icon={
+              product.inStock
+                ? "zondicons:checkmark-outline"
+                : "carbon:close-outline"
+            }
+          />
+          <span>{product.inStock ? "In Stock" : "Out of Stock"}</span>
         </div>
         <div className="flex items-center space-x-4 mt-2">
           <h2 className="text-[18px] text-[#1B1B1B] font-semibold">
@@ -117,11 +129,19 @@ function CollectionListing({ product }) {
             ${product.price}
           </h2>
         </div>
-        <div className="mt-5 flex justify-between">
+        <div
+          style={{
+            opacity: product.inStock ? 1 : 0.5,
+            pointerEvents: product.inStock ? "all" : "none",
+          }}
+          className="mt-5 flex justify-between"
+        >
           {isAddedToCart ? (
             <div className="flex items-center bg-[#D9D9D9] border border-black rounded-md">
               <button
-                onClick={() => handleDecrement()}
+                onClick={() => {
+                  product.inStock && handleDecrement();
+                }}
                 className="h-[36px] px-3"
               >
                 -
@@ -130,7 +150,9 @@ function CollectionListing({ product }) {
                 {quantity}
               </span>
               <button
-                onClick={() => handleIncrement()}
+                onClick={() => {
+                  product.inStock && handleIncrement();
+                }}
                 className="h-[36px] px-3"
               >
                 +
@@ -138,7 +160,9 @@ function CollectionListing({ product }) {
             </div>
           ) : (
             <button
-              onClick={() => handleAddToCart()}
+              onClick={() => {
+                product.inStock && handleAddToCart();
+              }}
               className="bg-[#023E8A] px-5 h-[36px] text-white rounded text-sm"
             >
               Add to Cart
