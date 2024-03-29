@@ -129,15 +129,15 @@ function CollectionListing({ product }) {
             ${product.price}
           </h2>
         </div>
-        <div
-          style={{
-            opacity: product.inStock ? 1 : 0.5,
-            pointerEvents: product.inStock ? "all" : "none",
-          }}
-          className="mt-5 flex justify-between"
-        >
+        <div className="mt-5 flex justify-between">
           {isAddedToCart ? (
-            <div className="flex items-center bg-[#D9D9D9] border border-black rounded-md">
+            <div
+              style={{
+                opacity: product.inStock ? 1 : 0.5,
+                pointerEvents: product.inStock ? "all" : "none",
+              }}
+              className="flex items-center bg-[#D9D9D9] border border-black rounded-md"
+            >
               <button
                 onClick={() => {
                   product.inStock && handleDecrement();
@@ -160,6 +160,10 @@ function CollectionListing({ product }) {
             </div>
           ) : (
             <button
+              style={{
+                opacity: product.inStock ? 1 : 0.5,
+                pointerEvents: product.inStock ? "all" : "none",
+              }}
               onClick={() => {
                 product.inStock && handleAddToCart();
               }}
