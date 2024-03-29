@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 function CollectionListing({ product }) {
-  console.log("product", product);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [quantity, setQuantity] = useState(0);
   const router = useRouter();
