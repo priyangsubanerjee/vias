@@ -173,7 +173,7 @@ function ProductBuy({ product }) {
           <h1 className="text-[24px] lg:text-[32px] font-medium">
             {product.name}
           </h1>
-          <div className="bg-[#D7E8FF] p-6 rounded-md mt-6">
+          <div className="bg-[#D7E8FF] p-6 rounded-md mt-6 max-h-[400px] lg:max-h-none overflow-y-auto">
             <h2 className="text-lg font-semibold text-[#383838]">
               Description
             </h2>

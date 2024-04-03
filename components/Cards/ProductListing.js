@@ -7,7 +7,7 @@ function ProductListing({ product }) {
     <div className="border-[3px] border-[#C3C3C3] rounded-2xl overflow-hidden">
       <div className="h-44 w-full border-b-[3px] border-[#C3C3C3]">
         <img
-          src={product.productImages[0].url}
+          src={product?.productImages[0]?.url}
           className="h-full w-full object-cover"
           alt=""
         />

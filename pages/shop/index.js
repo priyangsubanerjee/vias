@@ -127,6 +127,24 @@ function Shop({
     }
   }, [state]);
 
+  useEffect(() => {
+    if (sorting == "l-t-h") {
+      setVisibleProducts(
+        visibleProducts.sort(
+          (a, b) => b.collections[0].price - a.collections[0].price
+        )
+      );
+    } else if (sorting == "h-t-l") {
+      setVisibleProducts(
+        visibleProducts.sort(
+          (a, b) => a.collections[0].price - b.collections[0].price
+        )
+      );
+    } else {
+      setVisibleProducts(visibleProducts);
+    }
+  }, [sorting]);
+
   return (
     <div>
       <div className='h-[240px] lg:h-[340px] font-general-sans flex flex-col items-center justify-center bg-[url("https://res.cloudinary.com/db9kd4qbi/image/upload/v1692430582/Dtory/vias/cabinets_bg_vvhjj2.png")]'>
@@ -543,9 +561,10 @@ function Shop({
               </div>
             </div>
             <div className="grid grid-cols-1 place-content-center lg:grid-cols-3 gap-4 mt-8">
-              {visibleProducts.map((product, index) => {
-                return <ProductListing key={index} product={product} />;
-              })}
+              {visibleProducts.length > 0 &&
+                visibleProducts.map((product, index) => {
+                  return <ProductListing key={index} product={product} />;
+                })}
             </div>
           </div>
         </div>
