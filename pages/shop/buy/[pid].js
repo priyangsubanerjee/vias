@@ -21,27 +21,37 @@ export async function getServerSideProps(context) {
   };
 }
 
+const SortBYInstock = (collection) => {
+  let sortByStock = collection.sort((a, b) => {
+    return a.inStock == b.inStock ? 0 : a.inStock ? -1 : 1;
+  });
+  let sortByPrice = sortByStock.sort((a, b) => {
+    return a.discountedPrice - b.discountedPrice;
+  });
+  return sortByPrice;
+};
+
 function ProductBuy({ product }) {
   const { doorColors, refreshDoorColors } = useContext(GlobalState);
   const [filter, setFilter] = useState("");
-  const [colorFilter, setColorFilter] = useState("");
+  const [colorFilter, setColorFilter] = useState();
   const [visibleProducts, setVisibleProducts] = useState(
-    product.collections || []
+    SortBYInstock(product.collections) || []
   );
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    console.log(product.collections);
     if (filter == "") {
       if (colorFilter == "") {
-        setVisibleProducts(product.collections || []);
+        setVisibleProducts(SortBYInstock(product.collection) | []);
         return;
       } else {
-        setVisibleProducts(
-          product.collections.filter(
-            (product) => product.doorColor == colorFilter
-          )
-        );
+        let colors = [];
+        // product.collections.filter((product) =>
+        //   product.doorColor.split(",").map((color) => {
+        //     colors.push(color.trim());
+        //   })
+        // );
       }
       return;
     } else {
@@ -57,12 +67,16 @@ function ProductBuy({ product }) {
           product.collections.filter(
             (product) =>
               product.tag.split("-")[1].toLowerCase() == filter.toLowerCase() &&
-              product.doorColor == colorFilter
+              product.doorColor.split(",").includes(colorFilter) == true
           )
         );
       }
     }
   }, [filter, product.collections, colorFilter]);
+
+  useEffect(() => {
+    setColorFilter(doorColors[0]?.color);
+  }, [doorColors]);
 
   const [doorImages, setDoorImages] = useState([
     {

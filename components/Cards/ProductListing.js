@@ -3,6 +3,15 @@ import Link from "next/link";
 import React from "react";
 
 function ProductListing({ product }) {
+  const SortBYInstock = (collection) => {
+    let sortByStock = collection.sort((a, b) => {
+      return a.inStock == b.inStock ? 0 : a.inStock ? -1 : 1;
+    });
+    let sortByPrice = sortByStock.sort((a, b) => {
+      return a.discountedPrice - b.discountedPrice;
+    });
+    return sortByPrice;
+  };
   return (
     <div className="border-[3px] border-[#C3C3C3] rounded-2xl overflow-hidden">
       <div className="h-44 w-full border-b-[3px] border-[#C3C3C3]">
@@ -16,7 +25,7 @@ function ProductListing({ product }) {
         <h2 className="font-medium text-[#222]">{product.name}</h2>
         <div className="flex items-center space-x-5">
           <h3 className="mt-2 text-[18px] font-semibold">
-            ${product.collections[0]?.discountedPrice}
+            ${SortBYInstock(product.collections)[0]?.discountedPrice}
           </h3>
           <h3 className="mt-2 text-sm text-[#A3A3A3] line-through font-normal">
             ${product.collections[0]?.price}

@@ -80,6 +80,16 @@ function Shop({
     features: [],
   });
 
+  const SortBYInstock = (collection) => {
+    let sortByStock = collection.sort((a, b) => {
+      return a.inStock == b.inStock ? 0 : a.inStock ? -1 : 1;
+    });
+    let sortByPrice = sortByStock.sort((a, b) => {
+      return a.discountedPrice - b.discountedPrice;
+    });
+    return sortByPrice;
+  };
+
   const filterByColor = (products) => {
     if (filters.color.length == 0) {
       return products;
