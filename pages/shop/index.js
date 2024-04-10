@@ -58,7 +58,7 @@ function Shop({
   kitchenCabinets,
   bathroomVanities,
 }) {
-  const [visibleProducts, setVisibleProducts] = React.useState(kitchenCabinets); // ["kitchen-cabinets", "bathroom-vanities"
+  const [visibleProducts, setVisibleProducts] = React.useState([]); // ["kitchen-cabinets", "bathroom-vanities"
   const router = useRouter();
   const [state, setState] = React.useState("kitchen-cabinets"); // ["kitchen-cabinets", "bathroom-vanities"]
   const [filterOptions, setFilterOptions] = React.useState({
@@ -69,9 +69,8 @@ function Shop({
     features: filterOptionsProp.features,
   });
   const [sortingTabOpen, setSortingTabOpen] = React.useState(false);
-  const [sorting, setSorting] = React.useState({
-    price: "",
-  });
+  const [sorting, setSorting] = React.useState(""); // ["l-t-h", "h-t-l", "d-t-h"]
+
   const [filters, setFilters] = React.useState({
     color: [],
     cabinetStyle: [],
@@ -105,11 +104,22 @@ function Shop({
     );
   };
 
-  useEffect(() => {
-    const sortedColor = filterByColor(products);
-    const sortedDoorStyle = filterByDoorStyle(sortedColor);
-    setVisibleProducts(sortedDoorStyle);
-  }, [filterByColor, filterByDoorStyle, filters, products]);
+  //   useEffect(() => {
+  //     let sortedColor = filterByColor(products);
+  //     let sortedDoorStyle = filterByDoorStyle(sortedColor);
+  //     if (sorting == "l-t-h") {
+  //       console.log("sorting", sorting);
+  //       let arr = sortedDoorStyle.sort((a, b) => {
+  //         return a.discountedPrice - b.discountedPrice;
+  //       });
+  //       setVisibleProducts([]);
+  //       setVisibleProducts(arr);
+  //     }
+  //     if (sorting == "h-t-l") {
+  //       console.log("sorting", sorting);
+  //       //setVisibleProducts(sortedDoorStyle);
+  //     }
+  //   }, [filterByColor, filterByDoorStyle, filters, products, sorting]);
 
   useEffect(() => {
     if (router.query.tab === "bathroom") {
@@ -119,31 +129,56 @@ function Shop({
     }
   }, [router.query.tab]);
 
+  let sortByPrice = (arr, tp) => {
+    let sortedArr = arr.sort((a, b) => {
+      return tp == "l-t-h"
+        ? a.collections[0].discountedPrice - b.collections[0].discountedPrice
+        : b.collections[0].discountedPrice - a.collections[0].discountedPrice;
+    });
+    return sortedArr;
+  };
+
   useEffect(() => {
     if (state == "kitchen-cabinets") {
-      setVisibleProducts(kitchenCabinets);
+      let sortedColor = filterByColor(kitchenCabinets);
+      let sortedDoorStyle = filterByDoorStyle(sortedColor);
+      let sortedPrice = sortByPrice(sortedDoorStyle, sorting);
+      setVisibleProducts(sortedPrice);
     } else {
-      setVisibleProducts(bathroomVanities);
+      let sortedColor = filterByColor(bathroomVanities);
+      let sortedDoorStyle = filterByDoorStyle(sortedColor);
+      let sortedPrice = sortByPrice(sortedDoorStyle, sorting);
+      setVisibleProducts(sortedPrice);
     }
   }, [state]);
 
   useEffect(() => {
+    setVisibleProducts([]);
+    let products_tem = [];
+    if (state == "kitchen-cabinets") {
+      let sortedColor = filterByColor(kitchenCabinets);
+      let sortedDoorStyle = filterByDoorStyle(sortedColor);
+      products_tem = sortedDoorStyle;
+      setVisibleProducts(products_tem);
+    } else {
+      let sortedColor = filterByColor(bathroomVanities);
+      let sortedDoorStyle = filterByDoorStyle(sortedColor);
+      products_tem = sortedDoorStyle;
+    }
+  }, [state, filters]);
+
+  const refreshSorting = (sorting) => {
+    setVisibleProducts([]);
     if (sorting == "l-t-h") {
-      setVisibleProducts(
-        visibleProducts.sort(
-          (a, b) => b.collections[0].price - a.collections[0].price
-        )
-      );
+      let sortedPrice = sortByPrice(visibleProducts, "l-t-h");
+      setVisibleProducts(sortedPrice);
     } else if (sorting == "h-t-l") {
-      setVisibleProducts(
-        visibleProducts.sort(
-          (a, b) => a.collections[0].price - b.collections[0].price
-        )
-      );
+      let sortedPrice = sortByPrice(visibleProducts, "h-t-l");
+      setVisibleProducts(sortedPrice);
     } else {
       setVisibleProducts(visibleProducts);
     }
-  }, [sorting]);
+  };
 
   return (
     <div>
@@ -311,7 +346,10 @@ function Shop({
                 </span>
                 {sorting.length > 0 && (
                   <button
-                    onClick={() => setSorting("")}
+                    onClick={() => {
+                      refreshSorting("");
+                      setSorting("");
+                    }}
                     className="text-[#1877F2] text-sm ml-auto font-medium font-general-sans"
                   >
                     Clear
@@ -321,12 +359,13 @@ function Shop({
               <ul className="mt-4 text-sm space-y-2">
                 <li className="flex items-center space-x-3">
                   <input
-                    checked={sorting == "h-t-l"}
                     onChange={(e) => {
                       if (e.target.checked) {
                         setSorting("h-t-l");
+                        refreshSorting("h-t-l");
                       }
                     }}
+                    checked={sorting === "h-t-l"}
                     type="radio"
                     name="price-sort"
                     id="htl-sort"
@@ -335,13 +374,14 @@ function Shop({
                 </li>
                 <li className="flex items-center space-x-3">
                   <input
+                    type="radio"
+                    checked={sorting === "l-t-h"}
                     onChange={(e) => {
                       if (e.target.checked) {
                         setSorting("l-t-h");
+                        refreshSorting("l-t-h");
                       }
                     }}
-                    type="radio"
-                    checked={sorting == "l-t-h"}
                     name="price-sort"
                     id="lth-sort"
                   />
