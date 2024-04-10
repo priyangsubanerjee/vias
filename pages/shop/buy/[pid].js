@@ -54,27 +54,23 @@ function ProductBuy({ product }) {
       }
       return;
     } else {
-      console.log("Here 3");
       if (colorFilter == "") {
-        console.log("Here 2");
-        // setVisibleProducts(
-        //   []
-        //   SortBYInstock(
-        //     product.collections.filter(
-        //       (product) =>
-        //         product.tag.split("-")[1].toLowerCase() == filter.toLowerCase()
-        //     )
-        //   )
-        // );
+        setVisibleProducts(
+          SortBYInstock(
+            product.collections.filter(
+              (product) =>
+                product.tag.split("-")[1].toLowerCase() == filter.toLowerCase()
+            )
+          )
+        );
       } else {
-        console.log("Here 1");
-        // setVisibleProducts(
-        //   product.collections.filter(
-        //     (product) =>
-        //       product.tag.split("-")[1].toLowerCase() == filter.toLowerCase() &&
-        //       product.doorColor.split(",").includes(colorFilter) == true
-        //   )
-        // );
+        setVisibleProducts(
+          product.collections.filter(
+            (product) =>
+              product.tag.split("-")[1].toLowerCase() == filter.toLowerCase() &&
+              product.doorColor.split(",").includes(colorFilter) == true
+          )
+        );
       }
     }
   }, [filter, product.collections, colorFilter]);
@@ -83,63 +79,63 @@ function ProductBuy({ product }) {
     setColorFilter(doorColors[0]?.color);
   }, [doorColors]);
 
-  const [doorImages, setDoorImages] = useState([
-    {
-      url: "/door/door1.webp",
-      selected: false,
-      name: "Shaker Natural Wood",
-    },
-    {
-      url: "/door/door2.webp",
-      selected: false,
-      name: "Navy Blue Shaker",
-    },
-    {
-      url: "/door/door3.webp",
-      selected: false,
-      name: "Escada Midnight Blue",
-    },
-    {
-      url: "/door/door4.webp",
-      selected: false,
-      name: "Charcoal Black Shaker",
-    },
-    {
-      url: "/door/door5.webp",
-      selected: false,
-      name: "Shaker Gray",
-    },
-    {
-      url: "/door/door6.webp",
-      selected: false,
-      name: "Escade Vintage Wood",
-    },
-    {
-      url: "/door/door7.webp",
-      selected: false,
-      name: "Thielsen Espresso",
-    },
-    {
-      url: "/door/door8.webp",
-      selected: false,
-      name: "Thielson Pigeon White",
-    },
-    {
-      url: "/door/door9.webp",
-      selected: false,
-      name: "Shaker White",
-    },
-    {
-      url: "/door/door10.webp",
-      selected: false,
-      name: "Pebble Gray",
-    },
-    {
-      url: "/door/door11.webp",
-      selected: false,
-      name: "Thielsen Sapphire Blue",
-    },
-  ]);
+  //   const [doorImages, setDoorImages] = useState([
+  //     {
+  //       url: "/door/door1.webp",
+  //       selected: false,
+  //       name: "Shaker Natural Wood",
+  //     },
+  //     {
+  //       url: "/door/door2.webp",
+  //       selected: false,
+  //       name: "Navy Blue Shaker",
+  //     },
+  //     {
+  //       url: "/door/door3.webp",
+  //       selected: false,
+  //       name: "Escada Midnight Blue",
+  //     },
+  //     {
+  //       url: "/door/door4.webp",
+  //       selected: false,
+  //       name: "Charcoal Black Shaker",
+  //     },
+  //     {
+  //       url: "/door/door5.webp",
+  //       selected: false,
+  //       name: "Shaker Gray",
+  //     },
+  //     {
+  //       url: "/door/door6.webp",
+  //       selected: false,
+  //       name: "Escade Vintage Wood",
+  //     },
+  //     {
+  //       url: "/door/door7.webp",
+  //       selected: false,
+  //       name: "Thielsen Espresso",
+  //     },
+  //     {
+  //       url: "/door/door8.webp",
+  //       selected: false,
+  //       name: "Thielson Pigeon White",
+  //     },
+  //     {
+  //       url: "/door/door9.webp",
+  //       selected: false,
+  //       name: "Shaker White",
+  //     },
+  //     {
+  //       url: "/door/door10.webp",
+  //       selected: false,
+  //       name: "Pebble Gray",
+  //     },
+  //     {
+  //       url: "/door/door11.webp",
+  //       selected: false,
+  //       name: "Thielsen Sapphire Blue",
+  //     },
+  //   ]);
   return (
     <div className="lg:px-[96px] lg:py-[90px] py-10 px-6 font-general-sans bg-[#D7F3FF]">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:space-x-16">
