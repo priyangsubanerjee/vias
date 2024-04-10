@@ -4,13 +4,13 @@ import React from "react";
 
 function ProductListing({ product }) {
   const SortBYInstock = (collection) => {
-    let sortByStock = collection.sort((a, b) => {
-      return a.inStock == b.inStock ? 0 : a.inStock ? -1 : 1;
-    });
-    let sortByPrice = sortByStock.sort((a, b) => {
+    let sortByPrice = collection.sort((a, b) => {
       return a.discountedPrice - b.discountedPrice;
     });
-    return sortByPrice;
+    let sortByStock = sortByPrice.sort((a, b) => {
+      return a.inStock == b.inStock ? 0 : a.inStock ? -1 : 1;
+    });
+    return sortByStock;
   };
   return (
     <div className="border-[3px] border-[#C3C3C3] rounded-2xl overflow-hidden">

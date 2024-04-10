@@ -22,54 +22,59 @@ export async function getServerSideProps(context) {
 }
 
 const SortBYInstock = (collection) => {
-  let sortByStock = collection.sort((a, b) => {
-    return a.inStock == b.inStock ? 0 : a.inStock ? -1 : 1;
-  });
-  let sortByPrice = sortByStock.sort((a, b) => {
+  let sortByPrice = collection.sort((a, b) => {
     return a.discountedPrice - b.discountedPrice;
   });
-  return sortByPrice;
+  let sortByStock = sortByPrice.sort((a, b) => {
+    return a.inStock == b.inStock ? 0 : a.inStock ? -1 : 1;
+  });
+  return sortByStock;
 };
 
 function ProductBuy({ product }) {
   const { doorColors, refreshDoorColors } = useContext(GlobalState);
   const [filter, setFilter] = useState("");
   const [colorFilter, setColorFilter] = useState();
-  const [visibleProducts, setVisibleProducts] = useState(
-    SortBYInstock(product.collections) || []
-  );
+  const [visibleProducts, setVisibleProducts] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     if (filter == "") {
       if (colorFilter == "") {
-        setVisibleProducts(SortBYInstock(product.collection) | []);
+        setVisibleProducts(SortBYInstock(product.collections) | []);
         return;
       } else {
-        let colors = [];
-        // product.collections.filter((product) =>
-        //   product.doorColor.split(",").map((color) => {
-        //     colors.push(color.trim());
-        //   })
-        // );
+        setVisibleProducts(
+          SortBYInstock(
+            product.collections.filter((product) =>
+              product.doorColor?.split(",").includes(colorFilter)
+            )
+          )
+        );
       }
       return;
     } else {
+      console.log("Here 3");
       if (colorFilter == "") {
-        setVisibleProducts(
-          product.collections.filter(
-            (product) =>
-              product.tag.split("-")[1].toLowerCase() == filter.toLowerCase()
-          )
-        );
+        console.log("Here 2");
+        // setVisibleProducts(
+        //   []
+        //   SortBYInstock(
+        //     product.collections.filter(
+        //       (product) =>
+        //         product.tag.split("-")[1].toLowerCase() == filter.toLowerCase()
+        //     )
+        //   )
+        // );
       } else {
-        setVisibleProducts(
-          product.collections.filter(
-            (product) =>
-              product.tag.split("-")[1].toLowerCase() == filter.toLowerCase() &&
-              product.doorColor.split(",").includes(colorFilter) == true
-          )
-        );
+        console.log("Here 1");
+        // setVisibleProducts(
+        //   product.collections.filter(
+        //     (product) =>
+        //       product.tag.split("-")[1].toLowerCase() == filter.toLowerCase() &&
+        //       product.doorColor.split(",").includes(colorFilter) == true
+        //   )
+        // );
       }
     }
   }, [filter, product.collections, colorFilter]);
