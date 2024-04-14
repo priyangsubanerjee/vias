@@ -104,6 +104,15 @@ function Shop({
     );
   };
 
+  const filterByConstructionType = (products) => {
+    if (filters.constructionType.length == 0) {
+      return products;
+    }
+    return products.filter((product) =>
+      filters.constructionType.includes(product.constructionType)
+    );
+  };
+
   //   useEffect(() => {
   //     let sortedColor = filterByColor(products);
   //     let sortedDoorStyle = filterByDoorStyle(sortedColor);
@@ -142,12 +151,14 @@ function Shop({
     if (state == "kitchen-cabinets") {
       let sortedColor = filterByColor(kitchenCabinets);
       let sortedDoorStyle = filterByDoorStyle(sortedColor);
-      let sortedPrice = sortByPrice(sortedDoorStyle, sorting);
+      let sortedConstructionType = filterByConstructionType(sortedDoorStyle);
+      let sortedPrice = sortByPrice(sortedConstructionType, sorting);
       setVisibleProducts(sortedPrice);
     } else {
       let sortedColor = filterByColor(bathroomVanities);
       let sortedDoorStyle = filterByDoorStyle(sortedColor);
-      let sortedPrice = sortByPrice(sortedDoorStyle, sorting);
+      let sortedConstructionType = filterByConstructionType(sortedDoorStyle);
+      let sortedPrice = sortByPrice(sortedConstructionType, sorting);
       setVisibleProducts(sortedPrice);
     }
   }, [state]);
@@ -158,12 +169,15 @@ function Shop({
     if (state == "kitchen-cabinets") {
       let sortedColor = filterByColor(kitchenCabinets);
       let sortedDoorStyle = filterByDoorStyle(sortedColor);
-      products_tem = sortedDoorStyle;
+      let sortedConstructionType = filterByConstructionType(sortedDoorStyle);
+      products_tem = sortedConstructionType;
       setVisibleProducts(products_tem);
     } else {
       let sortedColor = filterByColor(bathroomVanities);
       let sortedDoorStyle = filterByDoorStyle(sortedColor);
-      products_tem = sortedDoorStyle;
+      let sortedConstructionType = filterByConstructionType(sortedDoorStyle);
+      products_tem = sortedConstructionType;
+      setVisibleProducts(products_tem);
     }
   }, [state, filters]);
 
