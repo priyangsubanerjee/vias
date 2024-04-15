@@ -32,6 +32,7 @@ const SortBYInstock = (collection) => {
 };
 
 function ProductBuy({ product }) {
+  console.log(product);
   const { doorColors, refreshDoorColors } = useContext(GlobalState);
   const [filter, setFilter] = useState("");
   const [colorFilter, setColorFilter] = useState();
@@ -39,18 +40,18 @@ function ProductBuy({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    console.log("use effect");
     if (filter == "") {
+      console.log("here");
       if (colorFilter == "") {
         setVisibleProducts(SortBYInstock(product.collections) | []);
         return;
       } else {
-        setVisibleProducts(
-          SortBYInstock(
-            product.collections.filter((product) =>
-              product.doorColor?.split(",").includes(colorFilter)
-            )
-          )
+        console.log("here 1");
+        let filtered = product.collections.filter((p) =>
+          p.doorColor.split(",").includes(colorFilter)
         );
+        setVisibleProducts(SortBYInstock(filtered));
       }
       return;
     } else {
