@@ -40,14 +40,11 @@ function ProductBuy({ product }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    console.log("use effect");
     if (filter == "") {
-      console.log("here");
       if (colorFilter == "") {
         setVisibleProducts(SortBYInstock(product.collections) | []);
         return;
       } else {
-        console.log("here 1");
         let filtered = product.collections.filter((p) =>
           p.doorColor.split(",").includes(colorFilter)
         );
