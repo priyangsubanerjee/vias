@@ -192,9 +192,9 @@ function Cart() {
         couponDiscount = selectedCoupon.amount_off / 100;
         setCoupounAmount(couponDiscount);
       }
-      setTotalAmount(total - couponDiscount + 7.5);
+      setTotalAmount(total - couponDiscount + 130);
     } else {
-      setTotalAmount(total + 7.5);
+      setTotalAmount(total + 130);
     }
     setCartItems(cart);
     loadCoupons();
@@ -226,9 +226,9 @@ function Cart() {
         couponDiscount = selectedCoupon.amount_off / 100;
         setCoupounAmount(couponDiscount);
       }
-      setTotalAmount(total - couponDiscount + 7.5);
+      setTotalAmount(total - couponDiscount + 130);
     } else {
-      setTotalAmount(total + 7.5);
+      setTotalAmount(total + 130);
     }
     setCartItems(cart);
   };
@@ -249,9 +249,9 @@ function Cart() {
         couponDiscount = selectedCoupon.amount_off / 100;
         setCoupounAmount(couponDiscount);
       }
-      setTotalAmount(total - couponDiscount + 7.5);
+      setTotalAmount(total - couponDiscount + 130);
     } else {
-      setTotalAmount(total + 7.5);
+      setTotalAmount(total + 130);
     }
   }, [selectedCoupon]);
 
@@ -453,7 +453,7 @@ function Cart() {
                       <span className="text-[#777777] font-medium text-[14px]">
                         Delivery charges
                       </span>
-                      <span className="text-[#1B1B1B] font-medium">$7.50</span>
+                      <span className="text-[#1B1B1B] font-medium">$130</span>
                     </li>
                   </ul>
                   <div className="h-[1px] bg-[#777] w-full mt-10"></div>
@@ -675,7 +675,7 @@ function Cart() {
                   <span className="text-[#777777] font-medium text-[14px]">
                     Delivery charges
                   </span>
-                  <span className="text-[#1B1B1B] font-medium">$7.50</span>
+                  <span className="text-[#1B1B1B] font-medium">$130</span>
                 </li>
               </ul>
               <div className="h-[1px] bg-[#777] w-full mt-10"></div>
